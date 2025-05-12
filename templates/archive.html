@@ -63,10 +63,10 @@
     <!-- Dynamic content -->
     <h2>Latest Articles</h2>
     <ul>
-    {% for article in articles %}
+    {% for meta in articles %}
       <li>
-        <a href="/{{ article.slug }}/">{{ article.title }}</a><br>
-        <small><em>{{ article.date }}</em> — {{ article.description }}</small>
+        <a href="/{{ meta.canonical}}/">asdfasdfasd</a><br>
+        <small><em>{{ meta.date }}</em> — {{ meta.description }}</small>
       </li>
     {% endfor %}
     </ul>

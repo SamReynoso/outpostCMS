@@ -4,13 +4,15 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 import xml.dom.minidom
 
 PARENT_DIR = Path(__file__).parent.parent
-OUTPUT_DIR = Path(__file__).parent.joinpath("files")
+print( f"Parent directory: {PARENT_DIR}")
+
+CANON_DIR = PARENT_DIR.joinpath("canonical")
 
 BASE_URL = "https://ozprealpha.com"
 ROUTE_PREFIX = "/article/" 
-INPUT_JSON = Path(PARENT_DIR.joinpath("templates/articles.json"))
-OUTPUT_XML = Path(OUTPUT_DIR.joinpath("sitemap.xml"))
-OUTPUT_ROBOT= Path(OUTPUT_DIR.joinpath("robots.txt"))
+INPUT_JSON = Path(CANON_DIR.joinpath("articles.json"))
+OUTPUT_XML = Path(CANON_DIR.joinpath("sitemap.xml"))
+OUTPUT_ROBOT= Path(CANON_DIR.joinpath("robots.txt"))
 
 try:
     with INPUT_JSON.open() as f:

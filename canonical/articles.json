@@ -1,0 +1,22 @@
+[
+  {
+    "canonical": "build-log/week-1",
+    "path": "content/build-log/week-01_introduction/",
+    "public": true
+  },
+  {
+    "canonical": "build-log/week-5",
+    "path": "content/build-log/week-05_content-management-system/",
+    "public": true
+  },
+  {
+    "canonical": "semantic-html-guide",
+    "path": "content/specs/semantic-html-guide/",
+    "public": true
+  },
+  {
+    "canonical": "building-a-cms",
+    "path": "content/posts/building-a-content-management-system/",
+    "public": true
+  }
+]
