@@ -1,0 +1,31 @@
+#!/bin/bash
+PYTHONPATH="$(dirname "$0")"
+export PYTHONPATH
+
+SERVICE="$1"
+shift
+
+case $SERVICE in
+  "dev")
+    echo "Starting development server..."
+    uvicorn bin.server:app --reload
+    ;;
+  "robot")
+    echo "Creating robot.txt and sitemap.xml"
+    python3 bin/generate.py
+    ;;
+
+  "editor")
+    echo "Starting editor..."
+    python3 bin/editor.py
+    ;;
+
+  "test")
+    echo "Running tests..."
+    python3 lib/loadsite.py
+    ;;
+  *)
+    echo "Usage: $0 {dev}"
+    exit 1
+    ;;
+esac

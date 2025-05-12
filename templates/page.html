@@ -65,14 +65,21 @@
     <!-- Main Article -->
     <!-- Dynamic content -->
     <article>
+
       <h1>{{ meta.title }}</h1>
+
       <header>
+
         <em>{{ meta.date }}</em>
+
         <p>
           {{ meta.description }}
         </p>
+
       </header>
-      {% include dynamic_article %}
+
+      {{ article_fragment | safe }}
+
     </article>
 
   </main>

@@ -1,4 +1,3 @@
 venv/
-canonical/files/
-assets/
 *__pycache__/
+assets/
