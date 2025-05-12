@@ -1,0 +1,305 @@
+      <!-- Overview -->
+      <section>
+        <h2>Overview</h2>
+        <ul>
+          <li>
+            <strong>Scope:</strong> Defines correct HTML usage for formatting articles that convey textual information.
+          </li>
+
+          <li>
+            <strong>Purpose:</strong> Enforce consistent and styling-agnostic formatting to maximize portability.
+          </li>
+
+          <li>
+            <strong>Goal:</strong> Articles should integrate cleanly into any environment with minimal CSS.
+          </li>
+        </ul>
+
+        <p>
+          <strong>Preface:</strong> HTML offers flexibility, but this guide imposes strict structural rules to ensure
+          technical content remains durable, readable, and portable—even without CSS.
+        </p>
+
+        <p>
+          <strong>Assumptions:</strong> Assumes content is placed inside an <code>&lt;article&gt;</code> element, and
+          that the broader HTML structure (e.g., <code>&lt;html&gt;</code>, <code>&lt;body&gt;</code>) is already
+          valid.
+        </p>
+      </section>
+
+      <!-- Guidance -->
+      <section>
+        <h2>Guidance</h2>
+        <p>
+          Use the following guidelines to ensure your article is portable and accessible:
+        </p>
+
+        <ul>
+          <li>Use semantic HTML elements for structure and meaning.</li>
+          <li>Use sectioning elements to divide content meaningfully.</li>
+          <li>Use tables only for tabular data, never for layout.</li>
+          <li>Place all images within figure elements.</li>
+          <li>Use figcaption to describe the content of figures.</li>
+          <li>Avoid interactive and layout-oriented HTML elements in article content.</li>
+        </ul>
+        <p>
+          By following these guidelines, you can ensure that your articles are portable, accessible, and free of
+          unnecessary styling dependencies.
+        </p>
+      </section>
+
+      <!-- Rationale -->
+      <section>
+        <h2>Rationale</h2>
+        <p>
+          The goal of this document is to provide a set of guidelines for writing portable articles using semantic HTML.
+          By following these guidelines, you can ensure that your articles are easy to read, understand, and maintain.
+        </p>
+
+        <p>
+          The guidelines are based on the principles of semantic HTML, which emphasizes the use of meaningful elements
+          and attributes to convey the structure and meaning of content. By using semantic HTML, you can create
+          articles that are accessible to a wide range of users and devices.
+        </p>
+        <p>
+          The guidelines also emphasize the importance of using sectioning elements to divide content meaningfully
+          within the article. This helps to create a clear and logical structure for your articles, making them easier
+          to read and understand.
+        </p>
+      </section>
+
+      <!-- Content Rules -->
+      <section>
+        <h2>Semantic HTML</h2>
+        <p>
+          This section focuses on the semantic use of HTML in document writing. It does not aim to serve as a 
+          reference to the HTML specification and only touches on topics deemed relevant to technical writing in the HTML format.
+        <p>
+        <h3>Preferred Tags</h3>
+        <p>
+          Use semantic elements for structure and meaning:
+        </p>
+        <ul>
+          <li>
+            <code>&lt;section&gt;</code>,
+            <code>&lt;aside&gt;</code>,
+            <code>&lt;figure&gt;</code>,
+            <code>&lt;blockquote&gt;</code>,
+            <code>&lt;ul&gt;</code>,
+            <code>&lt;ol&gt;</code>,
+            <code>&lt;table&gt;</code>
+          </li>
+        </ul>
+
+        <h3>Headings: <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code></h3>
+
+        <ul>
+          <li>Each article must begin with an <code>&lt;h1&gt;</code>.</li>
+          <li>An article must not contain more than one <code>&lt;h1&gt;</code>.</li>
+          <li>Do not skip heading levels.(e.g., do not jump from <code>&lt;h1&gt;</code> to <code>&lt;h3&gt;</code>).</li>
+          <li>Each sectioning element should include a heading reflecting its hierarchical level.</li>
+        </ul>
+
+        <h3>Article Sectioning</h3>
+          <p>
+            Use sectioning elements (<code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>) to divide content 
+            meaningfully within the article. <strong><code>&lt;section&gt;</code></strong> are a clear choice for main
+            content given they are natively assigned the role <em> region</em> by default and are expected to have a
+            header by document outliner tools, and screen readers.
+          </p>
+
+        <h3>Tables</h3>
+        <p>
+          Use <code>&lt;table&gt;</code> only for tabular data — never for layout.
+        </p>
+        <ul>
+          <li>
+            Tables must include a caption unless inside a <code>&lt;figure&gt;</code> where a
+            <code>&lt;figcaption&gt;</code> is preferred.
+          </li>
+          <li>
+            Non-primary tables (i.e., those not central to the section's message) should be wrapped in a 
+            <code>&lt;figure&gt;</code> element.
+          </li>
+        </ul>
+
+        <h3>Images</h3>
+        <ul>
+          <li>
+            Place all images within figure elements.
+          </li>
+        </ul>
+        <p>
+          It is wise to place all images in the root of the article, not nested within section or aside elements.
+          This ensures layout independence and consistent styling behavior.
+        </p>
+
+        <h3>Figures</h3>
+        <p>
+          Each <code>&lt;figure&gt;</code> must include a <code>&lt;figcaption&gt;</code> to describe its content. Use
+          <code>&lt;figure&gt;</code> for content not part of the article’s primary flow, such as:
+        </p>
+        <ul>
+          <li> Images, diagrams, and illustrations</li>
+          <li>Secondary tables or supporting data</li>
+        </ul>
+
+        <h3>Text Structure</h3>
+
+        <p>
+          Text should be placed inside of a <code>&lt;p&gt;</code> tag within a sectioning element.
+          <code>&lt;p&gt;</code> should not be placed in the root of the article. Within sectioning containers,
+          <strong>use the following tags to logically structure content further:</strong>
+        </p>
+        <figure>
+          <table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Usage</th>
+              </tr>
+            </thead>
+            <tbode>
+              <tr><td><code>&lt;strong&gt;</code></td><td>For emphasis and scannability</td></tr>
+              <tr><td><code>&lt;figure&gt;</code></td><td>For visual or technical data</td></tr>
+
+              <tr>
+                <td><code>&lt;blockquote&gt;</code></td><td>For quotations, examples, or informal "air quotes"</td>
+              </tr>
+
+              <tr>
+              </tr>
+            </tbode>
+          </table>
+          <figcaption>Tags useful for structuring content within a sectioning element.</figcaption>
+
+        </figure>
+
+        <h3>Elements to Avoid</h3>
+        <p>
+          Avoid interactive and layout-oriented HTML elements in article content. These reduce portability and semantic
+          clarity:
+        </p>
+        <ul>
+          <li>
+            <code>&lt;form&gt;</code>,
+            <code>&lt;input&gt;</code>,
+            <code>&lt;select&gt;</code>,
+            <code>&lt;textarea&gt;</code>,
+            etc.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Technical Writing -->
+      <section>
+        <h2>Technical Writing</h2>
+        <p>
+          HTML has many native solutions for common situations that arise in technical writing. These solutions are
+          often simple to implement and add significant value to the reader. A few of the available native solutions
+          are detailed below.
+        </p>
+
+        <h3>Tags that are impactful without additional styles</h3>
+        <!-- High Impact Elements -->
+        <figure>
+          <table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Usage</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><code>&lt;details&gt;</code></td>
+                <td>Expandable/collapsible content</td>
+                <td>
+                  <details>
+                    <summary>More information</summary> This text is hidden until the user clicks “More information”.
+                  </details>
+                </td>
+              </tr>
+
+              <tr>
+                <td><code>&lt;abbr&gt;</code></td>
+                <td>Abbreviation</td>
+                <td>HTML stands for <abbr title="Hypertext Markup Language">HTML</abbr>.</td>
+              </tr>
+
+              <tr>
+                <td><code>&lt;address&gt;</code></td>
+                <td>Contact information</td>
+                <td>
+                  <address>
+                    John Doe<br>
+                    123 Main St.<br>
+                    City, State, ZIP<br>
+                  </address>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <figcaption>Elements that should be used often, and are very useful.</figcaption>
+        </figure>
+
+        <!-- Additional styling required -->
+        <h3>Tags that benefit from additional styling</h3>
+        <figure>
+          <table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Usage</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><code>&lt;dfn&gt;</code></td>
+                <td><p>Definition of a term</p></td>
+                <td>
+                  <dfn title="Related to meaning in language or logic.">
+                    Semantic
+                  </dfn>
+                  is a word with meanig in language or logic.</td>
+              </tr>
+
+              <tr>
+                <td><code>&lt;kbd&gt;</code></td>
+                <td><p>Keyboard input</p></td>
+                <td><kbd>Ctrl</kbd> + <kbd>C</kbd></td>
+              </tr>
+
+              <tr>
+                <td><code>&lt;code&gt;</code></td>
+                <td><p>Code snippet</p></td>
+                <td><code>sudo rm -rf /</code></td>
+              </tr>
+
+              <tr>
+                <td><code>&lt;cite&gt;</code></td>
+                <td><p>Title of a work</p></td>
+                <td>Book by <cite>Designing Standards</cite> by Art Designer.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <figcaption>Rarely used elements that may be helpful in specific contexts.</figcaption>
+        </figure>
+      </section>
+
+      <!-- Conclusion -->
+      <section>
+        <h3>Conclusion</h3>
+        <p>
+          Writing with strict semantic HTML isn't just about portability and accessibility—it’s also about convenience
+          and discipline. By committing to a consistent structure, you reduce ambiguity, eliminate styling
+          distractions, and force clarity in both your writing and your thinking. Over time, this approach improves not
+          just your markup, but your productivity and communication as a whole.
+        </p>
+      </section>

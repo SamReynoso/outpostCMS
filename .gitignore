@@ -1,0 +1,4 @@
+venv/
+canonical/files/
+assets/
+*__pycache__/

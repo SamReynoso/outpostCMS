@@ -1,0 +1,123 @@
+<section>
+  <h2>Know Your Limitations</h2>
+
+  <p>
+    I’m never going to be the guy who remembers to manually update a hardcoded “last updated” field. I’m just not him.
+  </p>
+
+  <p>
+    Still, I kept hardcoding that field anyway, like someday I’d automate it.
+  </p>
+
+  <strong>That day has finally come.</strong>
+
+</section>
+
+<section>
+
+  <h2>Why I needed a CMS</h2>
+
+  <p>
+    I’ve been brushing up on SEO, accessibility, and semantic HTML—trying to make my content more portable and
+    future-proof. This shift started while I was building the landing page for one of my projects, Abracadabra Sports.
+  </p>
+
+  <p>
+    Building a business isn’t the same as building a tool. Unexpectedly, I'm producing way more text than I ever
+    planned.
+  </p>
+
+  <p>
+    The system is dead simple. It's a form to produce a JSON file with metadata for SEO and archival purposes.
+    A FastAPI service with Jinja2 templating transforms the JSON into HTML, automatically updating metatags like the 
+    article's <code>&lt;h1&gt;</code> and <code>&lt;title&gt;</code> tags.
+  </p>
+  <p>
+    The content is created in a JavaScript <dfn title="What You See Is What You Get">WYSIWYG</dfn> editor. Adding new
+    sections, text, lists, and headings, plus reordering, is all done through the sidebar. If I really wanted to go all
+    out, I’d bring that functionality into the preview window and kill the sidebar entirely.
+  </p>
+
+</section>
+
+<figure>
+  <img src="/assets/cms-select-big.png" alt="CMS big" />
+  <figcaption>
+    <strong>Selection of a list and its corresponding heading</strong>
+  </figcaption>
+</figure>
+
+<section>
+
+  <h2>The Feature Set: What I wanted to build</h2>
+
+  <p>
+    To be frank, I didn't do any research before starting this project. I didn't know, and still don't, what's being
+    used at the Wall Street Journal or the New York Times, but it was safe to assume they aren’t raw-dogging HTML in
+    Notepad.
+  </p>
+
+  <dl>
+    <dt>Metadata management</dt>
+    <dd>Title, description, publish date, canonical URL, etc.</dd>
+
+    <dt>No-Code editing</dt>
+    <dd>Point-and-click editing, drag-and-drop reordering.</dd>
+
+    <dt>Publication pipeline</dt>
+    <dd>Rendering logic that converts JSON to clean HTML on the server.</dd>
+
+    <dt>Preview window</dt>
+    <dd>Because I like seeing what I’m writing.</dd>
+
+    <dt>Mobile friendly</dt>
+    <dd>Because why not?</dd>
+  </dl>
+
+</section>
+
+<figure>
+  <img src="/assets/cms-small.png" alt="CMS small" />
+  <figcaption>
+    <strong>Serviceable mobile view</strong>
+  </figcaption>
+</figure>
+
+<section>
+
+  <h2>Remarks</h2>
+
+  <p>
+    The repo will be available on my Git server (not this site) once I’ve finished the server-side publishing pipeline
+    and added health checks for dead links and broken images.
+  </p>
+
+  <h3>Was it worth it?</h3>
+
+  <strong>It shouldn’t have been.</strong>
+
+  <p>
+    This started as a side project, and I wouldn’t call it core to any of my businesses. One of my other projects is
+    the other kind of CMS—it has <strong>Customer Management System</strong> features, where promotional emails and
+    public-facing pages are driven by actual customer needs.
+  </p>
+
+  <h3>Will this ever become a product?</h3>
+
+  <strong>Probably not.</strong>
+
+  <p>
+    We’ve all used in-browser editors before. They can be nice to have. But at least now the option’s there—and if it’s
+    ever needed, this one will be zero-jank, powerful, and fun.
+  </p>
+
+  <h3>Did this solve my “last updated” problem?</h3>
+
+  <strong>Only time will tell.</strong>
+
+  <p>
+    I might still SSH into the server and edit raw HTML with base Vim.
+  </p>
+
+</section>
+

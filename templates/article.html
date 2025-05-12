@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ meta.title }}</title>
+  <meta name="description" content="{{ meta.description }}" />
+  <link rel="canonical" href="{{ meta.canonical_url }}" />
+  <meta property="og:title" content="{{ meta.title }}" />
+  <meta property="og:description" content="{{ meta.description }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{ meta.canonical_url }}" />
+  <meta property="og:image" content="{{ meta.image }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ meta.title }}" />
+  <meta name="twitter:description" content="{{ meta.description }}" />
+  <meta name="twitter:image" content="{{ meta.image }}" />
+  <link rel="stylesheet" href="/static/article.css">
+  <link rel="stylesheet" href="/static/article-themes.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <p>
+      <strong>Title:</strong> {{ meta.title }}<br>
+      <strong>Author:</strong> {{ meta.author }}<br>
+      <strong>Date:</strong> {{ meta.date }}<br>
+      <strong>Version:</strong> {{ meta.version }}<br>
+      <strong>Last Updated:</strong> {{ meta.last_updated }}<br>
+    </p>
+    <p>
+      <strong>Description:</strong> {{ meta.description }}
+    </p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+
+    <div>
+      <strong>Navigation</strong><br>
+      <ul>
+        <li><a href="https://ozprealpha.com" title="Home" aria-label="Home">Oz Pre Alpha</a></li>
+       </ul>
+      <ul>
+        <li><a href="https://ozprealpha.com/articles" title="Archive" aria-label="Archive">Article Archive</a></li>
+       </ul>
+    </div>
+
+    <div>
+      <strong>Settings</strong><br>
+      <ul>
+        <li>
+          <button>change theme</button>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Main Article -->
+    <!-- Dynamic content -->
+    <article>
+      <h1>{{ meta.title }}</h1>
+      <header>
+        <em>{{ meta.date }}</em>
+        <p>
+          {{ meta.description }}
+        </p>
+      </header>
+      {% include dynamic_article %}
+    </article>
+
+  </main>
+
+  <footer>
+    <address>
+      Oz Pre Alpha<br>
+    <address>
+  </footer>
+
+  <script>
+    const themes = ['light', 'dark', 'dolphin', 'neon'];
+    const button = document.querySelector('button');
+    button.addEventListener('click', () => {
+      let currentTheme = null;
+      let themeIndex = 0;
+      themes.forEach((theme, i) => {
+        if (document.documentElement.classList.contains(theme)) {
+          currentTheme = theme;
+          document.documentElement.classList.remove(theme);
+          themeIndex = i;
+        }
+      });
+      themeIndex = themeIndex + 1;
+      if (themeIndex >= themes.length) {
+        themeIndex = 0;
+      }
+      document.documentElement.classList.add(themes[themeIndex]);
+    });
+  </script>
+
+</body>
+</html>

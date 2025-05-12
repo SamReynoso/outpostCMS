@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "build-log/week-1",
+    "title": "Build Log: A Tale of Two Startups (Week 1)",
+    "date": "2025-04-13",
+    "description": "The beginning of our open build journey with two products: a no-code CMS and a sports event management system."
+  },
+  {
+    "slug": "build-log/week-5",
+    "title": "Build Log: This time it's personal (Week 5)",
+    "date": "2025-04-13",
+    "description": "The build log is back with avengeance! Twenty-eight days later, let's take a tale of the tape and see how far we've come."
+  },
+  {
+    "slug": "semantic-html-guide",
+    "title": "Semantic HTML Guidelines for Portable Articles",
+    "date": "2025-05-06",
+    "description": "Codifying how to write clean, portable, and consistent semantic HTML for long-term archiving."
+  },
+  {
+    "slug": "building-a-cms",
+    "title": "The 48 Hour Content Management System",
+    "date": "2025-05-11",
+    "description": "A brief walkthrough from idea to a working prototype of a no-code CMS in 48 hours."
+  }
+]
