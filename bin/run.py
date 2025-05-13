@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
+import uvicorn
 
 from lib.loadsite import load_and_validate_site_data
 from canonical import config
@@ -69,5 +70,16 @@ async def article_page(request: Request, article_path: str):
             "article_fragment": fragment,
             "meta": entry,
         },
+    )
+
+
+if __name__ == "__main__":
+    print("Starting the production server on port", config.PROD_PORT)
+    import uvicorn
+    uvicorn.run(
+        "bin.run:app",
+        port=config.PROD_PORT,
+        log_level="info",
+        reload=False,
     )
 

@@ -19,7 +19,6 @@ CANONICAL_INDEX = {}
 
 
 def update_cache():
-    """Update the cache by loading all articles."""
     global ALL_ARTICLES, CANONICAL_INDEX
     ALL_ARTICLES = load_everything()
     CANONICAL_INDEX = {entry["canonical"]: entry for entry in ALL_ARTICLES}
@@ -54,12 +53,11 @@ async def meta(request: Request, canonical_path: str):
 
 
 if __name__ == "__main__":
-    print("Starting the editor on port", config.EDITOR_PORT)
-    print("the editor is open")
+    print("Starting the development server on port", config.DEV_PORT)
     import uvicorn
     uvicorn.run(
-        "bin.editor:app",
-        port=config.EDITOR_PORT,
+        "bin.dev:app",
+        port=config.DEV_PORT,
         log_level="info",
         reload=True,
     )

@@ -10,14 +10,15 @@ case $SERVICE in
     echo "Starting development server..."
     uvicorn bin.server:app
     ;;
-  "robot")
-    echo "Creating robot.txt and sitemap.xml"
-    python3 bin/generate.py
-    ;;
 
   "dev")
     echo "Starting dev server..."
-    python3 bin/devserver.py --reload
+    python3 bin/dev.py
+    ;;
+
+  "robot")
+    echo "Creating robot.txt and sitemap.xml"
+    python3 bin/robot.py
     ;;
 
   "test")
