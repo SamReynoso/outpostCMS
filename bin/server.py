@@ -21,7 +21,6 @@ def check_cache():
         SITE_META = load_and_validate_site_data()
         CANONICAL_INDEX = {entry["canonical"]: entry for entry in SITE_META}
         LAST_LOAD = time.time()
-    print(CANONICAL_INDEX)
 
 
 
@@ -58,7 +57,6 @@ async def index(request: Request):
 
 @app.get("/archive/{article_path:path}/", response_class=HTMLResponse)
 async def article_page(request: Request, article_path: str):
-    print(article_path)
     entry = CANONICAL_INDEX.get(article_path)
     if not entry:
         print(f"[ERROR] Article not found: {article_path}")

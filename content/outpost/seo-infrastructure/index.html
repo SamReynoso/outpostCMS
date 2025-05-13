@@ -1,0 +1,60 @@
+<section>
+  <h2>Why SEO Matters</h2>
+  <p>
+    It’s not a hard sell: search results matter in a web-based industry. I'm not an expert in search engine
+    optimization — and that’s fine. Keep reading.
+  </p>
+  <p>
+    This article goes beyond what the title might suggest. “How to Write the &lt;head&gt; Section of Your Webpage"
+    didn't quite have the same ring. And honestly, there are better resources out there for that sort of thing.
+  </p>
+  <p>
+    What follows are a few nuggets of what seemed important in the world of SEO — and the extraordinary lengths I was
+    willing to go to make the simple task of writing 10–15 lines of HTML much, much harder.
+  </p>
+</section>
+
+<section>
+  <h2>The Spec</h2>
+  <p>
+    I saw an ad for a gig-work platform just days before diving into this project. “You’re a business owner — you’re
+    not going to hire an SEO expert. You’re going to spend days learning to do it yourself.”
+  </p>
+  <p>
+    All I can tell you is that you need endpoints for <code>robots.txt</code> and <code>sitemap.xml</code>, plus
+    metadata for Facebook’s and Twitter’s protocols — the ones that generate rich previews. And maybe throw in some
+    JSON-LD so machine that learn can connect tangents in the same ontology or whatever.
+  </p>
+  <p>
+    Sounds easy, right? I agree. But it doesn't scale, and it’s too prone to human error. I’m a human — and I wouldn't
+    trust me to put letters in the right order to form a sentence without spell-check. So forget about consistently
+    compiling SEO best practices by hand.
+  </p>
+  <p>
+    Instead, I built a system for visibility and auditing — one I’d trust to scale to 50 or 500 articles.
+  </p>
+</section>
+
+<section>
+  <h2>CMS Continued</h2>
+  <p>
+    So, it’s clear at this point that I need a form. Or several. I need a format (JSON), and I need to store it
+    somewhere (a file). And while I’m at it, I might as well add a public/private toggle with some basic whitelisting
+    logic for routes. Just like that, I’ve got the beginnings of a publication pipeline — for the content management
+    system I’m not supposed to be building.
+  </p>
+  <p>
+    Well, it’s not quite a CMS pipeline yet. Right now, article fragments are read from disk and injected into a Jinja2
+    template — all in the same route. In a proper CMS, those fragments (and the head tags) would be exposed through an
+    API, letting the service supply multiple sites with different (or the same) articles.
+  </p>
+  <p>
+    That’s a simple enough task — and probably worth knocking out before it’s strictly necessary. On the opposite end
+    of the spectrum: writing the serializer that converts HTML fragments into the JSON schema needed by the CMS’s rich
+    text editor.
+  </p>
+  <p>
+    That part seems a lot harder. And I still need to figure out thumbnails, cascading fields, and overrides — before
+    even thinking about touching the editor again. If ever.
+  </p>
+</section>

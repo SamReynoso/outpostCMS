@@ -65,7 +65,7 @@
     <ul>
     {% for meta in articles %}
       <li>
-        <a href="/archive/{{ meta.canonical}}/">asdfasdfasd</a><br>
+        <a href="/archive/{{ meta.canonical}}/">{{ meta.title }}</a><br>
         <small><em>{{ meta.date }}</em> — {{ meta.description }}</small>
       </li>
     {% endfor %}

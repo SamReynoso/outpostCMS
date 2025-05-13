@@ -1,22 +1,27 @@
 [
   {
-    "canonical": "build-log/week-1",
-    "path": "content/build-log/week-01_introduction/",
+    "canonical": "build/day-7",
+    "path": "content/build/day-007_introduction/",
     "public": true
   },
   {
-    "canonical": "build-log/week-5",
-    "path": "content/build-log/week-05_content-management-system/",
+    "canonical": "build/day-21",
+    "path": "content/build/day-032_content-management-system/",
     "public": true
   },
   {
-    "canonical": "semantic-html-guide",
-    "path": "content/specs/semantic-html-guide/",
+    "canonical": "process/semantic-html-guide",
+    "path": "content/process/semantic-html-guide/",
     "public": true
   },
   {
-    "canonical": "building-a-cms",
-    "path": "content/posts/building-a-content-management-system/",
+    "canonical": "outpost/building-a-cms",
+    "path": "content/outpost/building-a-content-management-system/",
+    "public": true
+  },
+  {
+    "canonical": "outpost/seo-optimized-infrastructure",
+    "path": "content/outpost/seo-infrastructure/",
     "public": true
   }
 ]
