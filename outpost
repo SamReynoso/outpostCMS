@@ -6,18 +6,18 @@ SERVICE="$1"
 shift
 
 case $SERVICE in
-  "dev")
+  "run")
     echo "Starting development server..."
-    uvicorn bin.server:app --reload
+    uvicorn bin.server:app
     ;;
   "robot")
     echo "Creating robot.txt and sitemap.xml"
     python3 bin/generate.py
     ;;
 
-  "editor")
-    echo "Starting editor..."
-    python3 bin/editor.py
+  "dev")
+    echo "Starting dev server..."
+    python3 bin/devserver.py --reload
     ;;
 
   "test")

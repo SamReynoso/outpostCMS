@@ -84,21 +84,20 @@ def load_everything():
     valid_entries = []
 
     for entry in data:
+        article = {}
         content_dir = entry.get('path')
         if content_dir is not None:
             try:
                 article = load_article_json(entry)
             except Exception as e:
                 log_error(f"Error loading meta.json: {e}", entry)
-                article = {}
             article['canonical'] = entry.get('canonical')
             article['path'] = content_dir
             article['public'] = entry.get('public', False)
-            article['title'] = entry.get('title', '')
-            article['date'] = entry.get('date', '')
 
-        valid_entries.append(entry)
+        valid_entries.append(article)
     return valid_entries
+
 
 if __name__ == "__main__":
     data = load_and_validate_site_data()
