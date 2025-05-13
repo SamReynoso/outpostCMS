@@ -21,6 +21,7 @@ def check_cache():
         SITE_META = load_and_validate_site_data()
         CANONICAL_INDEX = {entry["canonical"]: entry for entry in SITE_META}
         LAST_LOAD = time.time()
+    print(CANONICAL_INDEX)
 
 
 
