@@ -1,21 +1,118 @@
+import time
 import json
 from pathlib import Path
 import sys
+
+import config
+from fastapi import HTTPException
+
+SITE_MAP = []
+CANONICAL_INDEX = {}
+LAST_LOAD = 0
+
 
 
 def log_error(msg, entry):
     print(f"[ERROR] {msg} (canonical: {entry.get('canonical', '?')})", file=sys.stderr)
 
 
-def load_article_json(site_entry: dict) -> dict:
-    content_dir = site_entry['path']
+def get_articles_json():
+    ARTICLES_JSON = Path(config.CANONICAL_DIR) / "articles.json"
+    if ARTICLES_JSON.exists():
+        with open(ARTICLES_JSON, "r", encoding="utf-8") as f:
+            try:
+                return json.load(f)
+            except json.JSONDecodeError:
+                return []
+    else:
+        return []
+
+
+
+class Cache:
+    @staticmethod
+    def update_on_interval():
+        global LAST_LOAD
+        uptime = time.time() - LAST_LOAD
+        if uptime > config.CACHE_DELAY:
+            Cache.update_now()
+
+    @staticmethod
+    def update_article_index():
+        global SITE_MAP, CANONICAL_INDEX
+        CANONICAL_INDEX = {
+                entry['canonical']: load_article_metadata(entry) for entry in SITE_MAP
+                }
+
+    @staticmethod
+    def update_now():
+        global LAST_LOAD, SITE_META, CANONICAL_INDEX
+        SITE_META = load_valid_site_map()
+        LAST_LOAD = time.time()
+        Cache.update_article_index()
+
+    @staticmethod
+    def get(canonical):
+        global CANONICAL_INDEX
+        if CANONICAL_INDEX.__len__() == 0:
+            Cache.update_now()
+        entry = CANONICAL_INDEX.get(canonical)
+        if not entry:
+            print(f"[ERROR] Entry not found in canonical index: {canonical}")
+            raise HTTPException(status_code=404, detail="Entry not found")
+        return entry
+
+    @staticmethod
+    def site_map():
+        global SITE_META
+        if SITE_META.__len__() == 0:
+            Cache.update_now()
+        return SITE_META
+
+def load_fragment(metadata) -> str:
+    if not metadata:
+        print("[ERROR] Metadata is None or empty")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    content_dir = metadata.get('path')
+    if not content_dir:
+        print("[ERROR] Content directory is None or empty")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    
+    fragment_path = Path(content_dir) / "index.html"
+    if not fragment_path.is_file():
+        print(f"[ERROR] File for fragment not found: {fragment_path}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+    try:
+        with open(fragment_path) as fragment_file:
+            return fragment_file.read()
+    except IOError:
+        print(f"[ERROR] Error reading fragment file: {fragment_path}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
+def load_article_metadata(entry: dict) -> dict:
+    content_dir = entry.get('path')
+    if not content_dir:
+        print("[ERROR] Content directory is None or empty")
+        return {}
     meta_path = Path(content_dir) / "meta.json"
-    with open(meta_path) as f:
-        return json.load(f)
+    if not meta_path.is_file():
+        print(f"[ERROR] Meta file not found: {meta_path}")
+        return {}
+    try:
+        with open(meta_path) as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        print(f"[ERROR] Error decoding JSON from meta file: {meta_path}")
+        return {}
+    except IOError:
+        print(f"[ERROR] Error reading meta file: {meta_path}")
+        return {}
 
-def load_and_validate_site_data(json_path='canonical/articles.json'):
+def load_valid_site_map():
+    file_path = Path(config.CANONICAL_DIR) / "articles.json"
 
-    with open(json_path, 'r') as f:
+    with open(file_path, 'r') as f:
         data = json.load(f)
 
     seen = set()
@@ -53,52 +150,9 @@ def load_and_validate_site_data(json_path='canonical/articles.json'):
         if not public:
             print(f"[WARNING] Not public: {content_dir} (canonical: {canonical_str})", file=sys.stderr)
             continue
-        try:
-            article = load_article_json(entry)
-        except Exception as e:
-            log_error(f"Error loading meta.json: {e}", entry)
-            continue
-        if not isinstance(article, dict):
-            log_error("Invalid article JSON format", entry)
-            continue
-        if not article.get('title'):
-            log_error("Missing title in article JSON", entry)
-            continue
-        if not article.get('date'):
-            log_error("Missing date in article JSON", entry)
-            continue
 
-        article['canonical'] = canonical_str
-        article['path'] = content_dir
-        article['public'] = public
-
-        valid_entries.append(article)
+        valid_entries.append(entry)
 
     return valid_entries
 
 
-def load_everything():
-    with open('canonical/articles.json', 'r') as f:
-        data = json.load(f)
-
-    valid_entries = []
-
-    for entry in data:
-        article = {}
-        content_dir = entry.get('path')
-        if content_dir is not None:
-            try:
-                article = load_article_json(entry)
-            except Exception as e:
-                log_error(f"Error loading meta.json: {e}", entry)
-            article['canonical'] = entry.get('canonical')
-            article['path'] = content_dir
-            article['public'] = entry.get('public', False)
-
-        valid_entries.append(article)
-    return valid_entries
-
-
-if __name__ == "__main__":
-    data = load_and_validate_site_data()
-    print(f"loaded {len(data)} valid entries")

@@ -24,5 +24,9 @@ CANONICAL_DIR = "canonical"
 Configure the ports for the development and production servers.
 '''
 
+DEBUG = True
+CACHE_DELAY = 60 * 60
 PROD_PORT = 8080
 DEV_PORT = 8765
+
+

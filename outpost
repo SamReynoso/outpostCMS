@@ -7,12 +7,12 @@ shift
 
 case $SERVICE in
   "run")
-    echo "Starting development server..."
-    uvicorn bin.server:app
+    echo "Starting production server..."
+    python3 bin/run.py
     ;;
 
   "dev")
-    echo "Starting dev server..."
+    echo "Starting development server..."
     python3 bin/dev.py
     ;;
 

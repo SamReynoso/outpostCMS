@@ -1,27 +1,12 @@
 [
   {
-    "canonical": "build/day-7",
-    "path": "content/build/day-007_introduction/",
-    "public": true
+    "group": "codeoutpost",
+    "project_name": "building-a-cdn",
+    "canonical": "h"
   },
   {
-    "canonical": "build/day-21",
-    "path": "content/build/day-032_content-management-system/",
-    "public": true
-  },
-  {
-    "canonical": "process/semantic-html-guide",
-    "path": "content/process/semantic-html-guide/",
-    "public": true
-  },
-  {
-    "canonical": "outpost/building-a-cms",
-    "path": "content/outpost/building-a-content-management-system/",
-    "public": true
-  },
-  {
-    "canonical": "outpost/seo-optimized-infrastructure",
-    "path": "content/outpost/seo-infrastructure/",
-    "public": true
+    "group": "codeoutpost",
+    "project_name": "sams-new-project",
+    "canonical": "https://outpost.com/articles/building-a-cdn"
   }
 ]

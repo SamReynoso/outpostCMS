@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
+<nav>
+  <a href="/create">Add</a>
+</nav>
+
+<div class="articles-list">
+  <table>
+    <thead>
+      <tr><th>Date</th><th>Title</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for article in articles %}
+      <tr>
+        <td>{{ article.date }}</td>
+
+        <td>
+          <details class="article-details">
+            <summary>{{ article.title }}</summary>
+            <dl class="expanded">
+              <dt>Author</dt>
+              <dd>{{ article.author }}</dd>
+              <dt>Last Updated</dt>
+              <dd>{{ article.last_updated }}</dd>
+              <dt>Version</dt>
+              <dd>{{ article.version }}</dd>
+              <dt>Description</dt>
+              <dd>{{ article.description }}</dd>
+              <dt>Canonical</dt>
+              <dd>{{ article.canonical}}</dd>
+              <dt>Path</dt>
+              <dd>{{ article.path }}</dd>
+            </dl>
+            <table class="article-links">
+              <tr>
+                <td>
+                  <a href="archive/{{ article.canonical }}" target="">View</a>
+                </td>
+                <td>
+                  <a href="{{ article.path }}?edit" target="">Edit</a>
+                </td>
+            </table>
+            <table class="article-links">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <a href="edit/meta/{{ article.canonical}}">Mets</a>
+                  </td>
+                  <td>
+                    <a href="{{ article.path }}?edit" target="">Open Graph</a>
+                  </td>
+                  <td>
+                    <a href="{{ article.path }}?edit" target="">Twitter Card</a>
+                  </td>
+                  <td>
+                    <a href="{{ article.path }}?edit" target="">M.L.</a>
+                  </td>
+              </tbody>
+            </table>
+          </details>
+        </td>
+
+        <td>{{ article.public }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<div>
+
+
+{% endblock %}

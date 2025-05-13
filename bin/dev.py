@@ -1,56 +1,37 @@
-from bin.server import app
-from canonical import config
-from fastapi import FastAPI
+from fastapi import Request
 
-from fastapi import Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from pathlib import Path
-import json
-
-from lib.loadsite import load_everything
-
-templates = Jinja2Templates(directory="templates")
-
-
-ALL_ARTICLES = []
-CANONICAL_INDEX = {}
-
-
-def update_cache():
-    global ALL_ARTICLES, CANONICAL_INDEX
-    ALL_ARTICLES = load_everything()
-    CANONICAL_INDEX = {entry["canonical"]: entry for entry in ALL_ARTICLES}
+import config
+from bin.run import app
+from lib.response import PFResponse
+from bin.routers.api import api_router 
+from bin.routers.metadata import metadata_router
+from bin.routers.projects import project_router
 
 
 @app.get("/")
-async def nav(request: Request):
-    update_cache()
-    return templates.TemplateResponse(
-        "nav.html",
-        {
-            "request": request,
-            "articles": ALL_ARTICLES,
-        },
-    )
+async def console(request: Request):
+    resp = PFResponse(request, "console.html")
+    resp.update(title="Content Console")
+    return resp()
 
 
-@app.get("/edit/meta/{canonical_path:path}/")
-async def meta(request: Request, canonical_path: str):
-    article = CANONICAL_INDEX.get(canonical_path)
-    if not article:
-        return RedirectResponse(url="/", status_code=302)
-
-    return templates.TemplateResponse(
-        "meta.html",
-        {
-            "request": request,
-            "meta": article,
-        },
-    )
+@app.get("/archive/")
+async def archive(request: Request):
+    resp = PFResponse(request, "archive.html")
+    resp.update(title="Archive")
+    return resp()
 
 
+@app.get("/gallery/")
+async def gallery(request: Request):
+    resp = PFResponse(request, "about.html")
+    resp.update( title="Gallery",)
+    return resp()
+
+
+app.include_router(api_router, prefix="/api", tags=["api"])
+app.include_router(metadata_router, prefix="/metadata", tags=["metadata"])
+app.include_router(project_router, prefix="/projects", tags=["projects"])
 
 if __name__ == "__main__":
     print("Starting the development server on port", config.DEV_PORT)
@@ -61,4 +42,3 @@ if __name__ == "__main__":
         log_level="info",
         reload=True,
     )
-

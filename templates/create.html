@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
+
+<h2>Create a New Project</h2>
+
+<form class="meta-form" method="post" action="/api/edit-metadata/" enctype="application/x-www-form-urlencoded">
+    <h3>Create a New Project</h3>
+    <hr>
+
+    <label>Group  
+      <input type="text" name="group" value="{{ meta.path }}">
+      <small>
+        This creates a folder in <code>PYTHONPATH/content/[group]</code>. Use dashes or underscores — no spaces.
+      </small>
+    </label>
+
+    <label>Project Name  
+      <input type="text" name="project_name" value="{{ meta.project_name }}">
+      <small>Used internally as the folder name for this project. Should be unique within its group.</small>
+    </label>
+
+    <label>Canonical URL  
+      <input type="text" name="canonical" value="{{ meta.canonical }}">
+      <small>
+        Full URL including domain — e.g., <code>https://outpost.com/articles/blog-1</code>.<br>
+        <strong>Note:</strong> You can't mark a project public until this is set.
+      </small>
+    </label>
+
+    <button type="submit">Next</button>
+  </form>
+{% endblock %}

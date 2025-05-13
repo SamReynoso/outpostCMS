@@ -1,9 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://ozprealpha.com/sitemap.xml
-
-Allow: /article/build-log/week-1
-Allow: /article/build-log/week-5
-Allow: /article/semantic-html-guide
-Allow: /article/building-a-cms

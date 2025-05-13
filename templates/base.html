@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dev Dashboard</title>
+  <title>{% block title %}Content Console{% endblock %}</title>
   <style>
     :root {
       --main-bg-color: rgb(235, 235, 235);
@@ -128,81 +128,65 @@
       border: 0;
     }
 
+    .meta-form {
+      max-width: 80ch;
+      margin: 1.5rem auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .meta-form label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+    }
+
+    .meta-form input[type="text"],
+    .meta-form input[type="email"],
+    .meta-form input[type="date"],
+    .meta-form textarea {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .meta-form .checkbox {
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: normal;
+    }
+
+    .meta-form button {
+      padding: 0.75rem;
+      background: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .meta-form button:hover {
+      background: #005fa3;
+    }
   </style>
 </head>
 <body>
-  <h1>Dev Mode Dashboard</h1>
   <nav>
-    <a href="/archive">Archive</a>
-  <div class="articles-list">
-    <table>
-      <thead>
-        <tr><th>Date</th><th>Title</th><th></th></tr>
-      </thead>
-      <tbody>
-        {% for article in articles %}
-        <tr>
-          <td>{{ article.date }}</td>
-
-          <td>
-            <details class="article-details">
-              <summary>{{ article.title }}</summary>
-              <dl class="expanded">
-                <dt>Author</dt>
-                <dd>{{ article.author }}</dd>
-                <dt>Last Updated</dt>
-                <dd>{{ article.last_updated }}</dd>
-                <dt>Version</dt>
-                <dd>{{ article.version }}</dd>
-                <dt>Description</dt>
-                <dd>{{ article.description }}</dd>
-                <dt>Canonical</dt>
-                <dd>{{ article.canonical}}</dd>
-                <dt>Path</dt>
-                <dd>{{ article.path }}</dd>
-              </dl>
-              <table class="article-links">
-                <tr>
-                  <td>
-                    <a href="archive/{{ article.canonical }}" target="">View</a>
-                  </td>
-                  <td>
-                    <a href="{{ article.path }}?edit" target="">Edit</a>
-                  </td>
-              </table>
-              <table class="article-links">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <a href="edit/meta/{{ article.canonical}}">Mets</a>
-                    </td>
-                    <td>
-                      <a href="{{ article.path }}?edit" target="">Open Graph</a>
-                    </td>
-                    <td>
-                      <a href="{{ article.path }}?edit" target="">Twitter Card</a>
-                    </td>
-                    <td>
-                      <a href="{{ article.path }}?edit" target="">M.L.</a>
-                    </td>
-                </tbody>
-              </table>
-            </details>
-          </td>
-
-          <td>{{ article.public }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  <div>
+    {% if request.path != '/' %}
+      <a href="/">Content Console</a>
+    {% endif %}
+  <nav>
+  <main>
+    <section>
+      <h1>{{ title }}</h1>
+    {% block content %}{% endblock %}
+    </section>
+  </main>
 </body>
 </html>
