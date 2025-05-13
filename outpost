@@ -7,17 +7,18 @@ shift
 
 case $SERVICE in
   "run")
-    echo "Starting development server..."
-    uvicorn bin.server:app
-    ;;
-  "robot")
-    echo "Creating robot.txt and sitemap.xml"
-    python3 bin/generate.py
+    echo "Starting production server..."
+    python3 bin/run.py
     ;;
 
   "dev")
-    echo "Starting dev server..."
-    python3 bin/devserver.py --reload
+    echo "Starting development server..."
+    python3 bin/dev.py
+    ;;
+
+  "robot")
+    echo "Creating robot.txt and sitemap.xml"
+    python3 bin/robot.py
     ;;
 
   "test")

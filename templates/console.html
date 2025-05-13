@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
+
+<aside class="actions">
+  <a class="btn" href="/projects/new/">Start a new project</a>
+</aside>
+
+<table class="projects">
+  <thead>
+    <tr><th>projects</th></tr>
+  </thead>
+  <tbody>
+
+    {% for entry in zip_map%}
+    <tr>
+      <td>
+        <details class="project-details">
+          <summary><small>{{ entry.date }} | {{ entry.group }}:</small> {{ entry.project_name }} </summary>
+
+          <dl>
+            <dt>metadata forms</dt> 
+            <dd>
+              <nav>
+                <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/canonical/">Canonical</a>
+                <a href="{{ entry.path }}">Basic</a>
+                <a href="{{ entry.path }}">Social</a>
+                <a href="{{ entry.path }}">Advanced</a>
+              </nav>
+            </dd>
+            <dt>Public</dt> <dd>{{ entry.public }}</dd>
+            <dt>Title</dt> <dd>{{ entry.title }}</dd>
+            <dt>Author</dt> <dd>{{ entry.author }}</dd>
+            <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
+            <dt>Group</dt> <dd>{{ entry.group}}</dd>
+            <dt>Date</dt> <dd>{{ entry.date}}</dd>
+            <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
+            <dt>Last Updated</dt> <dd>{{ entry.canonical }}</dd>
+            <dt>Actions</dt> 
+            <dd>
+              <aside class="actions">
+                <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/preview/">Preview</a>
+                <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/canonical/">Upload File</a>
+                <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/update/">Open in Editor</a>
+                <a class="btn" href="{{ entry.path }}?delete" target="">Delete</a>
+              </aside>
+            </dd>
+          </dl>
+        </details>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

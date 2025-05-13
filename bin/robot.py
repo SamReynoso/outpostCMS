@@ -9,7 +9,7 @@ print( f"Parent directory: {PARENT_DIR}")
 CANON_DIR = PARENT_DIR.joinpath("canonical")
 
 BASE_URL = "https://ozprealpha.com"
-ROUTE_PREFIX = "/article/" 
+ROUTE_PREFIX = "/archive/" 
 INPUT_JSON = Path(CANON_DIR.joinpath("articles.json"))
 OUTPUT_XML = Path(CANON_DIR.joinpath("sitemap.xml"))
 OUTPUT_ROBOT= Path(CANON_DIR.joinpath("robots.txt"))
@@ -39,7 +39,7 @@ urlset = Element("urlset")
 urlset.set("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
 
 for article in articles:
-    slug = article["slug"]
+    slug = article["canonical"]
     robot_lines.append(f"Allow: {ROUTE_PREFIX}{slug}")
     url = SubElement(urlset, "url")
     loc = SubElement(url, "loc")

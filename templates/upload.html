@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
+
+<h2>New Project</h2>
+
+  <form class="meta-form" method="post" action="/edit-metadata">
+    <h3>Upload Markdown</h3>
+    <hr>
+
+
+    <label>Upload Markdown
+      <input type="file" name="markdown_file" accept=".md">
+      <small>Upload a markdown file. This will be the main content of your project.</small>
+    </label>
+
+    <label>Use empty index.html 
+      <input type="checkbox" name="empty_index" {% if meta.empty_index %}checked{% endif %}>
+      <small>Check this if you want to start with an empty index.html file.</small>
+    </label>
+
+    <button type="submit">Next</button>
+  </form>
+{% endblock %}

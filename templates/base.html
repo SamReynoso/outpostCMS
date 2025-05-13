@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{title}}</title>
+  <style>
+    }
+
+    :root {
+      --margin: 1rem;
+      --border-radius: 5px;
+      --background-color: rgb(249, 249, 249);
+    }
+
+    html * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      color: rgb(40, 20, 10);
+      background-color: rgb(240, 240, 240); 
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-around;
+      padding: .5rem;
+      margin: .5rem;
+      border-bottom: 2px solid rgb(150, 150, 150) 
+
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s;
+    }
+
+
+    nav a:hover {
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 1rem .5rem;
+    }
+
+    section {
+      background-color: rgb(250, 250, 250);
+      max-width: 80ch;
+      padding: 1rem;
+      margin: 1rem auto;
+      border: 1px solid rgb(221, 221, 221);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    table { 
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.projects { 
+      margin: 0 auto;
+      width: 95%;
+    }
+
+    th, td {
+    }
+
+    dl{
+      color: rgb(51, 51, 51);
+      line-height: 1.4;
+      font-size: 0.9rem;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      gap: 0.25rem 1rem;
+      background: rgb(239, 239, 239);
+      padding: 0.5rem;
+      border: 1px solid rgb(221, 221, 221);
+      border-bottom: 3px solid rgb(106, 106, 106);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      white-space: nowrap;
+    }
+
+    dt {
+      color: rgb(85, 85, 85);
+      overflow-wrap: anywhere;
+    }
+
+    dd {
+      color: rgb(30, 30, 30);
+      overflow-wrap: anywhere;
+      font-weight: 600;
+    }
+
+
+    details {
+      background: rgb(255, 255, 255);
+      margin-bottom: .1rem;
+    }
+
+    details summary {
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0.7rem 1rem;
+      background-color: rgb(250, 250, 250);
+      border-bottom: 1px solid #ccc;
+    }
+
+    details summary:hover {
+      background-color: rgb(240, 240, 240);
+    }
+
+    .meta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      background-color: rgb(250, 250, 250);
+      max-width: 60ch;
+      margin: 1.5rem auto;
+      padding: 1rem;
+      border: 1px solid rgb(205, 205, 205);
+      border-radius: var(--border-radius);
+    }
+
+    .meta-form label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+    }
+
+    .meta-form input[type="text"],
+    .meta-form input[type="email"],
+    .meta-form input[type="date"],
+    .meta-form textarea {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+    }
+
+    .meta-form .checkbox {
+      flex-direction: row;
+      gap: 0.5rem;
+      font-weight: normal;
+    }
+
+    .meta-form button {
+      padding: 0.75rem;
+      background: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+    }
+
+    td {
+      border: 1px solid rgb(221, 221, 221);
+      background-color: rgb(150, 150, 150);
+    }
+
+    aside.actions {
+      display: flex;
+      justify-content: space-around;
+      padding: .5rem;
+      margin: .4rem 0;
+    }
+
+    a.btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: rgb(37, 99, 235);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s;
+    }
+
+    a.btn:hover {
+      background-color: rgb(29, 78, 216);
+    }
+
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/console">Console</a>
+    <a href="/archive/">Archive</a>
+    <a href="/gallery/">Gallery</a>
+    <a href="/projects/">Projects</a>
+  </nav>
+  <main>
+      <h1>{{ title }}</h1>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

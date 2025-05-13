@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Console</title>
+</head>
+<body>
+  <h1>Content Console</h1>
+  <nav>
+    <div style="margin: 1rem 0;">
+      <button onclick="location.href='/upload'" style="margin-right: 1rem;">Upload New</button>
+      <button onclick="location.href='/create'">Create New</button>
+    </div>
+  </nav>
+</body>
+</html>

@@ -1,77 +1,22 @@
-<!doctype >
-<html>
+{% extends "base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/static/favicon.png">
 
-  <title>Article Archive | Oz Pre Alpha</title>
-  <meta name="description" content="A collection of technical articles, build logs, and guides from the Oz Pre Alpha team.">
-  <meta property="og:title" content="Article Archive | Oz Pre Alpha">
-  <meta property="og:description" content="A collection of technical articles, build logs, and guides from the Oz Pre Alpha team.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourdomain.com/articles/">
-  <meta property="og:image" content="https://yourdomain.com/static/opengraph-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Article Archive | Oz Pre Alpha">
-  <meta name="twitter:description" content="A collection of technical articles, build logs, and guides from the Oz Pre Alpha team.">
-  <meta name="twitter:image" content="https://yourdomain.com/static/opengraph-default.png">
-
-<style>
-  body {
-    font-family: system-ui, sans-serif;
-    margin: 2rem;
-    background: rgb(17, 24, 39);
-    color: rgb(249, 250, 251);
-    line-height: 1.5;
-  }
-
-  ul {
-    list-style: none;
-  }
-
-  li {
-    margin-bottom: 1rem;
-  }
-
-  a {
-    color: rgb(37, 99, 235);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-</style>
-
-</head>
-
-<body>
-
+<div class=archive-content>
   <header>
-    <h1>Article Archive</h1>
-    <p>A collection of technical articles, build logs, and guides from the Oz Pre Alpha team.</p>
+    <p>A collection of articles and resources tracked by the  system.</p>
   <header>
-  <nav>
-    <ul>
-      <li><a href="/">Home</a></li>
-    </ul>
-  </nav>
-  <main>
     <!-- Dynamic content -->
     <h2>Latest Articles</h2>
     <ul>
     {% for meta in articles %}
       <li>
-        <a href="/archive/{{ meta.canonical}}/">asdfasdfasd</a><br>
+        <a href="/archive/{{ meta.canonical}}/">{{ meta.title }}</a><br>
         <small><em>{{ meta.date }}</em> — {{ meta.description }}</small>
       </li>
     {% endfor %}
     </ul>
-  </main>
+</div>
 
-
-</body>
-</html>
+{% endblock %}
