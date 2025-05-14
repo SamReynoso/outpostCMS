@@ -1,0 +1,39 @@
+
+.social-preview {
+  width: 60ch;
+  background:rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(204, 204, 204, 0.7);
+  border-radius: 8px;
+  font-family: sans-serif;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.preview-image {
+  height: 40ch;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.preview-text {
+  padding: 16px;
+}
+
+.preview-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.preview-description {
+  font-size: 14px;
+  color: rgb(68, 68, 68);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.preview-url {
+  font-size: 13px;
+  color: rgb(102, 102, 102);
+}

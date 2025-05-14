@@ -105,11 +105,6 @@ def load_zip_map():
         for key, value in entry.items():
             meta[key] = value
         zip.append(meta)
-    print(''''
-
-
-    [INFO] Zip map loaded with {} entries
-    '''.format(len(zip)))
     return zip
 
 

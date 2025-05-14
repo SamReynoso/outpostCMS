@@ -1,28 +1,27 @@
-from fastapi import FastAPI
+import json
+from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 
-from lib.loadsite import Cache, load_fragment
+from lib.loadsite import load_fragment, load_zip_map
 import config
 
 
 app = FastAPI()
 app.mount("/" + config.STATIC_DIR, StaticFiles(directory="static"), name="static")
-app.mount("/" + config.ASSETS_DIR, StaticFiles(directory="assets"), name="assets")
 
 
 @app.get("/article/{canonical:path}/", response_class=JSONResponse)
 async def article_page(_, canonical:str):
-    metadata= Cache.get(canonical)
-    fragment = load_fragment(metadata)
-    return JSONResponse(content={"meta": metadata, "fragment": fragment})
+    pass
 
 
 @app.get("/info/", response_class=JSONResponse)
-async def info_page(_):
-    Cache.update_on_interval()
-    return JSONResponse(content={"site_map": Cache.site_map()})
+async def info_page():
+    data = load_zip_map()
+    pretty_data = json.dumps(data, indent=4, ensure_ascii=False)
+    return Response(content=pretty_data, media_type="application/json")
 
 
 if __name__ == "__main__":

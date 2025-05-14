@@ -17,12 +17,14 @@
   <meta name="twitter:image" content="{{ meta.image }}" />
   <link rel="stylesheet" href="/static/article.css">
   <link rel="stylesheet" href="/static/article-themes.css">
+  <link rel="stylesheet" href="/static/social-preview.css">
 </head>
 
 <body>
 
   <!-- Header -->
-  <header>
+  <header class="preview-header">
+    <div>
     <p>
       <strong>Title:</strong> {{ meta.title }}<br>
       <strong>Author:</strong> {{ meta.author }}<br>
@@ -33,6 +35,14 @@
     <p>
       <strong>Description:</strong> {{ meta.description }}
     </p>
+    </div>
+  <div class="social-preview">
+    <div class="preview-image" style="background-image: url('https://example.com/image.jpg');"></div>
+    <div class="preview-text">
+      <div class="preview-title">{{ meta.title }}</div>
+      <div class="preview-description">{{ meta.description }}</div>
+    </div>
+  </div>
   </header>
 
   <!-- Navigation -->
@@ -41,10 +51,10 @@
     <div>
       <strong>Navigation</strong><br>
       <ul>
-        <li><a href="/" title="Home" aria-label="Home">Home</a></li>
+        <li><a href="/console/" title="console" aria-label="Content Console">Content Console</a></li>
        </ul>
       <ul>
-        <li><a href="Archive" title="Archive" aria-label="Archive">Archive</a></li>
+        <li><a href="/projects/{{ group }}/{{ project_name }}/basic/" title="Add Info" aria-label="Add Info">Start adding info</a></li>
        </ul>
     </div>
 

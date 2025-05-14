@@ -1,0 +1,38 @@
+{% extends "metadata/base.html" %}
+
+{% block form %}
+<form
+  class="meta-form"
+  method="post"
+  action="{{ form_action }}"
+  enctype="application/x-www-form-urlencoded"
+  >
+  <h3>{{ form_header }}</h3>
+  <label>Title Override
+    <input type="text" name="title_override" value="{{ entry.title }}">
+  </label>
+
+  <label>Short Description
+    <input type="text" name="short_descriptiong" value="">
+  </label>
+
+  <label>Image
+    <input type="text" name="image" value="{{ entry.image }}" required>
+  </label>
+
+  <label>Site Name
+    <input type="text" name="site_name" value="{{ entry.site_name }}" required>
+  </label>
+
+  <label>Twitter Card
+    <input type="text" name="twitter_card" value="{{ entry.twitter_card }}">
+  </label>
+  <label>Twitter Site
+    <input type="text" name="twitter_site" value="{{ entry.twitter_site }}">
+  </label>
+  <label>Twitter Creator
+    <input type="text" name="twitter_creator" value="{{ entry.twitter_creator }}">
+  </label>
+
+  <button type="submit">Submit</button>
+{% endblock %}

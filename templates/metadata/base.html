@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if group %}
+<nav>
+  <a href="/projects/{{ group }}/{{ project_name }}/canonical/">Canonical</a>
+  <a href="/projects/{{ group }}/{{ project_name }}/basic/">Basic</a>
+  <a href="/projects/{{ group }}/{{ project_name }}/social/">Social</a>
+  <a href="/projects/{{ group }}/{{ project_name }}/advanced/">Advanced</a>
+  <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/preview/">Preview</a>
+</nav>
+{% else %}
+{% endif %}
+
+<section>
+  {{ form_description | safe}}
+</section>
+
+{% block form %}
+<p> this is the base template for editing metadata</p>
+{% endblock %}
+
+
+{% endblock %}

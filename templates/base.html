@@ -173,7 +173,7 @@
       margin: .4rem 0;
     }
 
-    a.btn {
+    .btn {
       display: inline-block;
       padding: 0.5rem 1rem;
       background-color: rgb(37, 99, 235);
@@ -183,19 +183,26 @@
       transition: background-color 0.3s;
     }
 
-    a.btn:hover {
+    .btn:hover {
       background-color: rgb(29, 78, 216);
+    }
+    pre.response-box {
+      background-color: rgb(240, 240, 240);
+      padding: 1rem;
+      height: 30vh;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
 
   </style>
 </head>
 <body>
   <nav>
-    <a href="/">Start</a>
     <a href="/console">Console</a>
-    <a href="/archive/">Archive</a>
-    <a href="/gallery/">Gallery</a>
-    <a href="/projects/">Projects</a>
+    <a href="/endpoints/">API</a>
+    <a href="/">Getting Started</a>
   </nav>
   <main>
       <h1>{{ title }}</h1>
