@@ -6,6 +6,7 @@ from lib.response import PFResponse
 from bin.routers.api import api_router 
 from bin.routers.metadata import metadata_router
 from bin.routers.projects import project_router
+from lib.loadsite import load_zip_map
 
 @app.get("/")
 async def home(request: Request):
@@ -16,7 +17,10 @@ async def home(request: Request):
 @app.get("/console/")
 async def console(request: Request):
     resp = PFResponse(request, "console.html")
-    resp.update(title="Content Console")
+    resp.update(
+        title="Content Console",
+        zip_map=load_zip_map(),
+    )
     return resp()
 
 

@@ -12,19 +12,15 @@
   </thead>
   <tbody>
 
-    {% for article in articles %}
+    {% for article in zip_map%}
     <tr>
       <td>{{ article.date }}</td>
       <td>
         <details class="article-details">
-          <summary>{{ article.title }}</summary>
+          <summary><small>{{ article.date }} | {{ article.group }}:</small> {{ article.project_name }} </summary>
           <dl>
+            <dt>Group</dt> <dd>{{ article.group}}</dd>
             <dt>Author</dt> <dd>{{ article.author }}</dd>
-            <dt>Last Updated</dt><dd>{{ article.last_updated }}</dd>
-            <dt>Version</dt> <dd>{{ article.version }}</dd>
-            <dt>Description</dt><dd>{{ article.description }}</dd>
-            <dt>Canonical</dt><dd>{{ article.canonical}}</dd>
-            <dt>Path</dt> <dd>{{ article.path }}</dd>
           </dl>
           <table class="article-links">
             <tr>

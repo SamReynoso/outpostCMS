@@ -46,8 +46,8 @@ class Cache:
 
     @staticmethod
     def update_now():
-        global LAST_LOAD, SITE_META, CANONICAL_INDEX
-        SITE_META = load_valid_site_map()
+        global LAST_LOAD, SITE_MAP, CANONICAL_INDEX
+        SITE_MAP = load_valid_site_map()
         LAST_LOAD = time.time()
         Cache.update_article_index()
 
@@ -64,10 +64,11 @@ class Cache:
 
     @staticmethod
     def site_map():
-        global SITE_META
-        if SITE_META.__len__() == 0:
+        global SITE_MAP
+        if SITE_MAP.__len__() == 0:
             Cache.update_now()
-        return SITE_META
+        return SITE_MAP
+
 
 def load_fragment(metadata) -> str:
     if not metadata:
@@ -108,6 +109,43 @@ def load_article_metadata(entry: dict) -> dict:
     except IOError:
         print(f"[ERROR] Error reading meta file: {meta_path}")
         return {}
+
+
+def load_site_map():
+    file_path = Path(config.CANONICAL_DIR) / "articles.json"
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+    return data
+
+
+def load_from_site_map(entry: dict) -> dict:
+    project_dir = Path(config.CONTENT_DIR) / entry['group'] / entry['project_name']
+    meta_path = project_dir / "meta.json"
+    if not meta_path.is_file():
+        print(f"[ERROR] Meta file not found: {meta_path}")
+        return {}
+    try:
+        with open(meta_path) as f:
+            return json.load(f)
+    except json.JSONDecodeError:
+        print(f"[ERROR] Error decoding JSON from meta file: {meta_path}")
+        return {}
+
+def load_zip_map():
+    site_map = load_site_map()
+    zip = []
+    for entry in site_map:
+        meta = load_from_site_map(entry)
+        for key, value in entry.items():
+            meta[key] = value
+        zip.append(meta)
+    print(''''
+
+
+    [INFO] Zip map loaded with {} entries
+    '''.format(len(zip)))
+    return zip
+
 
 def load_valid_site_map():
     file_path = Path(config.CANONICAL_DIR) / "articles.json"

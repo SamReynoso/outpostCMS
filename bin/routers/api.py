@@ -13,5 +13,21 @@ async def create_project(
         group: str = Form(...), 
         project_name: str = Form(...),
         canonical: str = Form(...)):
+    print('''
+
+
+
+
+
+
+
+
+          this is working?
+
+
+
+
+
+          ''')
     create_project_structure(group, project_name, canonical)
     return RedirectResponse(url="/", status_code=303)

@@ -19,8 +19,15 @@ async def new_project(request: Request):
     
     resp.update(
         title="New Project",
+        form_action="/api/projects/new/",
         form_header="Create a new project",
-        form_description="Use this form to create a new project and new groups.",
+        form_description='''
+<h2>Project Structure</h2>
+The content management system uses the information entered in this form the maintain
+a mapping between canonical URLs and your project. The information is used to generate
+accurate SEO metatags and search engine submissions. The information is also used to
+generate the sitemap.xml file.
+''',
         meta={},
         )
     return resp()
