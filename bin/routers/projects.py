@@ -1,6 +1,8 @@
-from fastapi import Request, APIRouter
-
+from fastapi import Request, APIRouter, HTTPException
+from lib.loadsite import Cache, load_fragment
 from lib.response import PFResponse
+
+from lib.loadsite import load_fragment, load_meta
 
 
 
@@ -33,13 +35,46 @@ generate the sitemap.xml file.
     return resp()
 
 
+@project_router.get("/{group}/{project_name}/canonical/")
+async def project_canonical(request: Request, group: str, project_name: str):
+    resp = PFResponse(request, "metadata/basic.html")
+    entry=Cache.get_project(group, project_name)
+    if entry is None:
+        raise HTTPException(status_code=404, detail="Project not found")
+
+    resp.update(
+        title="Update Project",
+        form_action="/api/projects/update/",
+        form_header="Update: " + entry["title"],
+        form_description='''
+<strong>Note:</strong> Changing the group or project name will not change canonical URL of the project. But will effect
+the the API endpoint for the project that returns the article fragment.
+''',
+        meta=entry,
+        )
+    return resp()
+@project_router.get("/{group}/{project_name}/info/")
+async def project_info(request: Request, group: str, project_name: str):
+    resp = PFResponse(request, "projects/info.html")
+    resp.update(
+            title="Project Info",
+            entry=Cache.get_project(group, project_name),
+            )
+    return resp()
+
+
+
 @project_router.get("/{group}/{project_name}/preview/")
 async def preview_project(request: Request, group: str, project_name: str):
     resp = PFResponse(request, "preview.html")
+    meta = load_meta(group, project_name)
+    
     resp.update(
-            title="Preview",
+            title="Preview " + meta.get("title", "unknown"),
             group=group,
-            project_name=project_name
+            project_name=project_name,
+            article_fragment=load_fragment(group, project_name),
+            meta=meta,
             )
     return resp()
 

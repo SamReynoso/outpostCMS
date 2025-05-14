@@ -6,11 +6,6 @@ import sys
 import config
 from fastapi import HTTPException
 
-SITE_MAP = []
-CANONICAL_INDEX = {}
-LAST_LOAD = 0
-
-
 
 def log_error(msg, entry):
     print(f"[ERROR] {msg} (canonical: {entry.get('canonical', '?')})", file=sys.stderr)
@@ -30,56 +25,34 @@ def get_articles_json():
 
 
 class Cache:
-    @staticmethod
-    def update_on_interval():
-        global LAST_LOAD
-        uptime = time.time() - LAST_LOAD
-        if uptime > config.CACHE_DELAY:
-            Cache.update_now()
-
-    @staticmethod
-    def update_article_index():
-        global SITE_MAP, CANONICAL_INDEX
-        CANONICAL_INDEX = {
-                entry['canonical']: load_article_metadata(entry) for entry in SITE_MAP
-                }
-
-    @staticmethod
-    def update_now():
-        global LAST_LOAD, SITE_MAP, CANONICAL_INDEX
-        SITE_MAP = load_valid_site_map()
-        LAST_LOAD = time.time()
-        Cache.update_article_index()
-
-    @staticmethod
-    def get(canonical):
-        global CANONICAL_INDEX
-        if CANONICAL_INDEX.__len__() == 0:
-            Cache.update_now()
-        entry = CANONICAL_INDEX.get(canonical)
-        if not entry:
-            print(f"[ERROR] Entry not found in canonical index: {canonical}")
-            raise HTTPException(status_code=404, detail="Entry not found")
-        return entry
 
     @staticmethod
     def site_map():
-        global SITE_MAP
-        if SITE_MAP.__len__() == 0:
-            Cache.update_now()
-        return SITE_MAP
+        return  load_zip_map()
+
+    @staticmethod
+    def indexed_site_map():
+        def format_path(entry):
+            return entry['group'] + '/' + entry['project_name'] 
+        site_map = Cache.site_map()
+        indexed_map = { format_path(entry): entry for entry in site_map }
+        return indexed_map
+
+    @staticmethod
+    def get_project(group, project_name):
+        indexed_map = Cache.indexed_site_map()
+        key = group + '/' + project_name
+        if key in indexed_map:
+            return indexed_map[key]
+        else:
+            return None
 
 
-def load_fragment(metadata) -> str:
-    if not metadata:
-        print("[ERROR] Metadata is None or empty")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-    content_dir = metadata.get('path')
-    if not content_dir:
-        print("[ERROR] Content directory is None or empty")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
-    
-    fragment_path = Path(content_dir) / "index.html"
+
+
+
+def load_fragment(group, project_name) -> str:
+    fragment_path = Path(config.CONTENT_DIR) / group / project_name / "index.html"
     if not fragment_path.is_file():
         print(f"[ERROR] File for fragment not found: {fragment_path}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
@@ -91,21 +64,14 @@ def load_fragment(metadata) -> str:
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-def load_article_metadata(entry: dict) -> dict:
-    content_dir = entry.get('path')
-    if not content_dir:
-        print("[ERROR] Content directory is None or empty")
-        return {}
-    meta_path = Path(content_dir) / "meta.json"
+def load_meta(group: str, project_name: str) -> dict:
+    meta_path = Path(config.CONTENT_DIR) / group / project_name / "meta.json"
     if not meta_path.is_file():
         print(f"[ERROR] Meta file not found: {meta_path}")
         return {}
     try:
         with open(meta_path) as f:
             return json.load(f)
-    except json.JSONDecodeError:
-        print(f"[ERROR] Error decoding JSON from meta file: {meta_path}")
-        return {}
     except IOError:
         print(f"[ERROR] Error reading meta file: {meta_path}")
         return {}

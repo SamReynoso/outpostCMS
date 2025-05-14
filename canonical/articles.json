@@ -1,1 +1,32 @@
-[]
+[
+    {
+        "group": "codeoutpost",
+        "project_name": "new-project",
+        "canonical": "https://outpost.com/articles/building-a-cdn",
+        "public": false
+    },
+    {
+        "group": "test-group",
+        "project_name": "the-big-test",
+        "canonical": "https://outpost.com/articles/212",
+        "public": false
+    },
+    {
+        "group": "codeoutpost",
+        "project_name": "the-ui-for-the-cms",
+        "canonical": "https://outpost.com/articles/213",
+        "public": false
+    },
+    {
+        "group": "",
+        "project_name": "",
+        "canonical": "",
+        "public": false
+    },
+    {
+        "group": "sdfasdklfasd",
+        "project_name": "jls;kjdfuoiuobi",
+        "canonical": "s.rmerglixldskfjgdf",
+        "public": false
+    }
+]
