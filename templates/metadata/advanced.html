@@ -1,0 +1,48 @@
+{% extends "metadata/base.html" %}
+
+{% block form %}
+<form
+  class="meta-form"
+  method="post"
+  action="{{ form_action }}"
+  enctype="application/x-www-form-urlencoded"
+  >
+  <label for="type">@type</label>
+  <select id="type" name="type" required>
+    <option value="SoftwareSourceCode">SoftwareSourceCode</option>
+    <option value="CreativeWork">CreativeWork</option>
+    <option value="Product">Product</option>
+    <option value="Article">Article</option>
+    <option value="Event">Event</option>
+  </select>
+
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="description">Description</label>
+  <textarea id="description" name="description" rows="3" required></textarea>
+
+  <label for="url">URL</label>
+  <input type="url" id="url" name="url" required>
+
+  <label for="image">Image URL</label>
+  <input type="url" id="image" name="image">
+
+  <label for="author">Author</label>
+  <input type="text" id="author" name="author">
+
+  <label for="datePublished">Date Published</label>
+  <input type="date" id="datePublished" name="datePublished">
+
+  <label for="license">License</label>
+  <input type="text" id="license" name="license">
+
+  <label for="keywords">Keywords (comma-separated)</label>
+  <input type="text" id="keywords" name="keywords">
+
+  <label for="sameAs">Same As (comma-separated URLs)</label>
+  <input type="text" id="sameAs" name="sameAs">
+
+  <button type="submit">Generate Structured Data</button>
+</form>
+{% endblock %}

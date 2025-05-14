@@ -7,9 +7,6 @@
 </aside>
 
 <table class="projects">
-  <thead>
-    <tr><th>projects</th></tr>
-  </thead>
   <tbody>
 
     {% for entry in zip_map%}
@@ -23,9 +20,9 @@
             <dd>
               <nav>
                 <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/canonical/">Canonical</a>
-                <a href="{{ entry.path }}">Basic</a>
-                <a href="{{ entry.path }}">Social</a>
-                <a href="{{ entry.path }}">Advanced</a>
+                <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/basic/">Basic</a>
+                <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/social/">Social</a>
+                <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/advanced/">Advanced</a>
               </nav>
             </dd>
             <dt>Public</dt> <dd>{{ entry.public }}</dd>
@@ -40,9 +37,9 @@
             <dd>
               <aside class="actions">
                 <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/preview/">Preview</a>
-                <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/canonical/">Upload File</a>
-                <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/update/">Open in Editor</a>
-                <a class="btn" href="{{ entry.path }}?delete" target="">Delete</a>
+                <a class="btn" href="/projects/{{ entry.group }}/{{ entry.project_name }}/upload/">Upload File</a>
+                <a class="btn" href="/editor/">Open in Editor</a>
+                <a class="btn" href="#" target="">Delete</a>
               </aside>
             </dd>
           </dl>

@@ -84,6 +84,12 @@ header {
   margin: 1rem;
 }
 
+header.preview-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 header strong {
   font-size: 1.2em;
   color: rgb(170, 170, 180);

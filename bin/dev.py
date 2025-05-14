@@ -1,4 +1,5 @@
 from fastapi import Request
+from fastapi.responses import HTMLResponse
 
 import config
 from bin.run import app
@@ -8,34 +9,35 @@ from bin.routers.metadata import metadata_router
 from bin.routers.projects import project_router
 from lib.loadsite import load_zip_map
 
+
 @app.get("/")
 async def home(request: Request):
     resp = PFResponse(request, "home.html")
     resp.update(title="Content Management System")
     return resp()
 
+
 @app.get("/console/")
 async def console(request: Request):
     resp = PFResponse(request, "console.html")
-    resp.update(
-        title="Content Console",
-        zip_map=load_zip_map(),
+    resp.update(title="Content Console", zip_map=load_zip_map())
+    return resp()
+
+
+@app.get("/endpoints/")
+async def endpoints(request: Request):
+    resp = PFResponse(request, "endpoints.html")
+    resp.update(title="API Endpoints")
+    return resp()
+
+
+@app.get("/editor/")
+async def editor():
+    return HTMLResponse(
+        """<html><head><title>Editor</title></head><body><h1>Editor</h1><p>Editor is not implemented yet.</p></body>
+</html>"""
     )
-    return resp()
 
-
-@app.get("/archive/")
-async def archive(request: Request):
-    resp = PFResponse(request, "archive.html")
-    resp.update(title="Archive")
-    return resp()
-
-
-@app.get("/gallery/")
-async def gallery(request: Request):
-    resp = PFResponse(request, "about.html")
-    resp.update( title="Gallery",)
-    return resp()
 
 
 app.include_router(api_router, prefix="/api", tags=["api"])
