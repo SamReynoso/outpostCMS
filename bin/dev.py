@@ -7,8 +7,13 @@ from bin.routers.api import api_router
 from bin.routers.metadata import metadata_router
 from bin.routers.projects import project_router
 
-
 @app.get("/")
+async def home(request: Request):
+    resp = PFResponse(request, "home.html")
+    resp.update(title="Content Management System")
+    return resp()
+
+@app.get("/console/")
 async def console(request: Request):
     resp = PFResponse(request, "console.html")
     resp.update(title="Content Console")

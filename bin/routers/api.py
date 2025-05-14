@@ -8,7 +8,7 @@ api_router = APIRouter()
 
 
 
-@api_router.post("/metadata/basic/")
+@api_router.post("/projects/new/")
 async def create_project(
         group: str = Form(...), 
         project_name: str = Form(...),

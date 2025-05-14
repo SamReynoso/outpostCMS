@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Console{% endblock %}
+{% block content %}
+
+<table class="article-links">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="{{ title }}">Canonical</a></td>
+      <td><a href="{{ title }}">Basic</a></td>
+      <td><a href="{{ title }}">Social</a></td>
+      <td><a href="{{ title }}">Advanced</a></td>
+  </tbody>
+</table>
+
+<p>{{ form_description }}</p>
+
+{% block form %}
+<p> this is the base template for editing metadata</p>
+{% endblock %}
+
+
+{% endblock %}

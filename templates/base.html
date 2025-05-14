@@ -10,8 +10,11 @@
       --nice-head-color: rgb(248, 248, 248);
       --nice-border-color: #f0f0f0;
 
+      --padding: 1rem;
+      --margin: 1rem;
       --cell-height: 3rem;
       --left-padding: 2rem;
+      --border-radius: 3px;
       --border-thickness: 1px;
       --border-color: rgb(204, 204, 204);
     }
@@ -21,11 +24,52 @@
       padding: 0;
       box-sizing: border-box;
     }
+
+
     body {
+      color: var(--main-text-color);
+      font-size: 16px;
       font-family: var(--main-font);
       background-color: var(--main-bg-color);
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background-color: var(--main-bg-color);
+      padding: .5rem;
+      margin: .5rem;
+      border-bottom: 2px solid var(--border-color);
+
+    }
+
+    nav a {
+      text-decoration: none;
       color: var(--main-text-color);
-      padding: 1em;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s;
+    }
+
+
+    nav a:hover {
+      background-color: var(--nice-head-color);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin: 1rem .5rem;
+    }
+
+
+    section {
+      max-width: 80ch;
+      margin: var(--margin) auto;
+      padding: var(--padding);
+      background-color: var(--nice-head-color);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
     }
 
     table { 
@@ -33,42 +77,11 @@
       border-collapse: collapse;
     }
 
-    td:first-child {
-      font-size: 0.8rem;
-      background-color: var(--nice-head-color);
-      text-align: center;
-    }
-
-    td:last-child {
-      font-size: 0.8rem;
-      text-align: center;
-      background-color: var(--nice-head-color);
-      padding: 0.5rem;
-    }
-
     th, td {
-      text-align: left;
-      border: var(--border-thickness) solid var(--border-color);
-    }
-    th {
-      padding-left: var(--left-padding);
-    }
-    .articles-list {
-      display: flex;
-    }
-
-    .articles-list ul {
-      list-style: none;
-    }
-
-    .articles-list li {
-      display: block;
-      text-align: center;
       border: var(--border-thickness) solid var(--border-color);
     }
 
-
-    dl.expanded {
+    dl{
       display: grid;
       grid-template-columns: max-content 1fr;
       gap: 0.25rem 1rem;
@@ -78,21 +91,22 @@
       line-height: 1.4;
     }
 
-    dl.expanded dt {
+    dl dt {
       font-weight: 600;
       color: #333;
       white-space: nowrap;
     }
 
-    dl.expanded dd {
+    dl dd {
       color: #555;
       overflow-wrap: anywhere;
     }
 
-    dl.expanded dd:last-of-type {
+    dl dd:last-of-type {
       font-size: 0.85rem;
       color: #999;
     }
+
     details.article-details {
       background: #fff;
     }
@@ -105,38 +119,15 @@
       border-bottom: 1px solid #ccc;
     }
 
-    table.article-links {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-      layout: fixed;
-
-    }
-    table.article-links th {
-      background-color: rgba(225, 45, 45, 0.3); 
-      height: .4rem;
-      border-right: 2px solid rgb(100, 100, 100);
-    }
-    table.article-links th:last-child {
-      border-right: none;
-    }
-    table.article-links td {
-      text-align: center;
-      background-color: rgb(248, 248, 248);
-      width: 25%; 
-      border: 0;
-    }
-
     .meta-form {
-      max-width: 80ch;
+      max-width: 60ch;
       margin: 1.5rem auto;
       padding: 1rem;
       display: flex;
       flex-direction: column;
       gap: 0.7rem;
       background: #f9f9f9;
-      border-radius: 8px;
+      border-radius: var(--border-radius);
       border: 1px solid #ddd;
     }
 
@@ -152,12 +143,11 @@
     .meta-form textarea {
       padding: 0.5rem;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: var(--border-radius);
     }
 
     .meta-form .checkbox {
       flex-direction: row;
-      align-items: center;
       gap: 0.5rem;
       font-weight: normal;
     }
@@ -167,26 +157,77 @@
       background: #007acc;
       color: #fff;
       border: none;
-      border-radius: 4px;
+      border-radius: var(--border-radius);
       cursor: pointer;
     }
 
     .meta-form button:hover {
       background: #005fa3;
     }
+
+    div.archive {
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        width: 100%;
+        height: 100vh;
+        background: rgb(17, 24, 39);
+        color: rgb(249, 250, 251);
+        line-height: 1.5;
+    }
+
+    div.archive ul {
+      list-style: none;
+    }
+
+    div.archive {
+      margin-bottom: 1rem;
+    }
+
+    div.archive a {
+      color: rgb(37, 99, 235);
+      text-decoration: none;
+    }
+
+    div.archive a:hover {
+      text-decoration: underline;
+    }
+
+    aside.actions {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    a.btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: rgb(37, 99, 235);
+      color: #fff;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s;
+    }
+
+    a.btn:hover {
+      background-color: rgb(29, 78, 216);
+    }
+
   </style>
 </head>
 <body>
   <nav>
-    {% if request.path != '/' %}
-      <a href="/">Content Console</a>
-    {% endif %}
-  <nav>
+    <a href="/">Start</a>
+    <a href="/console">Console</a>
+    <a href="/archive/">Archive</a>
+    <a href="/gallery/">Gallery</a>
+    <a href="/projects/">Projects</a>
+  </nav>
   <main>
-    <section>
       <h1>{{ title }}</h1>
     {% block content %}{% endblock %}
-    </section>
   </main>
 </body>
 </html>
