@@ -42,25 +42,26 @@ class Cache:
 
 
 def load_fragment(group, project_name) -> str:
-    fragment_path = Path(config.WORKING) / group / project_name / "index.html"
+    fragment_path = Path(config.CANON) / config.WORKING / group / project_name / "index.html"
     with open(fragment_path) as fragment_file:
         return fragment_file.read()
 
 
 def load_meta(group: str, project_name: str) -> dict:
-    meta_path = Path(config.WORKING) / group / project_name / "meta.json"
+    meta_path = Path(config.CANON) / config.WORKING / group / project_name / "meta.json"
     with open(meta_path) as f:
         return json.load(f)
 
 
 def load_site_map():
-    with open(config.SITE_MAP, 'r') as f:
+    path = Path(config.CANON) / config.SITE_MAP
+    with open(path, 'r') as f:
         data = json.load(f)
     return data
 
 
 def load_from_project(entry: dict) -> dict:
-    meta_path = Path(config.WORKING) / format_branch(**entry) / "meta.json"
+    meta_path = Path(config.CANON) / config.WORKING / format_branch(**entry) / "meta.json"
     with open(meta_path) as f:
         return json.load(f)
 

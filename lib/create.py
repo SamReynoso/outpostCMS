@@ -19,7 +19,7 @@ def update_site_map(path, file_name, entry):
     touch_json(path, file_name, site_map)
 
 def write_metadata(path, group, project_name, metadata):
-    project_directory = path + '/' + format_branch(group=group, project_name=project_name)
+    project_directory = path  /  format_branch(group=group, project_name=project_name)
     touch_json(project_directory, 'meta.json', metadata)
 
 
@@ -41,7 +41,7 @@ def create_project(path, group, project_name, canonical):
     write_metadata(path, group, project_name, metadata)
     git.save(path, f"Creating project {project_name} in group {group}")
     entry = new_site_map_entry(group, project_name, canonical)
-    update_site_map(config.WORKING, 'site-map.json', entry)
+    update_site_map(config.CANON, 'site-map.json', entry)
 
 
 def upload_index_html_file(path: str, group: str, project_name: str, file):

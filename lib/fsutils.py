@@ -17,7 +17,6 @@ def mkdir(path):
 
 
 def write(file_path, content):
-    assert does_not_exist(file_path), f"Path already exists: {file_path}"
     with open(file_path, 'w') as f:
         print(f"[INFO] Creating new file: {file_path}")
         f.write(content)

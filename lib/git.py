@@ -30,13 +30,33 @@ def has_changes(path):
 
 
 def unique_project(path, branch):
-    project_path = path + '/' + branch
+    project_path = path  /  branch
     if os.path.exists(project_path):
         return False
     return True
 
+
 def hash(path):
     return run_git_command(path, 'rev-parse', 'HEAD')
+
+def index_diff(path, group, project):
+    index =  group + '/' +  project  + '/' + 'index.html'
+    return run_git_command(
+            path,
+            'diff',
+            '--name-status',
+            index
+            )
+
+def meta_diff(path, group, project):
+    meta_file =  group + '/' +  project  + '/' + 'meta.json'
+    return run_git_command(
+            path,
+            'diff',
+            '--name-status',
+            meta_file
+            )
+
 
 def change_log(path, group, project):
     project_dir =  group + '/' + project
@@ -47,6 +67,11 @@ def change_log(path, group, project):
             '--date=iso',
             project_dir
             )
+
+
+def current_branch(path):
+    branch = run_git_command(path, 'rev-parse', '--abbrev-ref', 'HEAD')
+    return branch
 
 
 def show(path, commit_hash):
