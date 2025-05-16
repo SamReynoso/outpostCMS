@@ -18,7 +18,8 @@ async def create_project(
         group: str = Form(...), 
         project_name: str = Form(...),
         canonical: str = Form(...)):
-    create_project_structure(group, project_name, canonical)
+    path = Path(config.CANON) / config.WORKING
+    create_project_structure(path, group, project_name, canonical)
     return RedirectResponse(url=f"/projects/{ group }/{ project_name }/upload/", status_code=303)
 
 
@@ -28,7 +29,7 @@ async def upload_file(
         project_name: str,
         index_file: UploadFile = File(...)
         ):
-    upload_dir = Path(config.CONTENT_DIR) / group / project_name
+    upload_dir = Path(config.CANON)/ config.WORKING / group / project_name
     if not upload_dir.exists():
         return {"error": "Project directory does not exist."}
 
