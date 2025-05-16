@@ -10,18 +10,12 @@
       named projects. Each project is identified by a group and a project name, and content can be accessed, edited, or
       previewed via predictable URLs.
     </p>
-  </section>
-
-  <section>
     <h2>Core Concepts</h2>
     <dl>
       <dt><strong>Project:</strong></dt><dd>A collection of metadata and assets (e.g. image, video).</dd>
       <dt><strong>Group:</strong></dt><dd>An organizational prefix, often used for namespacing.</dd>
       <dt><strong>Fragment:</strong></dt><dd>A discrete piece of data (e.g. canonical title, preview image).</dd>
     </dl>
-  </section>
-
-  <section>
     <h2>Routes Overview</h2>
     <dl>
       <dt><code>/projects/</code></dt><dd>list all projects</dd>
@@ -29,9 +23,6 @@
       <dt><code>/preview/{group}/{project_name}/</code></dt><dd>preview project output</dd>
       <dt><code>/api/edit-metadata/</code></dt><dd> API endpoint to update metadata</dd>
     </dl>
-  </section>
-
-  <section>
     <h2>Front-End Ingestion</h2>
     <p>
       To use the content in a front-end application, fetch fragments via the API or generate static representations

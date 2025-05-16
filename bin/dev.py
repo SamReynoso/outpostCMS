@@ -15,7 +15,7 @@ from lib.response import PFResponse
 @app.get("/")
 async def home(request: Request):
     resp = PFResponse(request, "home.html")
-    resp.update(title="Content Management System")
+    resp.update(title="Outpost CMS")
     return resp()
 
 

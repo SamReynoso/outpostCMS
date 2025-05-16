@@ -1,22 +1,12 @@
 {% extends "publish/base.html" %}
 {% block publish %}
-
 <section>
   <h2>Editorial Control</h2>
-
-    <p>
-      {{ entry }}
-    </p>
-    <br>
-    <p>
-      index: {{ index_diff }}
-    </p>
-    <br>
-    <p>
-      meta: {{ meta_diff}}
-    </p>
-
-    <button class="btn">Save</button>
-    <button class="btn">Open Edit</button>
+  <aside class="sidebar">
+    <a href="#">View Changes</a>
+    <a href="#">Stage Changes</a>
+    <a href="#">Preview</a>
+    <a href="#">Open Edit</a>
+  </aside>
 </section>
 {% endblock %}
