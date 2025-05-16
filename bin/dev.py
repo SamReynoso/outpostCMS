@@ -2,12 +2,14 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse
 
 import config
+from templates.python import EDITOR_UNDER_CONSTRUCTION
+from lib.locached import Cache
 from bin.run import app
-from lib.response import PFResponse
 from bin.routers.api import api_router 
+from bin.routers.git_router import git_router
 from bin.routers.metadata import metadata_router
 from bin.routers.projects import project_router
-from lib.loadsite import load_zip_map
+from lib.response import PFResponse
 
 
 @app.get("/")
@@ -20,7 +22,7 @@ async def home(request: Request):
 @app.get("/console/")
 async def console(request: Request):
     resp = PFResponse(request, "console.html")
-    resp.update(title="Content Console", zip_map=load_zip_map())
+    resp.update(title="Content Console", site_map=Cache.all())
     return resp()
 
 
@@ -33,14 +35,11 @@ async def endpoints(request: Request):
 
 @app.get("/editor/")
 async def editor():
-    return HTMLResponse(
-        """<html><head><title>Editor</title></head><body><h1>Editor</h1><p>Editor is not implemented yet.</p></body>
-</html>"""
-    )
-
+    return HTMLResponse(content=EDITOR_UNDER_CONSTRUCTION, status_code=200)
 
 
 app.include_router(api_router, prefix="/api", tags=["api"])
+app.include_router(git_router, prefix="/publish", tags=["publish"])
 app.include_router(metadata_router, prefix="/metadata", tags=["metadata"])
 app.include_router(project_router, prefix="/projects", tags=["projects"])
 

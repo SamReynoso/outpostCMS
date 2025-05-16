@@ -4,12 +4,12 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 
-from lib.loadsite import load_fragment, load_zip_map
+from lib.locached import load_fragment, load_zip_map
 import config
 
 
 app = FastAPI()
-app.mount("/" + config.STATIC_DIR, StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=config.STATIC_DIR))
 
 
 @app.get("/article/{canonical:path}/", response_class=JSONResponse)

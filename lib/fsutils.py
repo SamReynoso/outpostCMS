@@ -1,27 +1,5 @@
-import time
 import json
 from pathlib import Path
-
-def new_article_entry(group: str, project_name: str, canonical: str):
-    return {
-        "group": group.strip(),
-        "project_name": project_name.strip(),
-        "canonical": canonical.strip(),
-        "public": False,
-    }
-
-
-def new_metadata():
-    date = time.strftime("%Y-%m-%d")
-    return {
-            "title": "Untitled",
-            "description": "",
-            "keywords": "",
-            "author": "",
-            "date": date,
-            "last_updated": date,
-            }
-
 
 
 def create_project_dir(path: str, group: str, project_name: str):
@@ -34,17 +12,9 @@ def create_project_dir(path: str, group: str, project_name: str):
     return project_dir
 
 
-def write_metadata_json(path, meta):
-    meta_json = Path(path) / "meta.json"
-    with open(meta_json, "w", encoding="utf-8") as f:
-        json.dump(meta, f, indent=4)
-
-
-def write_articles_json(path, articles):
-    articles_json = Path(path) / "articles.json"
-    articles_json.parent.mkdir(parents=True, exist_ok=True)
-    with open(articles_json, "w", encoding="utf-8") as f:
-        json.dump(articles, f, indent=4)
+def write_json_file(path, json_data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(json_data, f, indent=4)
 
 
 def upload_index_html_file(path: str, group: str, project_name: str, file):

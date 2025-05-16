@@ -2,9 +2,28 @@
 {% block title %}Console{% endblock %}
 {% block content %}
 
-<aside class="actions">
-  <a class="btn" href="/projects/new/">Start a new project</a>
-</aside>
+<section>
+  <h2>Editorial Control</h2>
+
+  <p>
+    This page is your audit trail and action center. It is the central interface for managing the publishing workflow of
+    your projects. This is where content changes are tracked, reviewed, and pushed live. Every change you make appears here.
+  </p>
+  <p>
+    Each project listed below reflects its current status in the publishing pipeline. You’ll see recent changes, unsaved 
+    drafts, unsubmitted edits, and visibility settings at a glance. 
+  </p>
+  <p>
+    From here, you can navigate into project-specific views, inspect changes,  and move content toward
+    publication. The preview system is tightly integrated, allowing you to review the exact output before finalizing
+    anything. Publishing is done per project, giving you control to stage updates independently.
+  </p>
+  <p>
+    If you're seeing a large number of entries, remember: each content change is tracked on save and can be reverted.
+    Use this space to ensure your content is ready, clean, and aligned before merging it into your mainline. Git is
+    doing the heavy lifting, but this interface is your command center.
+  </p>
+</section>
 
 <table class="projects">
   <tbody>

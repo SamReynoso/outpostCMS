@@ -28,7 +28,7 @@ async def upload_file(
         project_name: str,
         index_file: UploadFile = File(...)
         ):
-    upload_dir = Path(config.CONTENT_DIR) / group / project_name
+    upload_dir = Path(config.WORKING) / group / project_name
     if not upload_dir.exists():
         return {"error": "Project directory does not exist."}
 

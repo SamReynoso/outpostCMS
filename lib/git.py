@@ -2,6 +2,21 @@ import os
 import json
 import subprocess
 
+PUBLISH_REPOSITORY_README = """
+# Publish Repository
+This README should help you understand the purpose of this repository. This repo is the target of the CMS API when
+serving content in production mode. This repository is the canonical repository for the CMS API. Works in progress
+should be done in the working directory. This worktree has a different branch for each project which can be merged
+into main in the publish directory. The publish directory should always have main checked out.
+"""
+
+WORKING_REPOSITORY_README = """
+# Working Worktree
+The working directory holds all works in progress. The server does not access this directory when in production mode.
+changes made through the browser interface should ensure that each project branch only contains changes related to the
+corresponding project directory. With the main branch always being checked out in the publish branch you should feel
+secure that none of your work will be served to the client until you are ready to publish and merge them into main.
+"""
 
 '''
 
@@ -59,8 +74,17 @@ def touch_json(path, file_name, content):
     write(file_path, json.dumps(content, indent=4))
 
 
-def touch_readme(path, file_name, content):
-    file_path = path + '/' + file_name
+def touch_ignore(path):
+    file_path = path + '/' + '.gitignore'
+    content = '''
+# Ignore all files
+README.md
+'''
+    write(file_path, content)
+
+
+def touch_readme(path, content):
+    file_path = path + '/' + 'README.md'
     write(file_path, content)
 
 
@@ -96,17 +120,25 @@ def init_worktree(path, branch_name):
 
 
 def init():
+    # Create the canonical repository and site map file 'site-map.json'
     root = "canonical"
-    publish_name = "publish"
-    working_name = "working"
-    repo_path = root + '/' + publish_name
     mkdir(root)
+    touch_json(root, 'site-map.json', [])
+
+    # Create the canonical repository 
+    publish_name = "publish"
+    repo_path = root + '/' + publish_name
     mkdir(repo_path)
-    touch_json(repo_path, 'canonical.json', [])
+    touch_ignore(repo_path)
+    touch_readme(repo_path, PUBLISH_REPOSITORY_README)
     init_git_repo(repo_path)
     commit(repo_path, "Initializing Canonical Repository")
+
+    # Create the worktree for the working repository
+    working_name = "working"
     run_git_command(repo_path, 'branch', working_name)
     init_worktree(repo_path, working_name)
+    touch_readme(root + '/' + working_name, WORKING_REPOSITORY_README)
 
 
 '''
@@ -136,7 +168,17 @@ def unique_project(path, group, project):
 def change_log(path, group, project):
     project_dir =  group + '/' + project
     print(f"[INFO] Getting change log for {project_dir}")
-    return run_git_command(path, 'log', '--', project_dir)
+    return run_git_command(path, 'log', '--pretty=format:"%h %ad %s"', '--date=iso', project_dir)
+
+
+def show(path, commit_hash):
+    print(f"[INFO] Showing changes for {commit_hash}")
+    return run_git_command(path, 'show', commit_hash)
+
+
+def go_to(path, commit_hash):
+    print(f"[INFO] Checking out {commit_hash}")
+    run_git_command(path, 'checkout', commit_hash)
 
 
 '''

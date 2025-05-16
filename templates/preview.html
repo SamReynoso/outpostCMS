@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ meta.title }}</title>
-  <meta name="description" content="{{ meta.description }}" />
-  <link rel="canonical" href="{{ meta.canonical_url }}" />
-  <meta property="og:title" content="{{ meta.title }}" />
-  <meta property="og:description" content="{{ meta.description }}" />
+  <title>{{ entry.title }}</title>
+  <meta name="description" content="{{ entry.description }}" />
+  <link rel="canonical" href="{{ entry.canonical_url }}" />
+  <meta property="og:title" content="{{ entry.title }}" />
+  <meta property="og:description" content="{{ entry.description }}" />
   <meta property="og:type" content="article" />
-  <meta property="og:url" content="{{ meta.canonical_url }}" />
-  <meta property="og:image" content="{{ meta.image }}" />
+  <meta property="og:url" content="{{ entry.canonical_url }}" />
+  <meta property="og:image" content="{{ entry.image }}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{{ meta.title }}" />
-  <meta name="twitter:description" content="{{ meta.description }}" />
-  <meta name="twitter:image" content="{{ meta.image }}" />
+  <meta name="twitter:title" content="{{ entry.title }}" />
+  <meta name="twitter:description" content="{{ entry.description }}" />
+  <meta name="twitter:image" content="{{ entry.image }}" />
   <link rel="stylesheet" href="/static/article.css">
   <link rel="stylesheet" href="/static/article-themes.css">
   <link rel="stylesheet" href="/static/social-preview.css">
@@ -26,21 +26,21 @@
   <header class="preview-header">
     <div>
     <p>
-      <strong>Title:</strong> {{ meta.title }}<br>
-      <strong>Author:</strong> {{ meta.author }}<br>
-      <strong>Date:</strong> {{ meta.date }}<br>
-      <strong>Version:</strong> {{ meta.version }}<br>
-      <strong>Last Updated:</strong> {{ meta.last_updated }}<br>
+      <strong>Title:</strong> {{ entry.title }}<br>
+      <strong>Author:</strong> {{ entry.author }}<br>
+      <strong>Date:</strong> {{ entry.date }}<br>
+      <strong>Version:</strong> {{ entry.version }}<br>
+      <strong>Last Updated:</strong> {{ entry.last_updated }}<br>
     </p>
     <p>
-      <strong>Description:</strong> {{ meta.description }}
+      <strong>Description:</strong> {{ entry.description }}
     </p>
     </div>
   <div class="social-preview">
     <div class="preview-image" style="background-image: url('https://example.com/image.jpg');"></div>
     <div class="preview-text">
-      <div class="preview-title">{{ meta.title }}</div>
-      <div class="preview-description">{{ meta.description }}</div>
+      <div class="preview-title">{{ entry.title }}</div>
+      <div class="preview-description">{{ entry.description }}</div>
     </div>
   </div>
   </header>
@@ -80,10 +80,10 @@
 
       <header>
 
-        <em>{{ meta.date }}</em>
+        <em>{{ entry.date }}</em>
 
         <p>
-          {{ meta.description }}
+          {{ entry.description }}
         </p>
 
       </header>
