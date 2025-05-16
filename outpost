@@ -23,7 +23,7 @@ case $SERVICE in
 
   "test")
     echo "Running tests..."
-    python3 lib/loadsite.py
+    python3 lib/git.py
     ;;
   *)
     echo "Usage: $0 {dev}"
