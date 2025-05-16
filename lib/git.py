@@ -7,6 +7,7 @@ import subprocess
 
 
 
+
 git runner
 '''
 def run_git_command(repo_path, *args):
@@ -27,6 +28,7 @@ def run_git_command(repo_path, *args):
 
 
 '''
+
 
 
 
@@ -60,10 +62,24 @@ def touch_json(path, file_name, content):
 def touch_readme(path, file_name, content):
     file_path = path + '/' + file_name
     write(file_path, content)
+
+
+# Create the meta.json file in the project directory
+def create_meta_json(path, group_name, project_name):
+    group_path = path + '/' + group_name
+    project_path = group_path + '/' + project_name
+    if not os.path.exists(group_path):
+        mkdir(group_path)
+    mkdir(project_path)
+    touch_json(project_path, 'meta.json', {})
+
+
 '''
 
 
 
+
+Inistialization
 '''
 def init_git_repo(path):
     run_git_command(path, 'init')
@@ -97,7 +113,38 @@ def init():
 
 
 
+
 Content Management System Operations
+'''
+'''
+
+
+
+CMS helpers
+'''
+def has_changes(path):
+    changes = run_git_command(path, 'status', '--porcelain')
+    return bool(changes)
+
+
+def unique_project(path, group, project):
+    project_path = path + '/' + group + '/' + project
+    if os.path.exists(project_path):
+        return False
+    return True
+
+def change_log(path, group, project):
+    project_dir =  group + '/' + project
+    print(f"[INFO] Getting change log for {project_dir}")
+    return run_git_command(path, 'log', '--', project_dir)
+
+
+'''
+
+
+
+
+CMS Main Workflow
 '''
 def save(path, message):
     run_git_command(path, 'add', '.')
@@ -105,16 +152,13 @@ def save(path, message):
 
 
 def auto_save(path):
-    changes = run_git_command(path, 'status' '--porcelain')
-    if not changes:
-        print("No changes to save")
-        return
-    save(path, "Changes saved automatically")
+    if has_changes(path):
+        save(path, "Changes saved automatically")
 
 
-def publish(working_path, group_name, project_name):
+def submit(publish_path, group_name, project_name):
     branch_name = group_name + '/' + project_name
-    run_git_command(working_path, 'merge', '--force', branch_name)
+    run_git_command(publish_path, 'merge', branch_name)
 
 
 def new_project(working_path, group_name, project_name):
@@ -123,29 +167,17 @@ def new_project(working_path, group_name, project_name):
     branch_name = group_name + '/' + project_name
 
     auto_save(working_path)
-
     run_git_command(working_path, 'checkout', '-b', branch_name)
-    if not os.path.exists(group_path):
-        mkdir(group_path)
-    mkdir(project_path)
-    touch_json(project_path, 'meta.json', {})
+    create_meta_json(working_path, group_name, project_name)
     save(project_path, f"Project '{project_name}' created in group '{group_name}'")
 
 
 def change_project(working_path, group_name, project_name):
-    current_branch = run_git_command(working_path, 'branch', '--show-current')
-    if current_branch == 
+    branch_name = group_name + '/' + project_name
+
     auto_save(working_path)
+    run_git_command(working_path, 'checkout', branch_name)
 
-    group_path = working_path + '/' + group_name
-    project_path = group_path + '/' + project_name
-
-    if not os.path.exists(group_path):
-        mkdir(group_path)
-    mkdir(project_path)
-    touch_json(project_path, 'meta.json', {})
-    run_git_command(working_path, 'add', '.')
-    run_git_command(working_path, 'commit', '-m', f"Adding {project_name} to {group_name}")
 
 '''
 
@@ -154,40 +186,27 @@ def change_project(working_path, group_name, project_name):
 test
 '''
 if __name__ == "__main__":
-    group = "group-1"
-    project = "project-1"
+    group_1 = "group-1"
+    project_1 = "project-1"
+
+    group_2 = "group-2"
+    project_2 = "project-2"
 
     print('''
     [TEST] Git Commands
 
-  ''')
+''')
 
     init()
-
-    new_project("canonical/working", group, project)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    #new_project("canonical/working", group_1, project_1)
+    #new_project("canonical/working", group_2, project_1)
+    #new_project("canonical/working", group_2, project_2)
+    #change_project("canonical/working", group_1, project_1)
+    #submit("canonical/publish", group_2, project_2)
+    #print(change_log("canonical/working", group_2, project_2))
+    #save("canonical/working", "Test commit 1")
+    #save("canonical/working", "Test commit 2")
+    #save("canonical/working", "Test commit 3")
+    #submit("canonical/publish", group_2, project_2)
 
 
