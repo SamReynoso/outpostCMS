@@ -64,123 +64,129 @@ def touch_readme(path, file_name, content):
 
 
 
-Functions for creating directories
 '''
-def make_new_canonical_dir(root_path):
-    mkdir(root_path)
-    touch_json(root_path, 'canonical.json', [])
+def init_git_repo(path):
+    run_git_command(path, 'init')
 
 
-def make_new_group_dir(repo_path, group):
-    group_path = repo_path + "/" + group
-    mkdir(group_path)
-    touch_readme(group_path, 'README.md', f"# {group}")
+def commit(path, message):
+    run_git_command(path, 'add', '.')
+    run_git_command(path, 'commit', '-m', message)
 
 
-def make_new_project_dir(group_path, project):
-    project_path = group_path + '/' + project
-    mkdir(project_path)
-    touch_json(project_path, 'meta.json', [])
-
-
-'''
-
-
-
-
-Functions for creating git branches for new projects.
-'''
-def create_project_branch(worktree_path, group, project):
-    project_branch = group+ '/' + project
-    run_git_command(worktree_path, 'branch', project_branch)
-    run_git_command(worktree_path, 'add', '.')
-    run_git_command(worktree_path, 'commit', '-m', f'Create new project: {project_branch}')
-
-
-''' 
-
-
-
-
-Below are all the functions that needed to implement git into the content management system.
-'''
-
-def create_canonical_repo(root_path: str="canonical"):
-    make_new_canonical_dir(root_path)
-    run_git_command(root_path, 'init')
-    run_git_command(root_path, 'add', '.')
-    run_git_command(root_path, 'commit', '-m', 'Initializing Canonical Repository')
-
-
-def create_worktree(root_path: str="canonical", working_path: str="working"):
-    assert does_not_exist(working_path), f"Path already exists: {working_path}"
-    run_git_command(root_path, 'worktree', 'add', working_path)
-
-
-def create_new_group(group: str, working_path: str="working"):
-    make_new_group_dir(working_path, group)
-
-
-def create_new_project(group: str, project: str, working_path: str="working"):
-    group_path = working_path + '/' +  group
-    make_new_project_dir(group_path, project)
-    create_project_branch(working_path, group, project)
-
-
-def switch_projects(group: str, project: str, working_path: str="working"):
-    project_branch = group + '/' + project
-    run_git_command(working_path, 'checkout', project_branch)
-    run_git_command(working_path, 'add', '.')
-    run_git_command(working_path, 'commit', '-m', f'Switch to project: {project_branch}')
-
-
-def save(message: str, working_path: str="working"):
-    run_git_command(working_path, 'add', '.')
-    run_git_command(working_path, 'commit', '-m', message)
-
-
-def update(working_path: str="working"):
-    run_git_command(working_path, 'merge', 'main')
-
-
-def publish(group: str, project: str, canonical_path: str="canonical"):
-    project_branch = group + '/' + project
-    run_git_command(canonical_path, 'merge', project_branch)
+def init_worktree(path, branch_name):
+    working_path = f"../{branch_name}"
+    run_git_command(path, 'worktree', 'add', working_path, branch_name)
 
 
 def init():
-    create_canonical_repo()
-    create_worktree()
+    root = "canonical"
+    publish_name = "publish"
+    working_name = "working"
+    repo_path = root + '/' + publish_name
+    mkdir(root)
+    mkdir(repo_path)
+    touch_json(repo_path, 'canonical.json', [])
+    init_git_repo(repo_path)
+    commit(repo_path, "Initializing Canonical Repository")
+    run_git_command(repo_path, 'branch', working_name)
+    init_worktree(repo_path, working_name)
 
 
+'''
+
+
+
+Content Management System Operations
+'''
+def save(path, message):
+    run_git_command(path, 'add', '.')
+    run_git_command(path, 'commit', '-m', message)
+
+
+def auto_save(path):
+    changes = run_git_command(path, 'status' '--porcelain')
+    if not changes:
+        print("No changes to save")
+        return
+    save(path, "Changes saved automatically")
+
+
+def publish(working_path, group_name, project_name):
+    branch_name = group_name + '/' + project_name
+    run_git_command(working_path, 'merge', '--force', branch_name)
+
+
+def new_project(working_path, group_name, project_name):
+    group_path = working_path + '/' + group_name
+    project_path = group_path + '/' + project_name
+    branch_name = group_name + '/' + project_name
+
+    auto_save(working_path)
+
+    run_git_command(working_path, 'checkout', '-b', branch_name)
+    if not os.path.exists(group_path):
+        mkdir(group_path)
+    mkdir(project_path)
+    touch_json(project_path, 'meta.json', {})
+    save(project_path, f"Project '{project_name}' created in group '{group_name}'")
+
+
+def change_project(working_path, group_name, project_name):
+    current_branch = run_git_command(working_path, 'branch', '--show-current')
+    if current_branch == 
+    auto_save(working_path)
+
+    group_path = working_path + '/' + group_name
+    project_path = group_path + '/' + project_name
+
+    if not os.path.exists(group_path):
+        mkdir(group_path)
+    mkdir(project_path)
+    touch_json(project_path, 'meta.json', {})
+    run_git_command(working_path, 'add', '.')
+    run_git_command(working_path, 'commit', '-m', f"Adding {project_name} to {group_name}")
+
+'''
+
+
+
+test
+'''
 if __name__ == "__main__":
-    group = "test_group"
-    project = "test_project"
+    group = "group-1"
+    project = "project-1"
 
-    print(f'''
+    print('''
     [TEST] Git Commands
-    This is a test for the git commands.
-          The following commands will be run:
-            - git init
-            - git add .
-            - git commit -m "Initializing Canonical Repository"
-            - git submodule add <group_path>
-            - git branch <project>
-            - git worktree add <working_path>
 
-    The following paths will be created:
-        - [ Canonical Repository ] ./canonical/
-        - [ Working Directory    ] ./working/
+  ''')
 
-    The following groups and projects will be created:
-        - [Group] - directory and git repository : {group} 
-        - [Project] - directory and git branch   : {project} 
+    init()
 
-    ''')
+    new_project("canonical/working", group, project)
 
-    create_new_group(group)
-    create_new_project(group, project)
-    switch_projects(group, project)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
