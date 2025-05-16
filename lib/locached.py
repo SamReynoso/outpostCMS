@@ -2,22 +2,19 @@ import json
 from pathlib import Path
 
 import config
+from lib.formatters import format_branch
 
 
 def get_site_map() -> list:
-    site_map_json = Path(config.SITE_MAP)
-    if site_map_json.exists():
-        with open(site_map_json, "r", encoding="utf-8") as f:
+    site_map_path= Path(config.CANON) / config.SITE_MAP
+    if site_map_path.exists():
+        with open(site_map_path, "r", encoding="utf-8") as f:
             try:
                 return json.load(f)
             except json.JSONDecodeError:
                 return []
     else:
         return []
-
-
-def format_branch(**entry):
-    return entry['group'] + '/' + entry['project_name'] 
 
 
 class Cache:

@@ -18,7 +18,7 @@ async def create_project(
         group: str = Form(...), 
         project_name: str = Form(...),
         canonical: str = Form(...)):
-    create_project_structure(group, project_name, canonical)
+    create_project_structure(config.WORKING, group, project_name, canonical)
     return RedirectResponse(url=f"/projects/{ group }/{ project_name }/upload/", status_code=303)
 
 

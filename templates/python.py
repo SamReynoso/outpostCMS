@@ -5,6 +5,21 @@ from typing import Dict
 EDITOR_UNDER_CONSTRUCTION = """<html><head><title>Editor</title></head><body><h1>Editor</h1><p>Editor is not implemented
 yet.</p></body></html>"""
 
+PUBLISH_REPOSITORY_README = """
+# Publish Repository
+This README should help you understand the purpose of this repository. This repo is the target of the CMS API when
+serving content in production mode. This repository is the canonical repository for the CMS API. Works in progress
+should be done in the working directory. This worktree has a different branch for each project which can be merged
+into main in the publish directory. The publish directory should always have main checked out.
+"""
+
+WORKING_REPOSITORY_README = """
+# Working Worktree
+The working directory holds all works in progress. The server does not access this directory when in production mode.
+changes made through the browser interface should ensure that each project branch only contains changes related to the
+corresponding project directory. With the main branch always being checked out in the publish branch you should feel
+secure that none of your work will be served to the client until you are ready to publish and merge them into main.
+"""
 
 def new_site_map_entry(group: str, project_name: str, canonical: str):
     return {

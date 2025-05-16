@@ -30,7 +30,7 @@ project_router = APIRouter()
 @project_router.get("/new/")
 async def new_project(request: Request):
     resp = PFResponse(request, "metadata/canonical.html")
-    resp.update(**FORMS['new'].data)
+    resp.update(entry={}, **FORMS['new'].data)
     return resp()
 
 

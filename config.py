@@ -12,11 +12,12 @@ DOMAIN = "https:ozprealpha.com/"
 '''
 Configure the directories for the project.
 '''
-SITE_MAP = "canonical/site-map.json"
-CANON = "canonical/publish/"
-WORKING = "canonical/working/"
+SITE_MAP = "site-map.json"
+CANON = "canonical"
+PUBLISH = "publish"
+WORKING = "working"
 TEMPLATES_DIR = "templates"
-STATIC_DIR = "templates/static/"
+STATIC_DIR = "templates/static"
 
 
 '''

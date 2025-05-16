@@ -1,26 +1,30 @@
+import os
 import json
 from pathlib import Path
 
-
-def create_project_dir(path: str, group: str, project_name: str):
-    project_dir= Path(path)/ group / project_name
-    project_dir.mkdir(parents=True, exist_ok=True)
-    index_html = project_dir / "index.html"
-    index_html.touch(exist_ok=True)
-    metadata_json = project_dir / "meta.json"
-    metadata_json.touch(exist_ok=True)
-    return project_dir
+def does_not_exist(path):
+    if os.path.exists(path):
+        print(f"Path already exists: {path}")
+        raise Exception("Path already exists")
+    return True
 
 
-def write_json_file(path, json_data):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(json_data, f, indent=4)
+
+def mkdir(path):
+    assert does_not_exist(path), f"Path already exists: {path}"
+    print(f"[INFO] Creating directory: {path}")
+    os.makedirs(path, exist_ok=False)
 
 
-def upload_index_html_file(path: str, group: str, project_name: str, file):
-    group_dir = Path(path) / group / project_name
-    if not group_dir.exists():
-        raise FileNotFoundError(f"Group directory {group_dir} does not exist.")
-    index_html = group_dir / "index.html"
-    with open(index_html, "wb") as f:
-        f.write(file.file.read())
+def write(file_path, content):
+    assert does_not_exist(file_path), f"Path already exists: {file_path}"
+    with open(file_path, 'w') as f:
+        print(f"[INFO] Creating new file: {file_path}")
+        f.write(content)
+
+
+def touch_json(path, file_name, content):
+    file_path = Path(path) /  file_name
+    write(file_path, json.dumps(content, indent=4))
+
+
