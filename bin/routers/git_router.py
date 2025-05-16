@@ -40,7 +40,7 @@ async def staging(request: Request):
         entry['changes'] = changes
     resp = PFResponse(request, "publish/staging.html")
     resp.update(
-            title="stating",
+            title="Staging",
             site_map=site_map,
             )
     return resp()
