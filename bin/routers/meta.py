@@ -2,7 +2,7 @@
 from fastapi import Request, APIRouter
 from fastapi.exceptions import HTTPException
 
-from lib.locached import Cache, load_fragment
+from lib.locached import Cache
 from lib.response import PFResponse, MetadataResponse
 from templates.python import FORMS
 
@@ -24,37 +24,37 @@ def return_form_response(request: Request, name: str, group: str, project_name: 
     return resp()
 
 
-project_router = APIRouter()
+meta_router = APIRouter()
 
 
-@project_router.get("/new/")
+@meta_router.get("/new/")
 async def new_project(request: Request):
     resp = PFResponse(request, "metadata/canonical.html")
     resp.update(entry={}, **FORMS['new'].data)
     return resp()
 
 
-@project_router.get("/{group}/{project_name}/canonical/")
+@meta_router.get("/canonical/")
 async def meta_canonical(request: Request, group: str, project_name: str):
     return return_form_response(request, "canonical", group, project_name)
 
 
-@project_router.get("/{group}/{project_name}/basic/")
+@meta_router.get("/basic/")
 async def meta_basic(request: Request, group: str, project_name: str):
     return return_form_response(request, "basic", group, project_name)
 
 
-@project_router.get("/{group}/{project_name}/social/")
+@meta_router.get("/social/")
 async def meta_social(request: Request, group: str, project_name: str):
     return return_form_response(request, "social", group, project_name)
 
 
-@project_router.get("/{group}/{project_name}/advanced/")
+@meta_router.get("/advanced/")
 async def meta_advanced(request: Request, group: str, project_name: str):
     return return_form_response(request, "advanced", group, project_name)
 
 
-@project_router.get("/{group}/{project_name}/upload/")
+@meta_router.get("/upload/")
 async def index_html_upload(request: Request, group: str, project_name: str):
     resp = PFResponse(request, "metadata/upload.html")
     resp.update(
@@ -66,27 +66,4 @@ async def index_html_upload(request: Request, group: str, project_name: str):
     # Or changing the post logic in the api router.
     resp.update(form_action=f"/api/projects/upload/{group}/{project_name}/")
     return resp()
-
-
-'''
-
-
-
-
-The form routs stop here and the next function is a preview of the project
-'''
-@project_router.get("/{group}/{project_name}/preview/")
-async def preview_project(request: Request, group: str, project_name: str):
-    entry = entry_or_404(group, project_name)
-    print(entry)
-    resp = PFResponse(request, "preview.html")
-    resp.update(
-            title="Preview " + entry.get("title", "unknown"),
-            group=group,
-            project_name=project_name,
-            entry=entry,
-            article_fragment=load_fragment(group, project_name)
-            )
-    return resp()
-
 

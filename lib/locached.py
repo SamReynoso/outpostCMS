@@ -16,7 +16,6 @@ def get_site_map() -> list:
     else:
         return []
 
-
 class Cache:
 
     @staticmethod

@@ -2,30 +2,41 @@
 {% block publish %}
 <section>
   <h2>Editorial Control</h2>
-  <aside class="sidebar">
-    <a href="/publish/changes/{{ entry.group }}/{{ entry.project_name }}/">View Changes</a>
-    <a href="/publish/commit/{{ entry.group }}/{{ entry.project_name }}/">Save</a>
-    <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/preview/">Preview</a>
-    <a href="/editor/">Open in Editor</a>
+  <p>
+    Use the workbook to manage the editorial process for your project. 
+    You can view the current state of the project, make changes, and preview the 
+    results before publishing.
+  </p>
+  <aside class="actions">
+    <a href="/projects/preview/">Full Preview</a>
+    <a href="/metadata/canonical/">Add Info</a>
+    <a href="/publish/changes/">Ready</a>
   </aside>
-  <div class="workbook__card">
-              <dl>
-                <dt>Public</dt> <dd>{{ entry.public }}</dd>
-                <dt>Title</dt> <dd>{{ entry.title }}</dd>
-                <dt>Author</dt> <dd>{{ entry.author }}</dd>
-                <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
-                <dt>Group</dt> <dd>{{ entry.group}}</dd>
-                <dt>Date</dt> <dd>{{ entry.date}}</dd>
-                <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
-                <dt>Last Updated</dt> <dd>{{ entry.canonical }}</dd>
-              </dl>
+  <div class="card">
+    <dl>
+      <dt>Public</dt> <dd>{{ entry.public }}</dd>
+      <dt>Title</dt> <dd>{{ entry.title }}</dd>
+      <dt>Author</dt> <dd>{{ entry.author }}</dd>
+      <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
+      <dt>Group</dt> <dd>{{ entry.group}}</dd>
+      <dt>Date</dt> <dd>{{ entry.date}}</dd>
+      <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
+      <dt>Last Updated</dt> <dd>{{ entry.canonical }}</dd>
+    </dl>
+
     <div class="social-preview small">
-      <div class="preview-image" style="background-image: url('https://example.com/image.jpg');"></div>
+      <div class="preview-image" style="background-image: url('https://example.com/image.jpg');">
+      </div>
       <div class="preview-text">
-        <div class="preview-title">{{ entry.title }}</div>
-        <div class="preview-description">{{ entry.description }}</div>
+        <div class="preview-title">
+          {{ entry.title }}
+        </div>
+        <div class="preview-description">
+          {{ entry.description }}
+        </div>
       </div>
     </div>
+
   </div>
   </section>
 

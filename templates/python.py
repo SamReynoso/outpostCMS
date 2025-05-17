@@ -2,8 +2,6 @@ import time
 from dataclasses import dataclass, asdict
 from typing import Dict
 
-EDITOR_UNDER_CONSTRUCTION = """<html><head><title>Editor</title></head><body><h1>Editor</h1><p>Editor is not implemented
-yet.</p></body></html>"""
 
 PUBLISH_REPOSITORY_README = """
 # Publish Repository

@@ -7,17 +7,15 @@
 <section>
   <h2>Staging Notice</h2>
     <p>
-      Before updates from the workbook version of a project are pushed live, you must navigate to the project and 
-      select “Launch” from the menu. This action publishes the current state of the project to production, making it 
-      available through the external API.
-    </p>
-    <p>
-      Once launched, you can toggle the project’s visibility directly from the Launch page.
+      To mainting a clean change log, it is recommended that you checkout a project
+      before making any changes. Changes are automatically saved to the staging area 
+      when switching between projects. You can also manually save changes to for the 
+      active project by clicking the "Save" button in the workbook.
     </p>
 
   </section>
 
-  <aside class="actions">
+  <aside class="text-center">
     <a class="btn" href="/projects/new/">Start a new project</a>
   </aside>
 
@@ -57,7 +55,9 @@
             </dl>
           </details>
           </td>
-          <td> <a class="btn" href="/api/checkout/{{ entry.group }}/{{ entry.project_name }}">Checkout</a> </td>
+          <td style="vertical-align: top; padding-top: .25rem;">
+            <a class="btn" href="/api/checkout/{{ entry.group }}/{{ entry.project_name }}">Checkout</a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

@@ -24,6 +24,14 @@ def run_git_command(repo_path, *args):
         return e.stderr.strip()
 
 
+def head(path):
+    try:
+        head = run_git_command(path, 'rev-parse', 'HEAD')
+        return head
+    except subprocess.CalledProcessError as e:
+        print(f"[ERROR] Failed to get HEAD: {e.stderr.strip()}")
+        return None
+
 def has_changes(path):
     changes = run_git_command(path, 'status', '--porcelain')
     return bool(changes)
