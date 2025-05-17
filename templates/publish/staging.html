@@ -1,9 +1,67 @@
-
 {% extends "publish/base.html" %}
 
 
 
 {% block publish %}
-<h1>Staging</h1>
-{% endblock %}
 
+<section>
+  <h2>Staging Notice</h2>
+    <p>
+      Before updates from the workbook version of a project are pushed live, you must navigate to the project and 
+      select “Launch” from the menu. This action publishes the current state of the project to production, making it 
+      available through the external API.
+    </p>
+    <p>
+      Once launched, you can toggle the project’s visibility directly from the Launch page.
+    </p>
+
+  </section>
+
+  <aside class="actions">
+    <a class="btn" href="/projects/new/">Start a new project</a>
+  </aside>
+
+  <section>
+  <table>
+      <thead>
+        <tr>
+          <td>
+            Projects
+          </td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for entry in site_map%}
+        <tr>
+          <td colspan="6">
+          <details>
+            <summary>
+                <table>
+                  <tr>
+                    <td><small>Updated:</small> <strong>{{ entry.last_updated }}</strong></td>
+                    <td><small>Group/Project:</small> <strong> {{ entry.group }}/{{ entry.project_name }}</strong></td>
+                    <td><small>Title:</small> <strong>{{ entry.title }}</strong></td>
+                  </tr>
+                </table>
+            </summary>
+            <dl>
+              <dt>Public</dt> <dd>{{ entry.public }}</dd>
+              <dt>Title</dt> <dd>{{ entry.title }}</dd>
+              <dt>Author</dt> <dd>{{ entry.author }}</dd>
+              <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
+              <dt>Group</dt> <dd>{{ entry.group}}</dd>
+              <dt>Date</dt> <dd>{{ entry.date}}</dd>
+              <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
+              <dt>Canonical</dt> <dd>{{ entry.canonical }}</dd>
+            </dl>
+          </details>
+          </td>
+          <td> <a class="btn" href="/api/checkout/{{ entry.group }}/{{ entry.project_name }}">Checkout</a> </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+{% endblock %}

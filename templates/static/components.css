@@ -1,0 +1,57 @@
+
+.card {
+  display: flex;
+  flex-direction: row;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.5rem;
+  margin: 1rem;
+}
+
+.actions a {
+  color: rgb(0, 0, 225);
+  text-decoration: none;
+  text-align: center;
+  background-color: rgb(240, 240, 240);
+  min-width: 10ch;
+  padding: 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.actions a:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.actions a:active {
+  background-color: rgb(170, 170, 170);
+}
+
+article.diff {
+  background-color: rgb(200, 205, 215);
+}
+
+article.diff * {
+  font-size: 14px;
+  color: black;
+  margin: 0;
+  padding: 6px;
+}
+
+article.diff span {
+  display: block;
+  padding: 0;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+article.diff span.add {
+  background-color: rgba(0, 255, 0, 0.3) !important;
+}
+
+article.diff span.delete {
+  background-color: rgb(255, 0, 0, 0.3) !important;
+}

@@ -1,0 +1,24 @@
+:root {
+  --main-font-family: Arial, sans-serif;
+  --header-margin: .5rem;
+  --main-margin: 1rem;
+  --article-margin: 1rem;
+  --article-max-width: 80ch;
+  --margin: 1rem;
+  --padding: .25rem;
+
+  --section-border: 1px solid rgb(15, 15, 15); 
+  --dfn-color: rgb(0, 90, 156);
+  --dfn-border-color: rgb(0, 90, 156);
+  --kbd-background-color: rgb(244, 244, 244);
+  --kbd-border-color: rgb(204, 204, 204);
+  --kbd-box-shadow-color: rgb(170, 170, 170);
+  --code-background-color: rgb(249, 249, 249);
+  --code-color: rgb(199, 37, 78);
+  --var-background-color: rgb(243, 246, 255);
+  --var-color: rgb(0, 92, 197);
+  --cite-color: rgb(102, 102, 102);
+
+  --border-radius: 5px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

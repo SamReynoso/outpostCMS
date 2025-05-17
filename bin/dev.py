@@ -19,13 +19,6 @@ async def home(request: Request):
     return resp()
 
 
-@app.get("/console/")
-async def console(request: Request):
-    resp = PFResponse(request, "console.html")
-    resp.update(title="Content Console", site_map=Cache.all())
-    return resp()
-
-
 @app.get("/endpoints/")
 async def endpoints(request: Request):
     resp = PFResponse(request, "endpoints.html")

@@ -1,4 +1,45 @@
 {% extends "publish/base.html" %}
 {% block publish %}
-<h1>Launch</h1>
+<section>
+  <h2>Availability Notice</h2>
+  <p>
+    The canonical versions of all projects are listed below. These are the published versions that may be served to the
+    public through the external API. Workbook versions are internal only and are never exposed publicly.
+  </p>
+  <p>
+    You can toggle the visibility of each project from this page. This does not affect the workbook version, which
+    remains private regardless of visibility status.
+  </p>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th>Group/Project</th>
+        <th>Canonical URL</th>
+        <th>Public</th>
+        
+      </tr>
+    </thead>
+</section>
+<section>
+    <tbody>
+      {% for entry in site_map %}
+      <tr>
+        <td>{{ entry.group }}/{{ entry.project_name }}</td>
+        <td>{{ entry.canonical }}</td>
+        <td>
+          {% if entry.public %}
+            <a href="/publish/launch/{{ entry.group }}/{{ entry.project_name }}/">True</a>
+          {% else %}
+            <a href="/publish/launch/{{ entry.group }}/{{ entry.project_name }}/">False</a>
+          {% endif %}
+        </td>
+        <td>
+          hb
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
 {% endblock %}

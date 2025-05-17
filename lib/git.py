@@ -39,23 +39,29 @@ def unique_project(path, branch):
 def hash(path):
     return run_git_command(path, 'rev-parse', 'HEAD')
 
-def index_diff(path, group, project):
+def diff(path, file):
+    run_git_command(path, 'add', '.')
+    return run_git_command(path, 'diff', '-U10000', '--cached', file)
+
+def diff_index(path, group, project):
     index =  group + '/' +  project  + '/' + 'index.html'
+    print(f"[INFO] Diffing index: {index}")
+    return diff(path, index)
+
+def diff_meta(path, group, project):
+    meta_file =  group + '/' +  project  + '/' + 'meta.json'
+    print(f"[INFO] Diffing meta: {meta_file}")
+    return diff(path, meta_file)
+
+
+def status(path, group, project):
+    project_dir =  group + '/' + project
     return run_git_command(
             path,
-            'diff',
-            '--name-status',
-            index
+            'status',
+            '--porcelain',
             )
 
-def meta_diff(path, group, project):
-    meta_file =  group + '/' +  project  + '/' + 'meta.json'
-    return run_git_command(
-            path,
-            'diff',
-            '--name-status',
-            meta_file
-            )
 
 
 def change_log(path, group, project):

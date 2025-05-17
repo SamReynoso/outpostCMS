@@ -2,33 +2,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main>
   <section>
     <h2>What This System Does</h2>
     <p>
-      This application manages content fragments — including metadata, images, and potentially video — grouped into
-      named projects. Each project is identified by a group and a project name, and content can be accessed, edited, or
-      previewed via predictable URLs.
+      This application manages content fragments — including metadata, images, and optionally video — organized into
+      named projects. Each project has two versions: a private <em>workbook</em> version for in-progress edits, and a
+      <em>canonical</em> version that is optionally published and served through the public API.
     </p>
+
     <h2>Core Concepts</h2>
     <dl>
-      <dt><strong>Project:</strong></dt><dd>A collection of metadata and assets (e.g. image, video).</dd>
-      <dt><strong>Group:</strong></dt><dd>An organizational prefix, often used for namespacing.</dd>
-      <dt><strong>Fragment:</strong></dt><dd>A discrete piece of data (e.g. canonical title, preview image).</dd>
+      <dt><strong>Project:</strong></dt><dd>A named collection of metadata and assets (e.g., images, video), associated with a group.</dd>
+      <dt><strong>Group:</strong></dt><dd>A namespace or organizational prefix used to distinguish project ownership or scope.</dd>
+      <dt><strong>Fragment:</strong></dt><dd>A discrete unit of content (e.g., a title, image, or setting) managed independently within a project.</dd>
+      <dt><strong>Workbook Version:</strong></dt><dd>The editable draft state of a project. Changes here are not public until explicitly launched.</dd>
+      <dt><strong>Canonical Version:</strong></dt><dd>The published, immutable snapshot of a project served through the external API.</dd>
     </dl>
-    <h2>Routes Overview</h2>
-    <dl>
-      <dt><code>/projects/</code></dt><dd>list all projects</dd>
-      <dt><code>/projects/{group}/{project_name}/</code></dt><dd>view project details</dd>
-      <dt><code>/preview/{group}/{project_name}/</code></dt><dd>preview project output</dd>
-      <dt><code>/api/edit-metadata/</code></dt><dd> API endpoint to update metadata</dd>
-    </dl>
-    <h2>Front-End Ingestion</h2>
+
+    <h2>Versioning and Diff Previews</h2>
     <p>
-      To use the content in a front-end application, fetch fragments via the API or generate static representations
-      from the preview route. Fragment structure is stable, and suitable for both SSR and client-side rendering.
+      All changes to workbook content are version-controlled using Git. When viewing a project, the interface displays
+      a live preview decorated with visual diff indicators to show what has changed since the last launch. This allows
+      you to assess edits in context before promoting them to production.
+    </p>
+    <p>
+      While rollback is not yet implemented, it is on the near-term roadmap. Eventually, you’ll be able to revert
+      a project’s canonical version to any previous state directly from the UI, with all changes tracked and annotated
+      through Git.
     </p>
   </section>
-
-</main>
 {% endblock %}

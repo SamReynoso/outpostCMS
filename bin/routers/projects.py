@@ -56,7 +56,7 @@ async def meta_advanced(request: Request, group: str, project_name: str):
 
 @project_router.get("/{group}/{project_name}/upload/")
 async def index_html_upload(request: Request, group: str, project_name: str):
-    resp = PFResponse(request, "projects/upload.html")
+    resp = PFResponse(request, "metadata/upload.html")
     resp.update(
             entry=entry_or_404(group, project_name),
             **FORMS['upload'].data
