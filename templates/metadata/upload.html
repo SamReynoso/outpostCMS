@@ -1,0 +1,11 @@
+{% extends "metadata/base.html" %}
+{% block form %}
+    <label>Upload Article Fragment
+      <input type="file" name="index_file" accept=".html">
+    </label>
+
+    <div>
+      <button type="submit">Upload</button><br>
+      <button type="cancel">Use Empty HTML File</button>
+    </div>
+{% endblock %}

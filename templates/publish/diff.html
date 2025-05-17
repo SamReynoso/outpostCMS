@@ -1,0 +1,55 @@
+{% extends "publish/base.html" %}
+{% block publish %}
+<section>
+  <h2>Current State</h2>
+  <aside class="sidebar">
+    <a href="/publish/changes/{{ entry.group }}/{{ entry.project_name }}/">View Changes</a>
+    <a href="/publish/commit/{{ entry.group }}/{{ entry.project_name }}/">Save</a>
+    <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/preview/">Preview</a>
+    <a href="/editor/">Open in Editor</a>
+  </aside>
+  <div class="workbook__card">
+    <dl>
+      <dt>Public</dt> <dd>{{ entry.public }}</dd>
+      <dt>Title</dt> <dd>{{ entry.title }}</dd>
+      <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
+      <dt>Group</dt> <dd>{{ entry.group}}</dd>
+      <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
+    </dl>
+    <dl>
+      <dt>Status</dt> <dd><pre>{{ status }}<pre></dd>
+    </dl>
+  </section>
+
+  <section>
+  <h3>View Diffs</h3>
+  <div class="workbook__card">
+  <table>
+    <tbody>
+    <tr>
+      <td>
+        <details>
+          <summary>index.html</summary>
+            {{ index_diff | safe }}
+        </details>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <details>
+          <summary>meta.json</summary>
+          <pre>
+            <code>
+              {{ meta_diff  | safe }}
+            </code>
+          </pre>
+        </details>
+      </td>
+      <tr>
+    </tbody>
+  </table>
+
+  </div>
+</section>
+{% endblock %}

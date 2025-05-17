@@ -2,243 +2,40 @@
 <html lang="en">
 <head>
   <title>{{title}}</title>
-  <style>
-    }
-
-    :root {
-      --border-radius: 5px;
-      --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    html * {
-      box-sizing: border-box;
-    }
-
-    body {
-      color: rgb(0, 0, 0);
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, rgb(235, 235, 255), rgb(255, 255, 255)) no-repeat center center fixed;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav {
-      margin: 0;
-      display: flex;
-      justify-content: space-around;
-      background-color: rgba(12, 74, 240, 0.8);
-      background-image: linear-gradient(to bottom, rgb(12, 74, 220), rgba(0, 0, 0, 0.2), transparent);
-      align-items: center;
-      height: 3rem;
-      box-shadow: 0 8px 4px rgba(0, 0, 0, 0.1);
-
-    }
-
-    nav a {
-      color: rgb(255, 255, 255); 
-      text-decoration: none;
-      font-weight: bold;
-      text-align: center;
-      padding: .9rem 1rem;
-      transition: background-color 0.3s;
-      height: 100%;
-      min-width: 10ch;
-      transition: all 0.3s;
-    }
-
-
-    nav a:hover {
-      box-shadow: 0 4px 8px rgba(220, 255, 255, 0.2);
-    }
-
-    nav a:active {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    h1 {
-      color: black;;
-      font-size: 3rem;
-      background: linear-gradient(to right, rgb(255, 255, 255), rgb(230, 240, 255));
-      margin: 0;
-      padding: 5rem 0 1rem 2.5rem;
-      width: 100%;
-    }
-
-    section {
-      max-width: 100ch;
-      margin: 2.5rem auto;
-      padding-left: 2.5rem;
-    }
-
-    table { 
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table.projects { 
-      margin: 0 auto;
-      width: 95%;
-    }
-
-    details {
-      padding: .2rem;
-      border-radius: 5px;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, .3);
-      margin-bottom: 0.5rem;
-    }
-
-    details summary {
-      background-color: rgb(255, 255, 255);
-      cursor: pointer;
-      padding: 14px 1rem;
-      border: 1px solid rgb(205, 205, 205);
-      border-radius: 5px;
-      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-      transition: all 0.1s ease;
-    }
-
-    details summary:hover {
-      background-color: rgb(242, 242, 242);
-      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    }
-
-
-    dl{
-      font-size: 0.9rem;
-      display: grid;
-      grid-template-columns: max-content 1fr;
-      gap: 0.25rem 1rem;
-      padding: 0.5rem;
-      margin: 1rem;
-      white-space: nowrap;
-    }
-
-    .sidebar {
-      display: flex;
-      gap: 1.5rem;
-      margin: 1rem;
-    }
-
-    .sidebar a {
-      color: rgb(0, 0, 225);
-      text-decoration: none;
-      text-align: center;
-      background-color: rgb(240, 240, 240);
-      min-width: 10ch;
-      padding: 0.5rem;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: rgb(220, 220, 220);
-    }
-
-    .sidebar a:active {
-      background-color: rgb(170, 170, 170);
-    }
-
-    dt {
-      color: rgb(85, 85, 85);
-      overflow-wrap: anywhere;
-    }
-
-    dd {
-      color: rgb(30, 30, 30);
-      overflow-wrap: anywhere;
-      font-weight: 600;
-    }
-
-
-    .meta-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      background-color: rgb(250, 250, 250);
-      max-width: 60ch;
-      margin: 1.5rem auto;
-      padding: 1rem;
-      border: 1px solid rgb(205, 205, 205);
-    }
-
-    .meta-form label {
-      display: flex;
-      flex-direction: column;
-      font-weight: 600;
-    }
-
-    .meta-form input[type="text"],
-    .meta-form input[type="email"],
-    .meta-form input[type="date"],
-    .meta-form textarea {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-    }
-
-    .meta-form .checkbox {
-      flex-direction: row;
-      gap: 0.5rem;
-      font-weight: normal;
-    }
-
-    .meta-form button {
-      padding: 0.75rem;
-      background: #007acc;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-
-
-    aside.actions {
-      display: flex;
-      justify-content: space-around;
-      padding: .5rem;
-      margin: .4rem 0;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      background-color: rgb(37, 99, 235);
-      color: #fff;
-      text-decoration: none;
-      transition: background-color 0.3s;
-      border-radius: 5px;
-    }
-
-    .btn:hover {
-      background-color: rgb(29, 78, 216);
-    }
-
-    pre.response-box {
-      background-color: rgb(240, 240, 240);
-      padding: 1rem;
-      height: 30vh;
-      border-radius: 5px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-
-  </style>
+  <link rel="stylesheet" href="/static/utils.css">
+  <link rel="stylesheet" href="/static/elements.css">
+  <link rel="stylesheet" href="/static/main.css">
+  <link rel="stylesheet" href="/static/components.css">
+  <link rel="stylesheet" href="/static/social.css">
 </head>
 <body>
   <nav>
-    <a href="/console/">Console</a>
     <a href="/publish/">Publish</a>
     <a href="/endpoints/">API</a>
     <a href="/">Getting Started</a>
   </nav>
   <main>
-      <h1>{{ title }}</h1>
-
-    {% block nav%}
-    <nav>
-    </nav>
-    {% endblock %}
+    <h1>{{ title }}</h1>
+    {% block nav%}<nav></nav>{% endblock %}
     {% block content %}{% endblock %}
   </main>
+  <footer>
+    <p style="text-align: center; padding: 1rem; background-color: rgba(12, 74, 240, 0.8); color: white;">
+      &copy; 2025 Code Outpost Content Management. All rights reserved.
+    </p>
+    <div style="margin: 0 auto; max-width: 100ch; padding: 1rem;">
+      <h2>Contact Us</h2>
+      <p>Feel free to reach out to us if you have any questions or feedback.</p>
+    <address> 
+      <a href="https://www.codeoutpost.com">Code Outpost</a><br>
+      <a href="https://www.codeoutpost.com/contact">Contact Us</a><br>
+      <a href="https://www.codeoutpost.com/privacy">Privacy Policy</a><br>
+      <a href="https://www.codeoutpost.com/terms">Terms of Service</a><br>
+      <a href="https://www.codeoutpost.com/support">Support</a><br>
+      <a href="https://www.codeoutpost.com/faq">FAQ</a><br>
+      <a href="https://www.codeoutpost.com/blog">Blog</a><br>
+    </address>
+    <div>
+  </footer>
 </body>
 </html>

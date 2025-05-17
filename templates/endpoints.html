@@ -1,24 +1,30 @@
-
 {% extends "base.html" %}
 
 {% block content %}
 <section>
-  <h1>CMS Endpoint Explorer</h1>
+  <h2>CMS API Explorer</h2>
   <p>
     Test what public endpoints return for each project. Preview HTML fragments, head metadata, and structured data used
     by crawlers and platforms.
   </p>
 
-
+  <table>
+    <tbody>
+      <tr>
+        <td>
   <!-- Get the list projects by group, name, and canonical URL-->
   <details>
-    <summary><strong>GET /canonical/</strong></summary>
+    <summary><strong>GET /info/</strong></summary>
     <form onsubmit="return false;" data-endpoint="/articles">
       <label>
         <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
       <pre class="response-box" id="info">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get the list of unique groups -->
   <details>
@@ -29,16 +35,10 @@
       <pre class="response-box" id="info">// JSON response here</pre>
     </form>
   </details>
-
-  <!-- Get the list of all projects and metadata -->
-  <details>
-    <summary><strong>GET /info/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
-      <pre class="response-box" id="info">// JSON response here</pre>
-    </form>
-  </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get a specific article fragment -->
   <details>
@@ -62,6 +62,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get robots.txt entry for a specific project -->
   <details>
@@ -85,6 +89,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get robots.txt entries for a specific group -->
   <details>
@@ -101,6 +109,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get robots.txt entries for all projects -->
   <details>
@@ -110,6 +122,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
 
   <!-- Get sitemap.txt entry for a specific project -->
@@ -134,6 +150,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get sitemap.txt entries for a specific group -->
   <details>
@@ -150,6 +170,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
   <!-- Get sitemap.txt entries for all projects -->
   <details>
@@ -159,6 +183,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
 
 
@@ -184,6 +212,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
 
 
@@ -209,6 +241,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
 
 
@@ -234,6 +270,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
+        </td>
+      </tr>
+      <tr>
+        <td>
 
 
 
@@ -259,10 +299,10 @@
       <pre class="response-box">// JSON response here</pre>
     </form>
   </details>
-
-
-
-
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 
 

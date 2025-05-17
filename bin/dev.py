@@ -1,47 +1,32 @@
 from fastapi import Request
-from fastapi.responses import HTMLResponse
 
-import config
-from templates.python import EDITOR_UNDER_CONSTRUCTION
-from lib.locached import Cache
+from outpost_d import config
 from bin.run import app
-from bin.routers.api import api_router 
-from bin.routers.git_router import git_router
-from bin.routers.metadata import metadata_router
-from bin.routers.projects import project_router
-from lib.response import PFResponse
+from lib.response import EntryResponse
+
+from src.routers.api import api_router 
+from src.routers.meta import meta_router
+from src.routers.publish import publish_router
 
 
 @app.get("/")
 async def home(request: Request):
-    resp = PFResponse(request, "home.html")
+    resp = EntryResponse(request, "quick-start.html")
     resp.update(title="Outpost CMS")
-    return resp()
-
-
-@app.get("/console/")
-async def console(request: Request):
-    resp = PFResponse(request, "console.html")
-    resp.update(title="Content Console", site_map=Cache.all())
-    return resp()
+    return resp.as_response()
 
 
 @app.get("/endpoints/")
 async def endpoints(request: Request):
-    resp = PFResponse(request, "endpoints.html")
+    resp = EntryResponse(request, "endpoints.html")
     resp.update(title="API Endpoints")
-    return resp()
-
-
-@app.get("/editor/")
-async def editor():
-    return HTMLResponse(content=EDITOR_UNDER_CONSTRUCTION, status_code=200)
+    return resp.as_response()
 
 
 app.include_router(api_router, prefix="/api", tags=["api"])
-app.include_router(git_router, prefix="/publish", tags=["publish"])
-app.include_router(metadata_router, prefix="/metadata", tags=["metadata"])
-app.include_router(project_router, prefix="/projects", tags=["projects"])
+app.include_router(publish_router, prefix="/publish", tags=["publish"])
+app.include_router(meta_router, prefix="/metadata", tags=["metadata"])
+
 
 if __name__ == "__main__":
     print("Starting the development server on port", config.DEV_PORT)

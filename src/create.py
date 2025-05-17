@@ -5,7 +5,6 @@ from lib.fsutils import touch_json
 import config
 from lib.locached import Cache
 from templates.python import new_site_map_entry, new_metadata
-from lib.formatters import format_branch
 from lib.fsutils import mkdir, touch_json
 from lib import git
 
@@ -19,7 +18,7 @@ def update_site_map(path, file_name, entry):
     touch_json(path, file_name, site_map)
 
 def write_metadata(path, group, project_name, metadata):
-    project_directory = path  /  format_branch(group=group, project_name=project_name)
+    project_directory = path  /  "foo"
     touch_json(project_directory, 'meta.json', metadata)
 
 
@@ -34,7 +33,7 @@ def create_project_directory(path, group, project_name):
 
 
 def create_project(path, group, project_name, canonical):
-    git.new_branch(path, format_branch(group=group, project_name=project_name))
+    git.new_branch(path, fo
     create_project_directory(path, group, project_name)
     metadata = new_metadata()
     add_hash_to_metadata(path, metadata)

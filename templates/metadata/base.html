@@ -13,12 +13,15 @@
 {% endif %}
 
 <section>
-  {{ form_description | safe}}
+  <h2>{{ subtitle }}</h2>
+  {{ description }}
 </section>
 
+<form method="post" action="{{ action }}" enctype="application/x-www-form-urlencoded" >
 {% block form %}
 <p> this is the base template for editing metadata</p>
 {% endblock %}
+</form>
 
 
 {% endblock %}

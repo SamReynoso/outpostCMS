@@ -1,0 +1,67 @@
+{% extends "publish/base.html" %}
+
+
+
+{% block publish %}
+
+<section>
+  <h2>Staging Notice</h2>
+    <p>
+      To mainting a clean change log, it is recommended that you checkout a project
+      before making any changes. Changes are automatically saved to the staging area 
+      when switching between projects. You can also manually save changes to for the 
+      active project by clicking the "Save" button in the workbook.
+    </p>
+
+  </section>
+
+  <aside class="text-center">
+    <a class="btn" href="/metadata/new/">Start a new project</a>
+  </aside>
+
+  <section>
+  <table>
+      <thead>
+        <tr>
+          <td>
+            Projects
+          </td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for entry in site_map%}
+        <tr>
+          <td colspan="6">
+          <details>
+            <summary>
+                <table>
+                  <tr>
+                    <td><small>Updated:</small> <strong>{{ entry.last_updated }}</strong></td>
+                    <td><small>Group/Project:</small> <strong> {{ entry.group }}/{{ entry.project_name }}</strong></td>
+                    <td><small>Title:</small> <strong>{{ entry.title }}</strong></td>
+                  </tr>
+                </table>
+            </summary>
+            <dl>
+              <dt>Public</dt> <dd>{{ entry.public }}</dd>
+              <dt>Title</dt> <dd>{{ entry.title }}</dd>
+              <dt>Author</dt> <dd>{{ entry.author }}</dd>
+              <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
+              <dt>Group</dt> <dd>{{ entry.group}}</dd>
+              <dt>Date</dt> <dd>{{ entry.date}}</dd>
+              <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
+              <dt>Canonical</dt> <dd>{{ entry.canonical }}</dd>
+            </dl>
+          </details>
+          </td>
+          <td style="vertical-align: top; padding-top: .25rem;">
+            <a class="btn" href="/api/checkout/{{ entry.group }}/{{ entry.project_name }}">Checkout</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+{% endblock %}

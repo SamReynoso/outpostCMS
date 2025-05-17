@@ -1,158 +1,83 @@
-import os
-import sys
 import subprocess
-from pathlib import Path
-
-import config
-from templates.python import PUBLISH_REPOSITORY_README, WORKING_REPOSITORY_README
-from lib.fsutils import mkdir, write, touch_json
 
 
-def run_git_command(repo_path, *args):
-    print(f"[INFO] Running git command: {' '.join(['git'] + list(args))} in {repo_path}")
+def run_git_command(path, *args) -> tuple[str, bool]:
+    print(f"[INFO] Running git command: {' '.join(['git'] + list(args))} in {path}")
     try:
         result = subprocess.run(
             ['git'] + list(args),
-            cwd=repo_path,
+            cwd=path,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
             check=True
         )
-        return result.stdout.strip()
+        return result.stdout.strip(), True
     except subprocess.CalledProcessError as e:
-        return e.stderr.strip()
+        return e.stderr.strip(), False
 
 
-def has_changes(path):
-    changes = run_git_command(path, 'status', '--porcelain')
-    return bool(changes)
+def branch(path: str, branch: str) -> tuple[str, bool]:
+    """ Create a new branch and switch to it """
+    commit(path, "Creating branch")
+    return run_git_command(path, 'checkout', '-b', branch)
 
 
-def unique_project(path, branch):
-    project_path = path  /  branch
-    if os.path.exists(project_path):
-        return False
-    return True
+def checkout(path: str, branch: str) -> tuple[str, bool]:
+    """ Switch to an existing branch """
+    commit(path, "Switching branches")
+    return run_git_command(path, 'checkout', branch)
 
 
-def hash(path):
-    return run_git_command(path, 'rev-parse', 'HEAD')
-
-def index_diff(path, group, project):
-    index =  group + '/' +  project  + '/' + 'index.html'
+def status(path: str) -> tuple[str, bool]:
+    """ Get the status of the repository """
     return run_git_command(
             path,
-            'diff',
-            '--name-status',
-            index
+            'status',
+            '--porcelain',
             )
 
-def meta_diff(path, group, project):
-    meta_file =  group + '/' +  project  + '/' + 'meta.json'
-    return run_git_command(
-            path,
-            'diff',
-            '--name-status',
-            meta_file
-            )
+def commit(path: str, message: str="Changes saved automatically") -> tuple[str, bool]:
+    """ Commit changes to the repository """
+    run_git_command(path, 'add', '.')
+    return run_git_command(path, 'commit', '-m', message)
 
 
-def change_log(path, group, project):
-    project_dir =  group + '/' + project
-    return run_git_command(
-            path,
-            'log',
-            '--pretty=format:"%h %ad %s"',
-            '--date=iso',
-            project_dir
-            )
+def merge(path: str, branch: str, message: str="Merging changes") -> tuple[str, bool]:
+    """ Merge changes from another branch """
+    commit(path, message)
+    checkout(path, 'main')
+    return run_git_command(path, 'merge', branch)
 
 
-def current_branch(path):
-    branch = run_git_command(path, 'rev-parse', '--abbrev-ref', 'HEAD')
-    return branch
-
-
-def show(path, commit_hash):
+def show(path: str, commit_hash: str) -> tuple[str, bool]:
+    """ Show the details of a specific commit """
     return run_git_command(path, 'show', commit_hash)
 
 
-def go_to(path, commit_hash):
-    run_git_command(path, 'checkout', commit_hash)
+def head(path: str) -> tuple[str, bool]:
+    """ Get the current commit hash """
+    return run_git_command(path, 'rev-parse', 'HEAD')
+
+def hash(path: str) -> tuple[str, bool]:
+    """ Get the current commit hash """
+    return run_git_command(path, 'rev-parse', 'HEAD')
 
 
-def save(path, message):
+def diff(path: str, file: str) -> tuple[str, bool]:
+    """ Get the diff of a specific file """
     run_git_command(path, 'add', '.')
-    run_git_command(path, 'commit', '-m', message)
+    return run_git_command(path, 'diff', '-U10000', '--cached', file)
 
 
-def auto_save(path):
-    if has_changes(path):
-        save(path, "Changes saved automatically")
-
-
-def submit(path, branch):
-    run_git_command(path, 'merge', branch)
-
-
-def new_branch(path, branch):
-    if not unique_project(path, branch):
-        raise Exception(f"Project {branch} already exists")
-    auto_save(path)
-    run_git_command(path, 'checkout', '-b', branch)
-
-
-def change_branch(path, branch):
-    auto_save(path)
-    run_git_command(path, 'checkout', branch)
-
-
-'''
+def go_to(path: str, commit_hash: str) -> tuple[str, bool]:
+    """ Checkout a specific commit """
+    return run_git_command(path, 'checkout', commit_hash)
 
 
 
 
-Initialization
-'''
-def init():
-    def init_repo(path):
-        run_git_command(path, 'init')
-
-    def init_worktree(path, branch_name):
-        working_path = f"../{branch_name}"
-        run_git_command(path, 'worktree', 'add', working_path, branch_name)
-
-    def ignore(path):
-        content = '''# Git Ignore\nREADME.md'''
-        file_path = path / '.gitignore'
-        write(file_path, content)
-
-    def site_map():
-        touch_json(canon, config.SITE_MAP, [])
-
-    def readme(path, content):
-        file_path = Path(path) / 'README.md'
-        write(file_path, content)
 
 
-    canon = Path(config.CANON)
-    publish_path = canon / config.PUBLISH
-
-    mkdir(config.CANON)
-    site_map()
-    mkdir(publish_path)
-    init_repo(publish_path)
-
-    ignore(publish_path)
-    readme(publish_path, PUBLISH_REPOSITORY_README)
-    save(publish_path, "Initializing Canonical Repository")
-    run_git_command(publish_path, 'branch', config.WORKING)
-    init_worktree(publish_path, config.WORKING)
-    readme(canon / config.WORKING, WORKING_REPOSITORY_README)
-
-
-if __name__ == "__main__":
-    init()
 
 

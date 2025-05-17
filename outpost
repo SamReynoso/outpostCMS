@@ -2,18 +2,18 @@
 PYTHONPATH="$(dirname "$0")"
 export PYTHONPATH
 
-SERVICE="$1"
+CMD="$1"
 shift
 
-case $SERVICE in
-  "run")
-    echo "Starting production server..."
-    python3 bin/run.py
-    ;;
-
+case $CMD in
   "dev")
     echo "Starting development server..."
     python3 bin/dev.py
+    ;;
+
+  "init")
+    echo "Initializing Outpost..."
+    python3 bin/init.py
     ;;
 
   "robot")
@@ -21,10 +21,11 @@ case $SERVICE in
     python3 bin/robot.py
     ;;
 
-  "test")
-    echo "Running tests..."
-    python3 lib/git.py init
+  "run")
+    echo "Starting production server..."
+    python3 bin/run.py
     ;;
+
   *)
     echo "Usage: $0 {dev}"
     exit 1

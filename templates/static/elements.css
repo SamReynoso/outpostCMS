@@ -1,0 +1,39 @@
+
+.btn {
+  text-decoration: none;
+  display: inline-block;
+  background: rgb(0, 122, 204);
+  color: rgb(255, 255, 255);
+  padding: 0.25rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+td .btn {
+  margin-left: 0.5rem;
+  position: relative;
+  top: 0;
+}
+
+.btn:hover {
+  background-color: rgb(29, 78, 216);
+}
+
+dt.added {
+  color: rgb(0, 128, 0);
+}
+
+dt.deleted{
+  color: rgb(255, 0, 0);
+}
+
+dd.added {
+  color: rgb(0, 128, 0);
+}
+
+dd.deleted{
+  color: rgb(255, 0, 0);
+}
+
