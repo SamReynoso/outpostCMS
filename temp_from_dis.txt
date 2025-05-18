@@ -1,0 +1,47 @@
+NEW_PROJECT_DIS
+<h2>Project Structure</h2>
+The content management system uses the information entered in this form the maintain a mapping between canonical URLs
+and your project. The information is used to generate accurate SEO metatags and search engine submissions. The 
+information is also used to generate sitemap.xml and robots.txt files for your server.
+
+CANONICAL_DIS
+<strong>Note:</strong> Changing the group or project name will not change canonical URL of the project. But will effect
+the the API endpoint for the project that returns the article fragment.
+
+<strong>Note:</strong> Changing the group or project name will not change canonical URL of the project. But will effect
+the the API endpoint for the project that returns the article fragment.
+
+
+SOCIAL_DIS
+<strong>Rich Preview:</strong> This is the information that will be used to generate the rich preview
+by search social media sites. 
+
+
+ADVANCED_DIS
+<h2>Enhance Your Project’s Visibility</h2>
+
+<p>
+    Filling out this form helps generate rich previews and structured data for your project. These details power link
+    previews on social media (like Facebook, Twitter, and LinkedIn) and improve how your project appears in search
+    engines like Google.
+</p>
+
+<p>
+<strong>Why it matters:</strong>
+<ul>
+    <li>Makes your project stand out in shared links</li>
+    <li>Improves SEO and search result quality</li>
+    <li>Helps users understand what your project does at a glance</li>
+    <li>Encourages engagement and clicks</li>
+<p>
+    If you skip this step, your project may show up as a blank or generic link. Fill it out once, and your content looks
+    polished everywhere it appears.
+</p>
+
+
+INDEX_HTML_DIS
+<h2>Upload Your Project</h2>
+<p>
+    This is the information that will be used to generate the rich preview by search social media sites.
+</p>
+

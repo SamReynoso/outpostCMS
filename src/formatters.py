@@ -1,6 +1,4 @@
-
-def format_branch(**entry):
-    return entry['group'] + '/' + entry['project_name'] 
+import time
 
 
 def format_meta_diff(diff):
@@ -68,3 +66,24 @@ def format_index_diff(diff):
     html += "</article>\n"
     return html
             
+
+
+def new_site_map_entry(group: str, project_name: str, canonical: str):
+    return {
+        "group": group.strip(),
+        "project_name": project_name.strip(),
+        "canonical": canonical.strip(),
+        "public": False,
+    }
+
+
+def new_metadata():
+    date = time.strftime("%Y-%m-%d")
+    return {
+            "title": "Untitled",
+            "description": "",
+            "keywords": "",
+            "author": "",
+            "date": date,
+            "last_updated": date,
+            }

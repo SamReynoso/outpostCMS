@@ -1,12 +1,6 @@
 {% extends "metadata/base.html" %}
 
 {% block form %}
-<form
-  class="meta-form"
-  method="post"
-  action="{{ form_action }}"
-  enctype="application/x-www-form-urlencoded"
-  >
   <h3>{{ form_header }}</h3>
   <label>Group  
     <input type="text" name="group" value="{{ entry.group }}" required>
@@ -16,7 +10,7 @@
   </label>
 
   <label>Project Name  
-    <input type="text" name="project_name" value="{{ entry.project_name }}" required>
+    <input type="text" name="project" value="{{ entry.project_name }}" required>
     <small>Used internally as the folder name for this project. Should be unique within its group.</small>
   </label>
 

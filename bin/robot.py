@@ -10,9 +10,9 @@ CANON_DIR = PARENT_DIR.joinpath("canonical")
 
 BASE_URL = "https://ozprealpha.com"
 ROUTE_PREFIX = "/archive/" 
-INPUT_JSON = Path(CANON_DIR.joinpath("articles.json"))
-OUTPUT_XML = Path(CANON_DIR.joinpath("sitemap.xml"))
-OUTPUT_ROBOT= Path(CANON_DIR.joinpath("robots.txt"))
+INPUT_JSON = Path(CANON_DIR) / "articles.json"
+OUTPUT_XML = Path(CANON_DIR) / "sitemap.xml"
+OUTPUT_ROBOT= Path(CANON_DIR) / "robots.txt"
 
 try:
     with INPUT_JSON.open() as f:

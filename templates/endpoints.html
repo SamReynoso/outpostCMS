@@ -14,7 +14,7 @@
         <td>
   <!-- Get the list projects by group, name, and canonical URL-->
   <details>
-    <summary><strong>GET /canonical/</strong></summary>
+    <summary><strong>GET /info/</strong></summary>
     <form onsubmit="return false;" data-endpoint="/articles">
       <label>
         <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
@@ -29,20 +29,6 @@
   <!-- Get the list of unique groups -->
   <details>
     <summary><strong>GET /groups/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
-      <pre class="response-box" id="info">// JSON response here</pre>
-    </form>
-  </details>
-        </td>
-      </tr>
-      <tr>
-        <td>
-
-  <!-- Get the list of all projects and metadata -->
-  <details>
-    <summary><strong>GET /info/</strong></summary>
     <form onsubmit="return false;" data-endpoint="/articles">
       <label>
         <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
@@ -317,10 +303,6 @@
       </tr>
     </tbody>
   </table>
-
-
-
-
 
 
 
