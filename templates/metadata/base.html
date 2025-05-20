@@ -1,23 +1,25 @@
 {% extends "base.html" %}
-{% block content %}
 
-{% if entry.group %}
+{% block nav %}
+{% if entry %}
 <nav>
-  <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/canonical/">Canonical</a>
-  <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/basic/">Basic</a>
-  <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/social/">Social</a>
-  <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/advanced/">Advanced</a>
-  <a href="/projects/{{ entry.group }}/{{ entry.project_name }}/preview/">Preview</a>
+  <a href="/metadata/canonical/">Canonical</a>
+  <a href="/metadata/basic/">Basic</a>
+  <a href="/metadata/social/">Social</a>
+  <a href="/metadata/advanced/">Advanced</a>
+  <a href="/publish/workbook/">Workbook</a>
 </nav>
 {% else %}
 {% endif %}
+{% endblock %}
 
+{% block content %}
 <section>
   <h2>{{ subtitle }}</h2>
   {{ description }}
 </section>
 
-<form method="post" action="{{ action }}" enctype="application/x-www-form-urlencoded" >
+<form method="post" action="{{ action }}" enctype="{{ enctype }}" >
 {% block form %}
 <p> this is the base template for editing metadata</p>
 {% endblock %}

@@ -20,20 +20,3 @@ td .btn {
 .btn:hover {
   background-color: rgb(29, 78, 216);
 }
-
-dt.added {
-  color: rgb(0, 128, 0);
-}
-
-dt.deleted{
-  color: rgb(255, 0, 0);
-}
-
-dd.added {
-  color: rgb(0, 128, 0);
-}
-
-dd.deleted{
-  color: rgb(255, 0, 0);
-}
-

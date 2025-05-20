@@ -1,8 +1,16 @@
-[
-    {
+{
+    "outpost/project-x": {
         "group": "outpost",
-        "project_name": "content",
-        "canonical": "https://outpost.com/articles/building-a-cdn-3",
+        "project": "project-x",
+        "canonical": "https://outpost.com/articles/project-x",
+        "hash": "efd5453e40a82dd068bdb5e3ef5d4e685fc050dc",
+        "public": true
+    },
+    "outpost/project-z": {
+        "group": "outpost",
+        "project": "project-z",
+        "canonical": "https://outpost.com/articles/project-z",
+        "hash": "10637f37e9b25c6a2944798f810a53c7e17b2551",
         "public": false
     }
-]
+}

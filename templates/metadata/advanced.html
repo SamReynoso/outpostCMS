@@ -1,47 +1,53 @@
 {% extends "metadata/base.html" %}
 {% block form %}
-<form
-  class="meta-form"
-  method="post"
-  action="{{ form_action }}"
-  enctype="application/x-www-form-urlencoded"
-  >
-  <label for="type">@type</label>
-  <select id="type" name="type" required>
-    <option value="SoftwareSourceCode">SoftwareSourceCode</option>
-    <option value="CreativeWork">CreativeWork</option>
-    <option value="Product">Product</option>
-    <option value="Article">Article</option>
-    <option value="Event">Event</option>
+
+<label>twitter:title<input type="text" name="twitter_title" value="{{ entry.advanced.twitter_title }}"></label>
+<label>twitter:description<input type="text" name="twitter_description" value="{{ entry.advanced.twitter_description }}"></label>
+<label>twitter:image<input type="text" name="twitter_image" value="{{ entry.advanced.twitter_image }}"></label>
+<label>twitter:image:alt<input type="text" name="twitter_image_alt" value="{{ entry.advanced.twitter_image_alt }}"></label>
+
+<label>og:title<input type="text" name="og_title" value="{{ entry.advanced.og_title }}"></label>
+<label>og:description<input type="text" name="og_description" value="{{ entry.advanced.og_description }}"></label>
+<label>og:image<input type="text" name="og_image" value="{{ entry.advanced.og_image }}"></label>
+<label>og:image:alt<input type="text" name="og_image_alt" value="{{ entry.advanced.og_image_alt }}"></label>
+<label>og:url<input type="text" name="og_url" value="{{ entry.advanced.og_url }}"></label>
+
+<label>og:site_name<input type="text" name="og_site_name" value="{{ entry.advanced.og_site_name }}"></label>
+
+<label>
+  og:locale
+  <select name="og_locale">
+    <option value="en_US">en_US</option>
+    <option value="en_GB">en_GB</option>
+    <option value="fr_FR">fr_FR</option>
+    <option value="es_ES">es_ES</option>
   </select>
+</label>
 
-  <label for="name">Name</label>
-  <input type="text" id="name" name="name" required>
+<label>og:article:author<input type="text" name="og_article_author" value="{{ entry.advanced.og_article_author }}"></label>
+<label>og:article:section<input type="text" name="og_article_section" value="{{ entry.advanced.og_article_section }}"></label>
+<label>og:article:tag<input type="text" name="og_article_tags" value="{{ entry.advanced.og_article_tag }}"></label>
 
-  <label for="description">Description</label>
-  <textarea id="description" name="description" rows="3" required></textarea>
+<h3>Schema.org</h3>
 
-  <label for="url">URL</label>
-  <input type="url" id="url" name="url" required>
+<label>
+  schema:type
+  <select name="schema_type">
+    <option value="Article">Article</option>
+    <option value="CreativeWork">CreativeWork</option>
+    <option value="BlogPosting">BlogPosting</option>
+    <option value="NewsArticle">NewsArticle</option>
+    <option value="WebPage">WebPage</option>
+  </select>
+</label>
 
-  <label for="image">Image URL</label>
-  <input type="url" id="image" name="image">
+<label>schema:id<input type="text" name="schema_id" value="{{ entry.advanced.schema_id }}"></label>
+<label>schema:headline<input type="text" name="schema_headline" value="{{ entry.advanced.schema_headline }}"></label>
+<label>schema:description<input type="text" name="schema_description" value="{{ entry.advanced.schema_description }}"></label>
+<label>schema:datePublished<input type="text" name="schema_date" value="{{ entry.advanced.schema_date }}"></label>
+<label>schema:dateModified<input type="text" name="schema_modified" value="{{ entry.advanced.schema_modified }}"></label>
+<label>schema:author<input type="text" name="schema_author" value="{{ entry.advanced.schema_author }}"></label>
+<label>schema:publisher<input type="text" name="schema_publisher" value="{{ entry.advanced.schema_publisher }}"></label>
 
-  <label for="author">Author</label>
-  <input type="text" id="author" name="author">
-
-  <label for="datePublished">Date Published</label>
-  <input type="date" id="datePublished" name="datePublished">
-
-  <label for="license">License</label>
-  <input type="text" id="license" name="license">
-
-  <label for="keywords">Keywords (comma-separated)</label>
-  <input type="text" id="keywords" name="keywords">
-
-  <label for="sameAs">Same As (comma-separated URLs)</label>
-  <input type="text" id="sameAs" name="sameAs">
-
-  <button type="submit">Generate Structured Data</button>
-</form>
+<button type="submit">Submit</button>
 {% endblock %}

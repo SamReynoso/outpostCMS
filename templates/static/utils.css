@@ -2,3 +2,18 @@
   text-align: center;
   text-align: center;
 }
+
+.mb {
+  margin-bottom: .5rem;
+}
+
+.gap {
+  display: flex;
+  gap: 1rem;
+}
+
+.gap.col{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

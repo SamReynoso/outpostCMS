@@ -26,6 +26,11 @@ case $CMD in
     python3 bin/run.py
     ;;
 
+  "test")
+    echo "Starting production server..."
+    python3 tests/run.py
+    ;;
+
   *)
     echo "Usage: $0 {dev}"
     exit 1

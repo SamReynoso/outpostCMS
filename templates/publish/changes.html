@@ -1,0 +1,51 @@
+{% extends "publish/base.html" %}
+{% block publish %}
+<section>
+  <h2>Current State</h2>
+  <div class="workbook__card">
+    <dl>
+      <dt>Public</dt> <dd>{{ entry.canon.public }}</dd>
+      <dt>Project</dt> <dd>{{ entry.canon.project }}</dd>
+      <dt>Group</dt> <dd>{{ entry.canon.group}}</dd>
+      <dt>Title</dt> <dd>{{ entry.basic.title }}</dd>
+      <dt>Date</dt> <dd>{{ entry.basic.date}}</dd>
+      <dt>Last Updated</dt> <dd>{{ entry.basic.modified}}</dd>
+    </dl>
+  </section>
+
+  <aside class="actions" id="commits">
+  {% for commit_hash in commits %}
+    {% if hash == commit_hash %}
+      <a href="/publish/changes/{{ hash }}#commits" class="active" >active</a>
+    {% else %}
+      <a href="/publish/changes/{{ commit_hash }}#commits">{{ commit_hash }}</a>
+    {% endif %}
+  {% endfor %}
+  </aside>
+
+  <section>
+
+  <h3>View Diffs</h3>
+  <div class="gap col">
+    <details>
+      <summary>index.html</summary>
+        {{ diffs.index | safe }}
+    </details>
+
+    <details><summary>basic.json</summary>
+      <pre><code>{{ diffs.basic | safe }}</code></pre>
+    </details>
+
+    <details><summary>social.json</summary>
+      <pre><code>{{ diffs.social | safe }}</code></pre>
+    </details>
+
+    <details><summary>advanced.json</summary>
+      <pre><code>{{ diffs.advanced | safe }}</code></pre>
+    </details>
+  </div>
+</section>
+<section>
+<a class="btn" href="/api/commit/">Save</a>
+</section>
+{% endblock %}
