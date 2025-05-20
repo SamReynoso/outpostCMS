@@ -3,19 +3,19 @@
 {% block form %}
   <h3>{{ form_header }}</h3>
   <label>Group  
-    <input type="text" name="group" value="{{ entry.group }}" required>
+    <input type="text" name="group" value="{{ entry.canon.group }}" required>
     <small>
       This creates a folder in <code>PYTHONPATH/content/[group]</code>. Use dashes or underscores — no spaces.
     </small>
   </label>
 
   <label>Project Name  
-    <input type="text" name="project" value="{{ entry.project_name }}" required>
+    <input type="text" name="project" value="{{ entry.canon.project }}" required>
     <small>Used internally as the folder name for this project. Should be unique within its group.</small>
   </label>
 
   <label>Canonical URL  
-    <input type="text" name="canonical" value="{{ entry.canonical }}">
+    <input type="text" name="canonical" value="{{ entry.canon.canonical }}">
     <small>
       Including domain — e.g., <code>https://outpost.com/articles/blog-1</code>.<br>
       <strong>Note:</strong> You can't mark a project public until this is set.

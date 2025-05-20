@@ -22,3 +22,36 @@
   --border-radius: 5px;
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+html.dark {
+  --color: rgb(240, 240, 240);
+  --background-color: rgb(30, 30, 30);
+  --figure-color: rgb(220, 220, 220);
+  --figure-background-color: rgb(50, 50, 50);
+  --border-color: rgb(100, 100, 100);
+}
+
+html.light {
+  --color: rgb(30, 30, 30);
+  --background-color: rgb(255, 255, 255);
+  --figure-color: rgb(30, 30, 30);
+  --figure-background-color: rgb(230, 230, 230);
+  --border-color: rgb(221, 221, 221);
+}
+
+
+html.neon {
+  --color: rgb(255, 0, 255);
+  --background-color: rgb(110, 175, 210);
+  --figure-color: rgb(220, 20, 20);
+  --figure-background-color: rgb(50, 250, 50);
+  --border-color: rgb(100, 100, 100);
+}
+
+html.dolphin {
+  --color: rgb(205, 205, 255);
+  --background-color: rgb(15, 15, 65);
+  --figure-color: rgb(220, 220, 220);
+  --figure-background-color: rgb(40, 2, 50);
+  --border-color: rgb(100, 100, 100);
+}

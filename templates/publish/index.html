@@ -21,42 +21,35 @@
 
   <section>
   <table>
-      <thead>
-        <tr>
-          <td>
-            Projects
-          </td>
-        </tr>
-      </thead>
-
+      <caption>
+        <h2>Staging Projects</h2>
+        <p>Click on a project to view the current state and make changes.</p>
+        {{ entry.id }}
       <tbody>
-        {% for entry in site_map%}
+        {% for key, canon in site_map.items()%}
+        {% if entry.id == canon.id %}
+        <tr class="active">
+        {% else %}
         <tr>
+        {% endif %}
           <td colspan="6">
-          <details>
+          <details class="mb">
             <summary>
                 <table>
                   <tr>
-                    <td><small>Updated:</small> <strong>{{ entry.last_updated }}</strong></td>
-                    <td><small>Group/Project:</small> <strong> {{ entry.group }}/{{ entry.project_name }}</strong></td>
-                    <td><small>Title:</small> <strong>{{ entry.title }}</strong></td>
+                    <td><small>Title:</small> <strong>{{ key}}</strong></td>
                   </tr>
                 </table>
             </summary>
             <dl>
-              <dt>Public</dt> <dd>{{ entry.public }}</dd>
-              <dt>Title</dt> <dd>{{ entry.title }}</dd>
-              <dt>Author</dt> <dd>{{ entry.author }}</dd>
-              <dt>Project</dt> <dd>{{ entry.project_name }}</dd>
-              <dt>Group</dt> <dd>{{ entry.group}}</dd>
-              <dt>Date</dt> <dd>{{ entry.date}}</dd>
-              <dt>Last Updated</dt> <dd>{{ entry.last_updated}}</dd>
-              <dt>Canonical</dt> <dd>{{ entry.canonical }}</dd>
+              <dt>Project</dt> <dd>{{ canon.project }}</dd>
+              <dt>Group</dt> <dd>{{ canon.group}}</dd>
+              <dt>Canonical</dt> <dd>{{ canon.canonical }}</dd>
             </dl>
           </details>
           </td>
           <td style="vertical-align: top; padding-top: .25rem;">
-            <a class="btn" href="/api/checkout/{{ entry.group }}/{{ entry.project_name }}">Checkout</a>
+            <a class="btn" href="/api/checkout/{{ canon.group }}/{{ canon.project }}">Checkout</a>
           </td>
         </tr>
         {% endfor %}

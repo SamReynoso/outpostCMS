@@ -4,7 +4,8 @@ from pathlib import Path
 from typing import Tuple
 
 from outpost_d import config
-from src.models import Canonical, Basic, Social, Advanced, Upload
+from lib import git
+from src.models import Canonical, Basic, Social, Advanced 
 
 
 class CacheError(Exception):
@@ -35,45 +36,24 @@ class FileIO:
 
 
         @staticmethod
-        def canonical(path: Path, entry_id: str) -> Canonical:
-            """
-            Read the canonical entry from a JSON file.
-            The file is expected to be in the specified path.
-            """
-            project_dir = path / entry_id
-            canon_path = project_dir / "canonical.json"
-            if not canon_path.exists():
-                raise CacheError(f"File {canon_path} does not exist.")
-
-            with open(canon_path, 'r') as f:
-                try:
-                    canon_data = json.load(f)
-                except json.JSONDecodeError:
-                    raise CacheError(f"File {canon_path} is not a valid JSON file.")
-                try:
-                    return Canonical(**canon_data)
-                except TypeError:
-                    raise CacheError(f"Invalid entry format for {entry_id}.")
-
-        @staticmethod
         def site_map(
             root_path: str = config.CANON,
-            canon_file_name: str = config.SITE_MAP
+            site_map_file_name: str = config.SITE_MAP
             ) -> dict[str, Canonical]:
             """
             Read the site map from a JSON file.
             The file is expected to be in the specified root path.
             """
-            canon_path = Path(root_path) / canon_file_name
+            site_map_path = Path(root_path) / site_map_file_name 
 
-            if not canon_path.exists():
-                raise CacheError(f"File {canon_path} does not exist.")
+            if not site_map_path.exists():
+                raise CacheError(f"Site map file '{site_map_path}' does not exist.")
 
-            with open(canon_path, 'r') as f:
+            with open(site_map_path, 'r') as f:
                 try:
                     canon_data = json.load(f)
                 except json.JSONDecodeError:
-                    raise CacheError(f"File {canon_path} is not a valid JSON file.")
+                    raise CacheError(f"Site map file {site_map_path} is not a valid JSON file.")
 
             temp = {}
             for key, value in canon_data.items():
@@ -89,8 +69,9 @@ class FileIO:
                     raise CacheError(f"Invalid entry format for {key}.")
             return temp
 
+
         @staticmethod
-        def metadata(path: Path, entry_id: str) -> Tuple[Basic, Social, Advanced, Upload]:
+        def metadata(path: Path, entry_id: str) -> Tuple[Basic, Social, Advanced]:
             """
             Read the metadata from JSON files.
             The files are expected to be in the specified path.
@@ -100,20 +81,32 @@ class FileIO:
                 raise CacheError(f"Directory {project_dir} does not exist.")
 
             metadata = []
-            for meta_type in ['basic', 'social', 'advanced', 'upload']:
+            for meta_type in ['basic', 'social', 'advanced']:
                 meta_path = project_dir / f"{meta_type}.json"
                 if not meta_path.exists():
                     raise CacheError(f"File {meta_path} does not exist.")
                 with open(meta_path, 'r') as f:
                     try:
-                        metadata.append(json.load(f))
+                        data = json.load(f)
                     except json.JSONDecodeError:
                         raise CacheError(f"File {meta_path} is not a valid JSON file.")
+
+                    try:
+                        if meta_type == 'basic':
+                            metadata.append(Basic(**data))
+                        elif meta_type == 'social':
+                            metadata.append(Social(**data))
+                        elif meta_type == 'advanced':
+                            metadata.append(Advanced(**data))
+                        else:
+                            raise CacheError(f"Unknown metadata type: {meta_type}")
+                    except TypeError:
+                        raise CacheError(f"Invalid metadata format for {meta_type}.")
             return tuple(metadata)
 
 
         @staticmethod
-        def metadata_map(site_map: dict[str, Canonical], path: Path) -> dict[str, Tuple[Basic, Social, Advanced, Upload]]:
+        def metadata_map(site_map: dict[str, Canonical], path: Path) -> dict[str, Tuple[Basic, Social, Advanced]]:
             """
             Read the metadata map from JSON files.
             The files are expected to be in the specified path.
@@ -125,23 +118,6 @@ class FileIO:
 
 
     class Write:
-
-        @staticmethod
-        def canonical(
-                entry: Canonical,
-                root_path: str = config.CANON,
-                working_dir: str = config.WORKING
-                ) -> None:
-            """
-            Write the canonical entry to a JSON file.
-            The file is saved in the specified root path and working directory.
-            """
-            project_dir = Path(root_path) / working_dir / entry.id
-            if not project_dir.exists():
-                os.makedirs(project_dir, exist_ok=True)
-            canon_path = project_dir / "canonical.json"
-            with open(canon_path, 'w') as f:
-                json.dump(entry.__dict__, f, indent=4)
 
         @staticmethod
         def site_map(
@@ -163,7 +139,7 @@ class FileIO:
         @staticmethod
         def metadata(
                 entry_id: str,
-                meta: Tuple[Basic, Social, Advanced, Upload],
+                meta: Tuple[Basic, Social, Advanced],
                 root_path: str = config.CANON,
                 working_dir: str = config.WORKING
                 ) -> None:
@@ -175,14 +151,15 @@ class FileIO:
             if not project_dir.exists():
                 os.makedirs(project_dir, exist_ok=True)
 
-            for meta_type, meta_data in zip(['basic', 'social', 'advanced', 'upload'], meta):
+            for meta_type, metadata in zip(['basic', 'social', 'advanced'], meta):
                 meta_path = project_dir / f"{meta_type}.json"
                 with open(meta_path, 'w') as f:
-                    json.dump(meta_data, f, indent=4)
+                    f.write(metadata.model_dump_json(indent=4))
+                    
 
         @staticmethod
         def metadata_map(
-                metadata_map: dict[str, Tuple[Basic, Social, Advanced, Upload]],
+                metadata_map: dict[str, Tuple[Basic, Social, Advanced]],
                 root_path: str = config.CANON,
                 working_dir: str = config.WORKING
                 ) -> None:
@@ -193,22 +170,6 @@ class FileIO:
             for entry_id, meta in metadata_map.items():
                 FileIO.Write.metadata(entry_id, meta, root_path, working_dir)
 
-
-    @staticmethod
-    def read():
-        """
-        Return the FileIO.Read class.
-        This class contains methods for reading data from JSON files.
-        """
-        return FileIO.Read
-
-    @staticmethod
-    def write():
-        """
-        Return the FileIO.Write class.
-        This class contains methods for writing data to JSON files.
-        """
-        return FileIO.Write
 
 
 class classproperty:
@@ -221,20 +182,58 @@ class classproperty:
 
 
 SITE_MAP: dict[str, Canonical] = {}
-METADATA_MAP: dict[str, tuple[Basic, Social, Advanced, Upload]] = {}
-PROJECT: Canonical | None = None
+METADATA_MAP: dict[str, tuple[Basic, Social, Advanced]] = {}
 FRAGMENTS: dict[str, str] = {}
 
 
 class Cache:
 
     @classproperty
+    def canon(cls) -> Canonical | None:
+        """
+        Return the current project.
+        The project is a Canonical object representing the current project.
+        If no project is set, return None.
+        """
+        branch, ret = git.branch_name(Path(config.CANON) / config.WORKING)
+        if ret is False:
+            raise CacheError(f"Error getting branch name: {branch}")
+        if branch == config.WORKING:
+            print(f"[INFO] No project set, using working branch.")
+            return None
+        if branch not in Cache.site_map:
+            raise CacheError(f"Entry {branch} does not exist.")
+        return Cache.site_map[branch]
+
+    @classproperty
+    def metadata(cls) -> tuple[Basic, Social, Advanced]:
+        """
+        Return the current metadata.
+        The metadata is a dictionary mapping entry IDs to tuples of Basic,
+        Social, Advanced, and Upload objects.
+        """
+        if Cache.canon is None:
+            raise CacheError("No project is set.")
+        global METADATA_MAP
+        if Cache.canon.id not in METADATA_MAP:
+            METADATA_MAP[Cache.canon.id] = FileIO.Read.metadata(
+                Path(config.CANON) / config.WORKING,
+                Cache.canon.id
+            )
+        return METADATA_MAP[Cache.canon.id]
+
+
+    @classproperty
     def fragment(cls) -> str:
-        entry = Cache.project
-        frag = FRAGMENTS.get(entry.id, "")
+        """
+        Return the current fragment.
+        The fragment is a string representing the current project.
+        If no project is set, raise a CacheError.
+        """
+        canon = Cache.canon
+        frag = FRAGMENTS.get(canon.id, "")
         if not frag:
-            frag = FileIO.Read.fragment(entry.id)
-            FRAGMENTS[entry.id] = frag
+            raise CacheError(f"Fragment for {canon.id} does not exist.")
         return frag
 
 
@@ -245,10 +244,18 @@ class Cache:
         The site map is a dictionary mapping entry IDs to their corresponding
         Canonical objects.
         """
+        global SITE_MAP
+        if not SITE_MAP or SITE_MAP == {}:
+            SITE_MAP = FileIO.Read.site_map()
+            print()
+            print()
+            print(SITE_MAP)
+            print()
+            print()
         return SITE_MAP
 
     @classproperty
-    def metadata_map(cls) -> dict[str, tuple[Basic, Social, Advanced, Upload]]:
+    def metadata_map(cls) -> dict[str, tuple[Basic, Social, Advanced]]:
         """
         Return the current metadata map.
         The metadata map is a dictionary mapping entry IDs to tuples of Basic,
@@ -256,76 +263,69 @@ class Cache:
         """
         return METADATA_MAP
 
-    @staticmethod
-    def checkout(key: str) -> Canonical:
-        """
-        Switch the current project to the one with the given ID.
-        If the ID does not exist in the cache, raise a CacheError.
-        """
-        global PROJECT
-        if key not in SITE_MAP:
-            raise CacheError(f"Entry {key} does not exist.")
-        PROJECT = SITE_MAP[key]
-        return Cache.project
-
-
-    @classproperty
-    def project(cls) -> Canonical | None:
-        """
-        Return the current project.
-        The project is a Canonical object representing the current project.
-        If no project is set, return None.
-        """
-        return PROJECT
-
-    @classproperty
-    def metadata(cls) -> tuple[Basic, Social, Advanced, Upload] | tuple[None, None, None, None]:
-        """
-        Return the current metadata.
-        The metadata is a dictionary mapping entry IDs to tuples of Basic,
-        Social, Advanced, and Upload objects.
-        """
-        if Cache.project is None:
-            return (None, None, None, None)
-        return METADATA_MAP[Cache.project.id]
 
     @staticmethod
-    def add(entry: Canonical) -> None:
+    def add(canon: Canonical) -> None:
         """
         Add a new entry to the cache.
         If the entry already exists, raise a CacheError.
         """
-        global SITE_MAP
-        if entry.id in SITE_MAP:
+        global SITE_MAP, CANON
+        if canon.id in Cache.site_map:
             raise CacheError(f"Entry {id} already exists.")
-        SITE_MAP[entry.id] = entry
+        SITE_MAP[canon.id] = canon
 
     @staticmethod
-    def update(entry: Canonical) -> None:
+    def update_metadata(metadata: tuple[Basic, Social, Advanced]) -> None:
+        """
+        Update the metadata for the current project.
+        If the project is not in the cache, raise a CacheError.
+        """
+        global METADATA_MAP
+        entry = Cache.canon
+        if entry is None:
+            raise CacheError("No project is set.")
+        METADATA_MAP[entry.id] = metadata
+
+    @staticmethod
+    def update_canonical(canon: Canonical) -> None:
         """
         Update the current project with the given entry.
         If the entry does not exist in the cache, raise a CacheError.
         """
         global SITE_MAP
 
-        if entry.id not in SITE_MAP:
-            raise CacheError(f"Entry {entry.id} does not exist.")
-        if Cache.project.id != entry.id:
-            raise CacheError(f"Entry {entry.id} does not match the current project.")
-        SITE_MAP[entry.id] = entry
+
+        if canon.id not in Cache.site_map:
+            raise CacheError(f"Entry {canon.id} does not exist.")
+        # This hasn't happened yet, but if it does, we need to raise an error
+        if canon.hash is None:
+            raise CacheError("No project is set.")
+        SITE_MAP[canon.id] = canon 
 
     @staticmethod
-    def delete(entry: Canonical) -> None:
+    def delete_canonical() -> None:
         """
         Delete the current project from the cache.
         If the project is not in the cache, raise a CacheError.
-        If the project is the current project, set PROJECT to None.
+        If the project is the current project, set CANON to None.
         """
         global SITE_MAP
-        if entry.id not in SITE_MAP:
-            raise CacheError(f"Entry {entry.id} does not exist.")
-        if Cache.project.id == entry.id:
-            raise CacheError(f"Entry {entry.id} is the current project.")
-        del SITE_MAP[entry.id]
+        canon = Cache.canon
+        if canon.id not in Cache.site_map:
+            raise CacheError(f"Entry {canon.id} does not exist.")
+        del SITE_MAP[canon.id]
+
+    @staticmethod
+    def delete_metadata() -> None:
+        """
+        Delete the metadata for the current project.
+        If the project is not in the cache, raise a CacheError.
+        """
+        global METADATA_MAP
+        canon = Cache.canon
+        if canon.id not in Cache.metadata_map:
+            raise CacheError(f"Entry {canon.id} does not exist.")
+        del METADATA_MAP[canon.id]
 
 

@@ -8,26 +8,11 @@
   enctype="application/x-www-form-urlencoded"
   >
   <h3>{{ form_header }}</h3>
-  <label>title
-    <input type="text" name="title" value="{{ entry.title }}" required>
-  </label>
-  <label>description
-    <textarea name="description" required>{{ entry.description }}</textarea>
-  </label>
-  <label>Author  
-    <input type="text" name="author" value="{{ entry.author }}" required>
-  </label>
-  <label>email
-    <input type="email" name="email" value="{{ entry.email }}" required>
-  </label>
-  <label>date
-    <input type="date" name="date" value="{{ entry.date }}" required>
-  </label>
-  <label>Last Updated
-    <input type="date" name="last_updated" value="{{ entry.last_updated }}">
-    <small>Leave blank if not applicable.</small>
-  </label>
-
+  <label>Title<input type="text" name="title" value="{{ entry.basic.title }}" required></label>
+  <label>Description<textarea name="description" required>{{ entry.basic.description }}</textarea></label>
+  <label>Author<input type="text" name="author" value="{{ entry.basic.author }}" required></label>
+  <label>Published<input type="text" name="date" value="{{ entry.basic.date }}"></label>
+  <label>Modified<input type="text" name="modified" value="{{ entry.basic.modified }}"></label>
 
   <button type="submit">Submit</button>
 {% endblock %}

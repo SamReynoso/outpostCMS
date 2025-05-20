@@ -2,10 +2,11 @@ import time
 
 
 def format_meta_diff(diff):
+    print(diff)
     diff = diff.split("\n")
     html = "<dl>\n"
     start = False
-    for i, line in enumerate(diff):
+    for line in diff:
         if line.find("}") != -1:
             start = False
             continue
@@ -16,14 +17,14 @@ def format_meta_diff(diff):
                 html += f"<dt>{cols[1]}</dt>\n"
                 html += f"<dd>{cols[3]}</dd>\n"
             if cols[0] == "-":
-                html += f"<dt class='deleted'> - {cols[1]}</dt>\n"
-                html += f"<dd class='deleted'> - {cols[3]}</dd>\n"
+                html += f"<dt class='delete'>{cols[1]}</dt>\n"
+                html += f"<dd class='delete'> - {cols[3]}</dd>\n"
             if cols[0] == "+":
-                html += f"<dt class='added'>+ {cols[1]}</dt>\n"
-                html += f"<dd class='added'>+ {cols[3]}</dd>\n"
+                html += f"<dt class='add'> {cols[1]}</dt>\n"
+                html += f"<dd class='add'> + {cols[3]}</dd>\n"
 
 
-        if line.startswith("{"):
+        if line.startswith("@"):
             start = True
 
     html += "</dl>\n"
@@ -46,7 +47,7 @@ def format_index_diff(diff):
             if cleaned.startswith("<"):
                 start = cleaned.find(">")
                 assert start != -1
-                cleaned = cleaned[:start] + ' class="add">' + cleaned[start + 1:]
+                html += cleaned[:start] + ' class="add">' + cleaned[start + 1:]
             else:
                 html += f'<span class="add">{cleaned}</span>\n'
             continue

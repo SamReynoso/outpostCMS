@@ -10,32 +10,51 @@
     You can toggle the visibility of each project from this page. This does not affect the workbook version, which
     remains private regardless of visibility status.
   </p>
-  <table class="grid">
+</section>
+
+<section>
+  <table>
     <thead>
       <tr>
         <th>Group/Project</th>
-        <th>Canonical URL</th>
+        <th>Yours</th>
+        <th>Staging</th>
+        <th></th>
         <th>Public</th>
-        
       </tr>
+        
     </thead>
-</section>
-<section>
-    <tbody>
-      {% for entry in site_map %}
-      <tr>
-        <td>{{ entry.group }}/{{ entry.project_name }}</td>
-        <td>{{ entry.canonical }}</td>
+    <tbody class="text-center">
+      {% for entry in site_map.values() %}
+      {% set st = tree_tracker(entry.id) %}
+      <tr id="{{ entry.group }}_{{ entry.project }}">
+
+        <td>{{ entry.id }}</td>
+
+        <td>
+          {{ st[0] }}
+        </td>
+        
+        <td>
+          {{ st[1] }}
+        </td>
+
+        <td>
+        </td>
+
         <td>
           {% if entry.public %}
-            <a href="/publish/launch/{{ entry.group }}/{{ entry.project_name }}/">True</a>
+            <a href="/api/toggle/{{ entry.group }}/{{ entry.project}}/">True</a>
           {% else %}
-            <a href="/publish/launch/{{ entry.group }}/{{ entry.project_name }}/">False</a>
+            <a href="/api/toggle/{{ entry.group }}/{{ entry.project}}/">False</a>
           {% endif %}
         </td>
+
+
         <td>
-          hb
+          <a href="/api/launch/{{ entry.group }}/{{ entry.project}}/">Launch</a>
         </td>
+
       </tr>
       {% endfor %}
     </tbody>

@@ -1,0 +1,9 @@
+{
+    "outpost/test-1": {
+        "group": "outpost",
+        "project": "test-1",
+        "canonical": "https://example.com/outpost/test-1",
+        "hash": "1234567890abcdef",
+        "public": true
+    }
+}

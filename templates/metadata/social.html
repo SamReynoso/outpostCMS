@@ -1,37 +1,72 @@
 {% extends "metadata/base.html" %}
 
 {% block form %}
-<form
-  class="meta-form"
-  method="post"
-  action="{{ form_action }}"
-  enctype="application/x-www-form-urlencoded"
-  >
-  <h3>{{ form_header }}</h3>
-  <label>Title Override
-    <input type="text" name="title_override" value="{{ entry.title }}">
-  </label>
 
-  <label>Short Description
-    <input type="text" name="short_descriptiong" value="">
-  </label>
+  <h3>Open Graph and Twitter Card</h3>
 
   <label>Image
-    <input type="text" name="image" value="{{ entry.image }}" required>
+    <input
+    type="text"
+    name="image"
+    value="{% if entry.social.image %}{{ entry.social.image }}{% endif %}"
   </label>
+
+  <label>Image Alt<input type="text" name="image_alt" value="{{ entry.social.image_alt }}"></label>
 
   <label>Site Name
-    <input type="text" name="site_name" value="{{ entry.site_name }}" required>
+    <input
+      type="text"
+      name="site_name"
+      value="{% if entry.social.site_name %}{{ entry.social.site_name }}{% endif %}"
+      >
   </label>
 
+  <label>Site URL
+    <input
+    type="text"
+    name="site_url"
+    value="{% if entry.social.site_url %}{{ entry.social.site_url }}{% endif %}"
+  </label>
+
+  <label>Short Description<input type="text" name="short_description" value="{{ entry.social.short_description }}"></label>
+
+  <label>Tags<input type="text" name="tags" value="{{ entry.social.tags }}"></label>
+
+  <label>Twitter Site Handle<input type="text" name="twitter_site" value="{{ entry.social.twitter_site }}"> </label>
+
+  <label>Twitter Creator Handle<input type="text" name="twitter_creator" value="{{ entry.social.twitter_site }}"> </label>
+
   <label>Twitter Card
-    <input type="text" name="twitter_card" value="{{ entry.twitter_card }}">
+    <select name="twitter_card">
+      <option value="summary">Summary</option>
+      <option value="summary_large_image">Summary Large Image</option>
+      <option value="app">App</option>
+      <option value="player">Player</option>
+      <option value="photo">Photo</option>
+      <option value="gallery">Gallery</option>
+      <option value="product">Product</option>
+    </select>
   </label>
-  <label>Twitter Site
-    <input type="text" name="twitter_site" value="{{ entry.twitter_site }}">
+
+  <label>Type
+    <select name="og_type">
+      <option value="">----</option>
+        <option value="website">Website</option>
+        <option value="article">Article</option>
+        <option value="video.movie">Video Movie</option>
+        <option value="video.episode">Video Episode</option>
+        <option value="video.other">Video Other</option>
+      </select>
   </label>
-  <label>Twitter Creator
-    <input type="text" name="twitter_creator" value="{{ entry.twitter_creator }}">
+
+  <label>Section
+    <select name="og_section">
+      <option value="">----</option>
+      <option value="news">News</option>
+      <option value="blog">Blog</option>
+      <option value="opinion">Opinion</option>
+      <option value="review">Review</option>
+    </select>
   </label>
 
   <button type="submit">Submit</button>

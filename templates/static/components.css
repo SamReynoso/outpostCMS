@@ -1,7 +1,7 @@
 
 .card {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .actions {
@@ -20,6 +20,22 @@
   padding: 0.5rem;
   border-radius: 5px;
   transition: background-color 0.3s;
+}
+
+.actions a:visited {
+  background-color: rgb(230, 230, 255);
+  color: rgb(110, 110, 255);
+}
+
+.actions a.active {
+  background-color: rgb(0, 0, 255);
+  color: white;
+}
+
+
+.actions a:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(0, 0, 255);
 }
 
 .actions a:hover {
@@ -48,10 +64,71 @@ article.diff span {
   box-shadow: var(--box-shadow);
 }
 
-article.diff span.add {
+article.diff .add {
   background-color: rgba(0, 255, 0, 0.3) !important;
 }
 
-article.diff span.delete {
+article.diff .delete {
   background-color: rgb(255, 0, 0, 0.3) !important;
+}
+
+dt.add {
+  color: rgb(0, 155, 0);
+}
+dt.delete {
+  color: rgb(155, 0, 0);
+}
+dd.add {
+  background-color: rgba(0, 255, 0, 0.3) !important;
+}
+
+ dd.delete {
+  background-color: rgba(255, 0, 0, 0.3) !important;
+}
+
+.social-preview {
+  width: 60ch;
+  border: 1px solid rgba(204, 204, 204, 0.7);
+  border-radius: 8px;
+  font-family: sans-serif;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.social-preview.small{
+  font-size: 0.8em;
+  width: 40ch;
+  height: 40ch;
+}
+
+.preview-image {
+  height: 25ch;
+  width: 100%;
+  background-color:rgb(64, 64, 64);
+  background-size: cover;
+  background-position: center;
+}
+
+.preview-text {
+  background: white;
+  height: 15ch;
+  padding: 1rem;
+}
+
+.preview-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.preview-description {
+  font-size: .9rem;
+  color: rgb(68, 68, 68);
+  margin-bottom: 0.5rem;
+  line-height: 1.4rem;
+}
+
+.preview-url {
+  font-size: 0.8rem;
+  color: rgb(102, 102, 102);
 }

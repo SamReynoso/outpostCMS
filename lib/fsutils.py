@@ -9,7 +9,7 @@ def does_not_exist(path):
     return True
 
 
-def mkdir(path: str, exist_ok=True):
+def mkdir(path: Path, exist_ok=True):
     """
     Create a directory at the given path. If the directory already exists and
     exist_ok is False, raise a FileExistsError.
@@ -25,7 +25,7 @@ def write(file_path, content):
         f.write(content)
 
 
-def touch_json(path, file_name, content, indent=4):
+def touch_json(path: Path, file_name: str, content: dict | list, indent=4):
     """
     Create a JSON file with the given content. If the file already exists,
     overwrite it.
