@@ -1,3 +1,4 @@
+
 :root {
   --main-font-family: Arial, sans-serif;
   --header-margin: .5rem;
@@ -13,7 +14,7 @@
   --kbd-background-color: rgb(244, 244, 244);
   --kbd-border-color: rgb(204, 204, 204);
   --kbd-box-shadow-color: rgb(170, 170, 170);
-  --code-background-color: rgb(249, 249, 249);
+  --code-background-color: rgb(219, 219, 219);
   --code-color: rgb(199, 37, 78);
   --var-background-color: rgb(243, 246, 255);
   --var-color: rgb(0, 92, 197);
@@ -29,6 +30,12 @@ html.dark {
   --figure-color: rgb(220, 220, 220);
   --figure-background-color: rgb(50, 50, 50);
   --border-color: rgb(100, 100, 100);
+
+  --code-background-color: black;
+  --code-color: red;
+
+  --dt-color: rgb(240, 240, 240);
+  --dd-color: rgb(240, 240, 240);
 }
 
 html.light {
@@ -46,6 +53,8 @@ html.neon {
   --figure-color: rgb(220, 20, 20);
   --figure-background-color: rgb(50, 250, 50);
   --border-color: rgb(100, 100, 100);
+  --dt-color: rgb(200, 255, 100);
+  --dd-color: rgb(0, 255, 100);
 }
 
 html.dolphin {
@@ -54,4 +63,64 @@ html.dolphin {
   --figure-color: rgb(220, 220, 220);
   --figure-background-color: rgb(40, 2, 50);
   --border-color: rgb(100, 100, 100);
+  --dt-color: rgb(255, 205, 255);
+  --dd-color: rgb(255, 255, 255);
+
+}
+pre {
+  background-color: var(--code-background-color);
+  color: var(--code-color);
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+body {
+  color: var(--color, rgb(30, 30, 30));
+}
+
+article {
+  max-width: var(--article-max-width);
+}
+
+main {
+  color: var(--color, rgb(30, 30, 30));
+  background-color: var(--background-color);
+}
+
+footer {
+  background-color: var(--background-color);
+  color: var(--color, rgb(30, 30, 30));
+}
+
+.header {
+  color: var(--color, rgb(30, 30, 30));
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 2rem;
+}
+
+.header dt {
+  color: var(--dt-color, rgb(85, 85, 85));
+}
+.header dd {
+  color: var(--dd-color, rgb(30, 30, 30));
+}
+
+figure {
+  color: var(--figure-color);
+  background-color: rgba(55, 50, 45, 0.4); 
+  padding: 1rem;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+  max-width: 80%;
+}
+
+dt {
+  color: var(--dt-color, rgb(85, 85, 85));
+}
+dd {
+  color: var(--dd-color, rgb(30, 30, 30));
 }

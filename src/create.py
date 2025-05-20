@@ -8,12 +8,9 @@ from templates.python import new_site_map_entry, new_metadata
 from lib.fsutils import mkdir, touch_json
 from lib import git
 
-def add_hash_to_metadata(path, metadata):
-    hash = git.hash(path)
-    metadata['hash'] = hash
 
 def update_site_map(path, file_name, entry):
-    site_map = Cache.get_site_map()
+    site_map = Cache.site_map
     site_map.append(entry)
     touch_json(path, file_name, site_map)
 

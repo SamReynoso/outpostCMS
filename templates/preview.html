@@ -1,108 +1,55 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ entry.title }}</title>
-  <meta name="description" content="{{ entry.description }}" />
-  <link rel="canonical" href="{{ entry.canonical_url }}" />
-  <meta property="og:title" content="{{ entry.title }}" />
-  <meta property="og:description" content="{{ entry.description }}" />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content="{{ entry.canonical_url }}" />
-  <meta property="og:image" content="{{ entry.image }}" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{{ entry.title }}" />
-  <meta name="twitter:description" content="{{ entry.description }}" />
-  <meta name="twitter:image" content="{{ entry.image }}" />
-  <link rel="stylesheet" href="/static/article.css">
-  <link rel="stylesheet" href="/static/article-themes.css">
-  <link rel="stylesheet" href="/static/social-preview.css">
-</head>
+{% extends "base.html" %}
 
-<body>
+{% block content %}
 
-  <!-- Header -->
-  <header class="preview-header">
-    <div>
-    <p>
-      <strong>Title:</strong> {{ entry.title }}<br>
-      <strong>Author:</strong> {{ entry.author }}<br>
-      <strong>Date:</strong> {{ entry.date }}<br>
-      <strong>Version:</strong> {{ entry.version }}<br>
-      <strong>Last Updated:</strong> {{ entry.last_updated }}<br>
-    </p>
-    <p>
-      <strong>Description:</strong> {{ entry.description }}
-    </p>
+  <header class="card header gap-2">
+    <div class="col gap">
+      <button class="btn">Change Theme</button>
+      <a class="btn" href="/api/checkout/{{ entry.id }}">Checkout</a>
     </div>
-  <div class="social-preview">
-    <div class="preview-image" style="background-image: url('https://example.com/image.jpg');"></div>
-    <div class="preview-text">
-      <div class="preview-title">{{ entry.title }}</div>
-      <div class="preview-description">{{ entry.description }}</div>
+    <dl>
+      <dt>Public</dt> <dd>{{ entry.canon.public }}</dd>
+      <dt>Project</dt> <dd>{{ entry.canon.project}}</dd>
+      <dt>Group</dt> <dd>{{ entry.canon.group}}</dd>
+      <dt>Last Updated</dt> <dd>{{ entry.canon.canonical }}</dd>
+
+      <dt>Title</dt> <dd>{{ entry.basic.title }}</dd>
+      <dt>Author</dt> <dd>{{ entry.basic.author }}</dd>
+      <dt>Date</dt> <dd>{{ entry.basic.date}}</dd>
+      <dt>Last Updated</dt> <dd>{{ entry.basic.modified}}</dd>
+    </dl>
+
+    <div class="social-preview small">
+      <div class="preview-image" style="background-image: url({{ entry.social.image }});">
+      </div>
+      <div class="preview-text">
+        <div class="preview-title">
+          {{ entry.basic.title }}
+        </div>
+        <div class="preview-description">
+          {{ entry.basic.description }}
+        </div>
+      </div>
     </div>
-  </div>
   </header>
 
-  <!-- Navigation -->
-  <nav>
 
-    <div>
-      <strong>Navigation</strong><br>
-      <ul>
-        <li><a href="/console/" title="console" aria-label="Content Console">Content Console</a></li>
-       </ul>
-      <ul>
-        <li><a href="/projects/{{ group }}/{{ project_name }}/basic/" title="Add Info" aria-label="Add Info">Start adding info</a></li>
-       </ul>
-    </div>
-
-    <div>
-      <strong>Settings</strong><br>
-      <ul>
-        <li>
-          <button>change theme</button>
-        </li>
-      </ul>
-    </div>
-
-  </nav>
-
-  <!-- Main Content -->
-  <main>
-
-    <!-- Main Article -->
-    <!-- Dynamic content -->
     <article>
+      <h2>Title: {{ entry.basic.title }}</h2>
+      <em>Description: {{ entry.basic.title }}</em><br>
+      <em>Published: {{ entry.basic.date}}</em>
 
-      <h1>{{ title }}</h1>
-
-      <header>
-
-        <em>{{ entry.date }}</em>
-
-        <p>
-          {{ entry.description }}
-        </p>
-
-      </header>
-
-      {{ article_fragment | safe }}
+      {{ fragment | safe }}
 
     </article>
-
-  </main>
-
-  <footer>
-    <address>
-      Oz Pre Alpha<br>
-    <address>
-  </footer>
 
   <script>
     const themes = ['light', 'dark', 'dolphin', 'neon'];
     const button = document.querySelector('button');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.documentElement.classList.add('dark');
+    });
+
     button.addEventListener('click', () => {
       let currentTheme = null;
       let themeIndex = 0;
@@ -121,5 +68,4 @@
     });
   </script>
 
-</body>
-</html>
+{% endblock %}

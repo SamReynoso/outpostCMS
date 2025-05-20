@@ -7,17 +7,30 @@ from src.models import Entry
 class EntryResponse:
     _templates = Jinja2Templates(directory="templates")
 
-    def __init__(self, request: Request, template_name: str):
+    def __init__(self, request: Request, template_name: str, canon_id: str | None = None):
         self.request = request
         self.template_name = template_name
-        if Cache.canon is None:
-            entry = Entry.new()
+
+        if canon_id is None:
+            if Cache.canon is None:
+                entry = Entry.new()
+            else:
+                canon = Cache.canon
+                metadata = Cache.metadata
+                entry = Entry(
+                    canon=canon,
+                    basic=metadata[0],
+                    social=metadata[1],
+                    advanced=metadata[2],
+                )
         else:
+            canon = Cache.canon_by_id(canon_id)
+            metadata = Cache.metadata_by_id(canon_id)
             entry = Entry(
-                canon=Cache.canon,
-                basic=Cache.metadata[0],
-                social=Cache.metadata[1],
-                advanced=Cache.metadata[2],
+                canon=canon,
+                basic=metadata[0],
+                social=metadata[1],
+                advanced=metadata[2],
             )
         self.context = {
             "request": request,

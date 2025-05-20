@@ -7,13 +7,28 @@
   margin-bottom: .5rem;
 }
 
+pb {
+  padding-bottom: .5rem;
+}
+
 .gap {
-  display: flex;
   gap: 1rem;
 }
 
-.gap.col{
+.gap-2 {
+  gap: 2rem;
+}
+
+.col{
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.grow {
+  flex-grow: 1;
 }

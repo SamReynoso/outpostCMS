@@ -26,6 +26,7 @@ class CacheControl:
         )
         Cache.add(canonical)
         Cache.update_metadata(metadata)
+        FileIO.Write.site_map(Cache.site_map)
         CacheControl.dump()
 
 

@@ -1,16 +1,16 @@
 {
-    "outpost/project-x": {
-        "group": "outpost",
-        "project": "project-x",
-        "canonical": "https://outpost.com/articles/project-x",
-        "hash": "efd5453e40a82dd068bdb5e3ef5d4e685fc050dc",
+    "sample/beekeeping": {
+        "group": "sample",
+        "project": "beekeeping",
+        "canonical": "https://outpost.com/articles/cms/beekeeping",
+        "hash": "146270054a6ed31ee012e6f4594dbf41d58ea27f",
         "public": true
     },
-    "outpost/project-z": {
-        "group": "outpost",
-        "project": "project-z",
-        "canonical": "https://outpost.com/articles/project-z",
-        "hash": "10637f37e9b25c6a2944798f810a53c7e17b2551",
-        "public": false
+    "sample/unix": {
+        "group": "sample",
+        "project": "unix",
+        "canonical": "https://outpost.com/articles/cms/unix",
+        "hash": "a07f052d1bfa6b9ce2dd2a9de5ac35a9e1347986",
+        "public": true
     }
 }

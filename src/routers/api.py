@@ -10,7 +10,7 @@ from outpost_d import config
 from lib.locached import Cache
 from src.data import CacheControl as cc
 from src.models import Canonical, Basic, Social, Advanced
-from lib import git
+from lib import git, fsutils
 
 
 api_router = APIRouter()
@@ -21,22 +21,16 @@ async def new_project(request: Request):
     form = dict(await request.form())
     canonical = Canonical(hash=None, public=False, **form)
     working_dir = Path(config.CANON) / config.WORKING
-    output, ret = git.commit(working_dir, "Creating new project")
+    output, ret = git.commit(working_dir, f"{canonical.id}: Created")
     if ret is False:
-        print(f'''
-
-              {output}
-
-              ''')
-    _, ret = git.merge(working_dir, config.WORKING)
-    if ret is False:
-        return RedirectResponse(url=f"/metadata/new/", status_code=303)
-    _, ret = git.checkout(working_dir, config.WORKING)
-    if ret is False:
-        return RedirectResponse(url=f"/metadata/new/", status_code=303)
-    hash, _ = git.branch(working_dir, canonical.id)
+        print(f"[Error  ] {output}")
+    git.add(working_dir)
+    _, ret = git.merge(working_dir, config.PUBLISH)
+    _, ret = git.checkout(working_dir, config.PUBLISH)
+    hash, ret = git.branch(working_dir, canonical.id)
     canonical.hash = hash
     cc.create_project(canonical)
+    fsutils.write(working_dir / canonical.id / "index.html", "<section></section>")
     return RedirectResponse(url=f"/metadata/upload/", status_code=303)
 
 
@@ -91,11 +85,11 @@ async def commit():
 async def checkout(group: str, project: str):
     path = Path(config.CANON) / config.WORKING
     branch = f"{group}/{project}"
-    git.commit(path, "Switching branches")
+    git.add(path)
+    git.commit(path, f"Switching branches: {Cache.canon.id} -> {branch}")
     git.checkout(path, branch)
-    git.merge(path, config.PUBLISH)
+    git.merge(path, config.PUBLISH, "Merging current published changes")
     return RedirectResponse(url=f"/publish/workbook/", status_code=303)
-
 
 
 @api_router.get("/toggle/{group}/{project}")
@@ -105,7 +99,6 @@ async def toggle(group: str, project: str):
         return RedirectResponse(url=f"/publish/launch/", status_code=303)
     canon.public = not canon.public
     cc.Update.canonical(canon)
-    git.commit(Path(config.CANON) / config.PUBLISH, "Toggle public")
     return RedirectResponse(url=f"/publish/launch#{group}_{project}", status_code=303)
 
 
@@ -114,8 +107,10 @@ async def launch(group: str, project: str):
     project_id = f"{group}/{project}"
     path = Path(config.CANON) / config.PUBLISH
     working_dir = Path(config.CANON) / config.WORKING / project_id
-    git.merge(working_dir, config.PUBLISH)
-    git.merge(path, project_id, "Publishing changes")
+    git.add(working_dir)
+    git.commit(working_dir, f"{project_id}: Saving changes")
+    git.merge(working_dir, config.PUBLISH, message="Merging any new published changes")
+    git.merge(path, project_id, f"{project_id}: Publishing changes to")
     return RedirectResponse(url=f"/publish/launch/", status_code=303)
 
 
