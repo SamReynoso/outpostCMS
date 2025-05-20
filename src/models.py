@@ -163,4 +163,4 @@ class Entry(BaseModel):
         return self.canon.id
 
     def __str__(self):
-        return f"Entry({self.cano}, {self.basic}, {self.social}, {self.advanced})"
+        return f"Entry({self.canon}, {self.basic}, {self.social}, {self.advanced})"

@@ -44,6 +44,8 @@ def get_html_diff(directory: Path, file: str, hash: str = "HEAD") -> str:
     if ret is False:
         return f"<p>Error getting diff for {file}</p>"
     if not diff:
+        if file == "index.html":
+            return "<pre><code><p>Index is unchanged</p></code></pre>"
         return f"<p>This file({file}) is unchanged</p>"
     if file.endswith(".html"):
         return format_index_diff(diff)

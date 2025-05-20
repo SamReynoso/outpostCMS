@@ -205,6 +205,32 @@ class Cache:
             raise CacheError(f"Entry {branch} does not exist.")
         return Cache.site_map[branch]
 
+    @staticmethod
+    def canon_by_id(canon_id: str) -> Canonical | None:
+        """
+        Return the current project by ID.
+        The project is a Canonical object representing the current project.
+        If no project is set, return None.
+        """
+        if canon_id not in Cache.site_map:
+            raise CacheError(f"Entry {canon_id} does not exist.")
+        return Cache.site_map[canon_id]
+
+#    @classproperty
+#    def working(cls) -> Canonical | None:
+#        """
+#        Return the current working project.
+#        The project is a Canonical object representing the current project.
+#        If no project is set, return None.
+#        """
+#        branch, ret = git.branch_name(Path(config.CANON) / config.WORKING)
+#        if ret is False:
+#            raise CacheError(f"Error getting branch name: {branch}")
+#        if branch == config.WORKING:
+#            print(f"[INFO] No project set, using working branch.")
+#            return None
+#        return Cache.site_map[branch]
+
     @classproperty
     def metadata(cls) -> tuple[Basic, Social, Advanced]:
         """
@@ -222,6 +248,20 @@ class Cache:
             )
         return METADATA_MAP[Cache.canon.id]
 
+    @staticmethod
+    def metadata_by_id(id) -> tuple[Basic, Social, Advanced]:
+        """
+        Return the current metadata.
+        The metadata is a dictionary mapping entry IDs to tuples of Basic,
+        Social, Advanced, and Upload objects.
+        """
+        global METADATA_MAP
+        if id not in METADATA_MAP:
+            METADATA_MAP[id] = FileIO.Read.metadata(
+                Path(config.CANON) / config.WORKING,
+                id
+            )
+        return METADATA_MAP[id]
 
     @classproperty
     def fragment(cls) -> str:
@@ -233,9 +273,29 @@ class Cache:
         canon = Cache.canon
         frag = FRAGMENTS.get(canon.id, "")
         if not frag:
-            raise CacheError(f"Fragment for {canon.id} does not exist.")
+            frag = FileIO.Read.fragment(
+                Path(config.CANON) / config.WORKING,
+                canon.id
+            )
+            FRAGMENTS[canon.id] = frag
         return frag
 
+
+    @staticmethod
+    def fragment_by_id(id) -> str:
+        """
+        Return the current fragment.
+        The fragment is a string representing the current project.
+        If no project is set, raise a CacheError.
+        """
+        frag = FRAGMENTS.get(id, "")
+        if not frag:
+            frag = FileIO.Read.fragment(
+                Path(config.CANON) / config.WORKING,
+                id
+            )
+            FRAGMENTS[id] = frag
+        return frag
 
     @classproperty
     def site_map(cls) -> dict[str, Canonical]:
@@ -247,11 +307,6 @@ class Cache:
         global SITE_MAP
         if not SITE_MAP or SITE_MAP == {}:
             SITE_MAP = FileIO.Read.site_map()
-            print()
-            print()
-            print(SITE_MAP)
-            print()
-            print()
         return SITE_MAP
 
     @classproperty

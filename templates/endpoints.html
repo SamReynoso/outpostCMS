@@ -12,293 +12,289 @@
     <tbody>
       <tr>
         <td>
-  <!-- Get the list projects by group, name, and canonical URL-->
-  <details>
-    <summary><strong>GET /info/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
-      <pre class="response-box" id="info">// JSON response here</pre>
-    </form>
-  </details>
+          <!-- Get the list projects by group, name, and canonical URL-->
+          <details>
+            <summary><strong>GET /info/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles/">
+              <label>
+                <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
+              </label>
+            </form>
+            <pre class="response-box" id="info">// JSON response here</pre>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
+        <!-- Get the list of unique groups -->
+          <details>
+            <summary><strong>GET /info/groups/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/info/groups/">
+              <label>
+                <button class="btn" type="submit" onclick="fetchAndRender('/info/groups/', 'groups')">Try it</button>
+              </label>
+            </form>
 
-  <!-- Get the list of unique groups -->
-  <details>
-    <summary><strong>GET /groups/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        <button class="btn" type="submit" onclick="fetchAndRender('/info/', 'info')">Try it</button>
-      <pre class="response-box" id="info">// JSON response here</pre>
-    </form>
-  </details>
+            <pre class="response-box" id="groups">// JSON response here</pre>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
+        <!-- Get the list of unique groups -->
+          <details>
+            <summary><strong>GET /info/projects/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/info/projects/">
+              <label>
+                <button class="btn" type="submit" onclick="fetchAndRender('/info/projects/', 'projects')">Try it</button>
+              </label>
+            </form>
 
-  <!-- Get a specific article fragment -->
-  <details>
-    <summary><strong>GET /articles/{group}/{project}/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+            <pre class="response-box" id="projects">// JSON response here</pre>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
+        <!-- Get a specific article fragment -->
+          <details>
+            <summary><strong>GET /articles/{group}/{project}/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles/">
+              <label>
+                Project:
+                <select name="projects" id="fragProjectSelect">
+                </select>
+              </label>
+              <button class="btn" type="submit" onclick="fetchFromSelect('/articles/','fragProjectSelect', 'article')">Try it</button>
+            </form>
 
-  <!-- Get robots.txt entry for a specific project -->
-  <details>
-    <summary><strong>GET /robots/{group}/{project_name}</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+            <pre class="response-box" id="article">// JSON response here</pre>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
+        <!-- Get the full HTML head tags as a fragment for a specific project -->
+          <details>
+            <summary><strong>GET /head/{group}/{project_name}/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Project:
+                <select name="projects" id="headProjectSelect">
+                </select>
+              </label>
+              <button class="btn" type="submit" onclick="fetchFromSelect('/head/full/','headProjectSelect', 'head')">Try it</button>
+            </form>
 
-  <!-- Get robots.txt entries for a specific group -->
-  <details>
-    <summary><strong>GET /robots/{group}/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+            <pre class="response-box" id="head">// JSON response here</pre>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
-
-  <!-- Get robots.txt entries for all projects -->
-  <details>
-    <summary><strong>GET /robots/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get robots.txt entry for a specific project -->
+          <details class="dead">
+            <summary><strong>GET /robots/{group}/{project_name}</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Group:
+                <select name="group">
+                  <option value="outpost">outpost</option>
+                  <option value="oz-pre-alpha">oz-pre-alpha</option>
+                </select>
+              </label>
+              <label>
+                Project:
+                <select name="project">
+                  <option value="code">code</option>
+                  <option value="cms-preview">cms-preview</option>
+                </select>
+              </label>
+              <button type="submit">Try it</button>
+            </form>
+          
+            <pre class="response-box">// JSON response here</pre>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
-
-
-  <!-- Get sitemap.txt entry for a specific project -->
-  <details>
-    <summary><strong>GET /sitemap/{group}/{project_name}</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get robots.txt entries for a specific group -->
+          <details class="dead">
+            <summary><strong>GET /robots/{group}/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Group:
+                <select name="group">
+                  <option value="outpost">outpost</option>
+                  <option value="oz-pre-alpha">oz-pre-alpha</option>
+                </select>
+              </label>
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
-
-  <!-- Get sitemap.txt entries for a specific group -->
-  <details>
-    <summary><strong>GET /sitemap/{group}/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get robots.txt entries for all projects -->
+          <details class="dead">
+            <summary><strong>GET /robots/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
-
-  <!-- Get sitemap.txt entries for all projects -->
-  <details>
-    <summary><strong>GET /sitemap/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get sitemap.txt entry for a specific project -->
+          <details class="dead">
+            <summary><strong>GET /sitemap/{group}/{project_name}</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Group:
+                <select name="group">
+                  <option value="outpost">outpost</option>
+                  <option value="oz-pre-alpha">oz-pre-alpha</option>
+                </select>
+              </label>
+              <label>
+                Project:
+                <select name="project">
+                  <option value="code">code</option>
+                  <option value="cms-preview">cms-preview</option>
+                </select>
+              </label>
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
-
-
-
-  <!-- Get the basic head HTML tags as a fragment for a specific project -->
-  <details>
-    <summary><strong>GET /head/{group}/{project_name}/basic/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get sitemap.txt entries for a specific group -->
+          <details class="dead">
+            <summary><strong>GET /sitemap/{group}/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Group:
+                <select name="group">
+                  <option value="outpost">outpost</option>
+                  <option value="oz-pre-alpha">oz-pre-alpha</option>
+                </select>
+              </label>
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
         </td>
       </tr>
+
       <tr>
         <td>
-
-
-
-  <!-- Get the social head HTML tags as a fragment for a specific project -->
-  <details>
-    <summary><strong>GET /head/{group}/{project_name}/social/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get sitemap.txt entries for all projects -->
+          <details class="dead">
+            <summary><strong>GET /sitemap/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
         </td>
       </tr>
+
+
       <tr>
         <td>
-
-
-
-  <!-- Get the JSON-DL head HTML tags as a fragment for a specific project -->
-  <details>
-    <summary><strong>GET /head/{group}/{project_name}/json-dl/</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+        <!-- Get the social head HTML tags as a fragment for a specific project -->
+          <details class="dead">
+          <summary><strong>GET /head/{group}/{project_name}/social/</strong></summary>
+          <form onsubmit="return false;" data-endpoint="/articles">
+            <label>
+              Group:
+              <select name="group">
+                <option value="outpost">outpost</option>
+                <option value="oz-pre-alpha">oz-pre-alpha</option>
+              </select>
+            </label>
+            <label>
+              Project:
+              <select name="project">
+                <option value="code">code</option>
+                <option value="cms-preview">cms-preview</option>
+              </select>
+            </label>
+            <button type="submit">Try it</button>
+            <pre class="response-box">// JSON response here</pre>
+          </form>
+        </details>
         </td>
       </tr>
+
       <tr>
         <td>
+        <!-- Get the JSON-DL head HTML tags as a fragment for a specific project -->
+          <details class="dead">
+            <summary><strong>GET /head/{group}/{project_name}/json-dl/</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Group:
+                <select name="group">
+                  <option value="outpost">outpost</option>
+                  <option value="oz-pre-alpha">oz-pre-alpha</option>
+                </select>
+              </label>
+              <label>
+                Project:
+                <select name="project">
+                  <option value="code">code</option>
+                  <option value="cms-preview">cms-preview</option>
+                </select>
+              </label>
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
+        </td>
+      </tr>
 
-
-
-  <!-- Get the head HTML fragment for a specific project -->
-  <details>
-    <summary><strong>GET /head/{group}/{project_name}</strong></summary>
-    <form onsubmit="return false;" data-endpoint="/articles">
-      <label>
-        Group:
-        <select name="group">
-          <option value="outpost">outpost</option>
-          <option value="oz-pre-alpha">oz-pre-alpha</option>
-        </select>
-      </label>
-      <label>
-        Project:
-        <select name="project">
-          <option value="code">code</option>
-          <option value="cms-preview">cms-preview</option>
-        </select>
-      </label>
-      <button type="submit">Try it</button>
-      <pre class="response-box">// JSON response here</pre>
-    </form>
-  </details>
+      <tr>
+        <td>
+        <!-- Get the head HTML fragment for a specific project -->
+          <details class="dead">
+            <summary><strong>GET /head/{group}/{project_name}</strong></summary>
+            <form onsubmit="return false;" data-endpoint="/articles">
+              <label>
+                Group:
+                <select name="group">
+                  <option value="outpost">outpost</option>
+                  <option value="oz-pre-alpha">oz-pre-alpha</option>
+                </select>
+              </label>
+              <label>
+                Project:
+                <select name="project">
+                  <option value="code">code</option>
+                  <option value="cms-preview">cms-preview</option>
+                </select>
+              </label>
+              <button type="submit">Try it</button>
+              <pre class="response-box">// JSON response here</pre>
+            </form>
+          </details>
         </td>
       </tr>
     </tbody>
@@ -309,6 +305,34 @@
 </section>
 
 <script>
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const fragSelect = document.getElementById("fragProjectSelect");
+  const headSelect = document.getElementById("headProjectSelect");
+
+  fetch("/info/projects/")
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return res.json();
+    })
+    .then((projects) => {
+      projects.forEach(( project ) => {
+        const option = document.createElement("option");
+        option.value = `${project}`;
+        option.textContent = `${project}`;
+        fragSelect.appendChild(option);
+        headSelect.appendChild(option.cloneNode(true));
+      });
+    })
+    .catch((err) => {
+      console.error("Failed to fetch projects:", err);
+    });
+});
+
+
 async function fetchAndRender(endpoint, id) {
   try {
     const res = await fetch(endpoint);
@@ -324,6 +348,30 @@ async function fetchAndRender(endpoint, id) {
     const pre = document.getElementById(id);
     if (pre) {
       pre.textContent = `Error fetching ${endpoint}: ${err}`;
+    }
+  }
+}
+
+
+async function fetchFromSelect(endpoint, selectId, id) {
+  const selectElm = document.getElementById(selectId);
+  const selectedProject = selectElm.value;
+  const fullEndpoint = `${endpoint}${selectedProject}/`;
+
+  try {
+    const res = await fetch(fullEndpoint);
+    const text = await res.text();
+    const pre = document.getElementById(id);
+    if (pre) {
+      pre.textContent = text;
+    } else {
+      console.warn(`No element with id="${id}" found.`);
+    }
+  } catch (err) {
+    console.error(`Failed to fetch ${fullEndpoint}:`, err);
+    const pre = document.getElementById(id);
+    if (pre) {
+      pre.textContent = `Error fetching ${fullEndpoint}: ${err}`;
     }
   }
 }

@@ -2,14 +2,6 @@ caption {
   font-weight: bold;
 }
 
-figure {
-  color: var(--figure-color);
-  background-color: rgba(55, 50, 45, 0.4); 
-  padding: 1em;
-  margin: auto;
-  margin-bottom: var(--margin);
-  max-width: 80%;
-}
 
 figcaption {
   font-size: 0.8rem;
@@ -52,7 +44,6 @@ kbd {
 
 code {
   background-color: var(--code-background-color);
-  color: var(--code-color);
   font-size: 0.95em;
   font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   border-radius: 4px;

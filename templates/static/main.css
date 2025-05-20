@@ -5,7 +5,7 @@ html * {
 }
 
 body {
-  color: rgb(0, 0, 0);
+  color: rgb(30, 30, 30);
   font-size: 16px;
   line-height: 1.5;
   font-family: Arial, sans-serif;
@@ -41,6 +41,16 @@ nav a:active {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+article {
+  margin: auto;
+  overflow: hidden;
+}
+
+ol, ul {
+  padding: 0;
+  margin-left: 1rem;
+}
+
 main {
   min-height: 100vh;
 }
@@ -68,6 +78,21 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
+pre.response-box {
+  font-size: 0.8rem;
+  background-color: rgb(245, 245, 255);
+  padding: 1rem;
+  border-radius: .5rem;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  white-space: pre-wrap;
+  margin: 1rem auto;
+  max-width: 80ch;
+}
+
+details {
+  margin-bottom: .25rem;
+}
 
 details summary {
   display: flex;
@@ -90,6 +115,11 @@ details summary:active {
   box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1), inset 5px 0 8px rgba(192, 192, 192, 0.5); 
 }
 
+details summary.active {
+  background-color: rgb(100, 200, 100);
+  color: white;
+}
+
 dl{
   font-size: 0.9rem;
   display: grid;
@@ -98,13 +128,13 @@ dl{
 }
 
 dt {
-  color: rgb(85, 85, 85);
   overflow-wrap: anywhere;
+  font-sixe: 0.9rem;
+  font-weight: 500;
 }
 
 dd {
   max-width: 60ch;
-  color: rgb(30, 30, 30);
   overflow-wrap: anywhere;
   font-weight: 600;
   padding-left: 1rem;

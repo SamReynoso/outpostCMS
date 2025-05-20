@@ -1,5 +1,7 @@
 from fastapi import Request
+from fastapi.exceptions import HTTPException
 
+from lib.locached import Cache
 from outpost_d import config
 from bin.run import app
 from lib.response import EntryResponse
@@ -22,6 +24,26 @@ async def endpoints(request: Request):
     resp.update(title="API Endpoints")
     return resp.as_response()
 
+
+@app.get("/preview/")
+async def preview(request: Request):
+    resp = EntryResponse(request, "preview.html")
+    resp.update(
+            title="Preview:",
+            fragment=Cache.fragment,
+            )
+    return resp.as_response()
+
+
+@app.get("/preview/{group}/{entry}")
+async def preview_by_id(request: Request, group: str, entry: str):
+    id = f"{group}/{entry}"
+    resp = EntryResponse(request, "preview.html", canon_id=id)
+    resp.update(
+            title="Preview:",
+            fragment=Cache.fragment_by_id(f"{group}/{entry}"),
+            )
+    return resp.as_response()
 
 app.include_router(api_router, prefix="/api", tags=["api"])
 app.include_router(publish_router, prefix="/publish", tags=["publish"])

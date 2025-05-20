@@ -27,9 +27,10 @@
     <tbody class="text-center">
       {% for entry in site_map.values() %}
       {% set st = tree_tracker(entry.id) %}
-      <tr id="{{ entry.group }}_{{ entry.project }}">
+      <tr id="{{ entry.group }}_{{ entry.project }}" class="mb pd">
 
-        <td>{{ entry.id }}</td>
+        <td style="display: inline-block; vertical-align: top; margin: 6px; line-height: 1.5rem;">
+          {{ entry.id }}</td>
 
         <td>
           {{ st[0] }}
@@ -42,17 +43,21 @@
         <td>
         </td>
 
-        <td>
+        <td style="line-height: 1.2rem;">
           {% if entry.public %}
-            <a href="/api/toggle/{{ entry.group }}/{{ entry.project}}/">True</a>
+            <a class="btn" href="/api/toggle/{{ entry.group }}/{{ entry.project}}/">True</a>
           {% else %}
-            <a href="/api/toggle/{{ entry.group }}/{{ entry.project}}/">False</a>
+            <a class="btn" href="/api/toggle/{{ entry.group }}/{{ entry.project}}/">False</a>
           {% endif %}
         </td>
 
 
-        <td>
-          <a href="/api/launch/{{ entry.group }}/{{ entry.project}}/">Launch</a>
+        <td style="line-height: 1.2rem;">
+          <a class="btn" href="/api/launch/{{ entry.group }}/{{ entry.project}}/">Launch</a>
+        </td>
+
+        <td style="line-height: 1.2rem;">
+          <a class="btn" href="/preview/{{ entry.group }}/{{ entry.project}}/">preview</a>
         </td>
 
       </tr>
