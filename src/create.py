@@ -30,7 +30,7 @@ def create_project_directory(path, group, project_name):
 
 
 def create_project(path, group, project_name, canonical):
-    git.new_branch(path, fo
+    git.new_branch(path, project_name)
     create_project_directory(path, group, project_name)
     metadata = new_metadata()
     add_hash_to_metadata(path, metadata)

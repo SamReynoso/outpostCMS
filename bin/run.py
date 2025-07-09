@@ -43,7 +43,7 @@ async def info_entry(group: str, project:str):
 async def articles_entry(group:str, project:str):
     return Response(content=Public.fragment(group, project))
 
-@app.get("/head/full/{group}/{project}/", response_class=Response)
+@app.get("/head/{group}/{project}/", response_class=Response)
 async def head_full(group:str, project:str):
     canon = Public.canon(group, project)
     metadata = Public.metadata(group, project)

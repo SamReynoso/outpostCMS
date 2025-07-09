@@ -1,16 +1,16 @@
 {
-    "sample/beekeeping": {
-        "group": "sample",
-        "project": "beekeeping",
-        "canonical": "https://outpost.com/articles/cms/beekeeping",
-        "hash": "146270054a6ed31ee012e6f4594dbf41d58ea27f",
+    "blog/test": {
+        "group": "blog",
+        "project": "test",
+        "canonical": "https://ozprealpha.com/blog/test/",
+        "hash": "4b4b6f9d2c54677a60cbbe6574ed75dd275e218c",
         "public": true
     },
-    "sample/unix": {
-        "group": "sample",
-        "project": "unix",
-        "canonical": "https://outpost.com/articles/cms/unix",
-        "hash": "a07f052d1bfa6b9ce2dd2a9de5ac35a9e1347986",
+    "blog/another-one-bites-dust": {
+        "group": "blog",
+        "project": "another-one-bites-dust",
+        "canonical": "https://ozprealpha.com/blog/test/",
+        "hash": "2907bf36bd231d919316c7217ff178e79761c881",
         "public": true
     }
 }

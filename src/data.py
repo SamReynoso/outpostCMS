@@ -1,7 +1,6 @@
 import shutil
 from pathlib import Path
 
-
 from outpost_d import config
 from lib.locached import Cache, FileIO
 from src import models
@@ -69,6 +68,5 @@ class CacheControl:
         for entry_id in site_map.keys():
             metadata = FileIO.Read.metadata(path, entry_id)
             Cache.update_metadata(metadata)
-
 
 
