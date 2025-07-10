@@ -165,3 +165,9 @@ form textarea {
   padding: 0.5rem;
   border: 1px solid #ccc;
 }
+
+
+p { 
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}

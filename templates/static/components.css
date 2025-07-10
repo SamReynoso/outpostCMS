@@ -97,10 +97,10 @@ dd.add {
 }
 
 .social-preview.small{
-  font-size: 0.8em;
-  width: 40ch;
-  height: 40ch;
+  width: 30ch;
+  height: 30ch;
 }
+
 
 .preview-image {
   height: 25ch;
@@ -119,7 +119,6 @@ dd.add {
 .preview-title {
   font-weight: bold;
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
 }
 
 .preview-description {
@@ -132,4 +131,21 @@ dd.add {
 .preview-url {
   font-size: 0.8rem;
   color: rgb(102, 102, 102);
+}
+
+.social-preview.small .preview-image {
+  height: 20ch;
+}
+.social-preview.small .preview-text {
+  height: 10ch;
+  padding: .5rem;
+  line-height: 1rem;
+}
+
+.social-preview.small .preview-title {
+  font-size: .8rem;
+}
+
+.social-preview.small .preview-description {
+  font-size: 0.6rem;
 }

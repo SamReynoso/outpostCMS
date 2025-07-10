@@ -112,10 +112,16 @@ footer {
 figure {
   color: var(--figure-color);
   background-color: rgba(55, 50, 45, 0.4); 
-  padding: 1rem;
-  margin: 0 auto;
+  padding: 2rem;
+  margin: 1rem auto;
   border-radius: var(--border-radius);
-  max-width: 80%;
+  max-width: 70%;
+}
+
+figure img {
+  color: var(--figure-color);
+  width: 100%;
+  height: auto;
 }
 
 dt {
@@ -123,4 +129,13 @@ dt {
 }
 dd {
   color: var(--dd-color, rgb(30, 30, 30));
+}
+
+section.metadata {
+}
+
+section.metadata img {
+  width: 60ch;
+  height: auto;
+  border-radius: var(--border-radius);
 }

@@ -1,16 +1,16 @@
 {
-    "blog/test": {
+    "blog/building-a-content-management-system": {
         "group": "blog",
-        "project": "test",
-        "canonical": "https://ozprealpha.com/blog/test/",
-        "hash": "4b4b6f9d2c54677a60cbbe6574ed75dd275e218c",
+        "project": "building-a-content-management-system",
+        "canonical": "https://ozprealpha.com/blog/building-a-content-management-system",
+        "hash": "ec12fcbccfae10bfbe0edbd398e7c66420de0156",
         "public": true
     },
-    "blog/another-one-bites-dust": {
+    "blog/why-i-built-the-same-startup-3-times": {
         "group": "blog",
-        "project": "another-one-bites-dust",
-        "canonical": "https://ozprealpha.com/blog/test/",
-        "hash": "2907bf36bd231d919316c7217ff178e79761c881",
+        "project": "why-i-built-the-same-startup-3-times",
+        "canonical": "https://ozprealpha.com/blog/why-i-built-the-same-startup-3-times",
+        "hash": "11902c3b6564bc1b9abe0bac824056c1fecb8726",
         "public": true
     }
 }
