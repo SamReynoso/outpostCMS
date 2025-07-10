@@ -1,0 +1,18 @@
+# vim: set filetype=sh :
+
+[Unit]
+Description=Run the ozprealpa production server.
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/ops/outpost-cms
+Environment="PYTHONPATH=/ops/outpost-cms"
+ExecStart="./outpost run"
+Restart=always
+RestartSec=5
+
+
+[Install]
+WantedBy=multi-user.target
