@@ -7,9 +7,8 @@ After=network.target
 [Service]
 User=www-data
 Group=www-data
-WorkingDirectory=/ops/outpost-cms
-Environment="PYTHONPATH=/ops/outpost-cms"
-ExecStart="./outpost run"
+WorkingDirectory=/ops/outpost-crm
+ExecStart=/ops/outpost-crm/outpost run
 Restart=always
 RestartSec=5
 

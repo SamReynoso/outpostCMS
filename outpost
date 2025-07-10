@@ -2,6 +2,8 @@
 PYTHONPATH="$(dirname "$0")"
 export PYTHONPATH
 
+source /ops/ozprealpha/venv/bin/activate
+
 CMD="$1"
 shift
 
