@@ -9,8 +9,6 @@ from lib.wacached import Public
 from src import tag_formatter
 
 
-PLACEHOLDER_KEY= "group-name/article-name"
-PLACEHOLDER_FRAGMENT = "<h1>Sample Title</h1><p>Sample content</p>"
 PLACEHOLDER_ENTRY = {}
 
 
@@ -45,8 +43,11 @@ async def articles_entry(group:str, project:str):
 
 @app.get("/head/{group}/{project}/", response_class=Response)
 async def head_full(group:str, project:str):
+    print(f"[DEBUG] route: head_full({group}, {project})")
     canon = Public.canon(group, project)
     metadata = Public.metadata(group, project)
+    if canon is None or metadata is None:
+        return Response(content=f"No data found for {group}/{project}.", media_type="application/json")
     return Response(content=tag_formatter.head_full(canon, metadata))
 
 
@@ -64,9 +65,6 @@ async def head_full(group:str, project:str):
 # @app.get("/articles/", response_class=JSONResponse)
 # async def articles():
 #     return JSONResponse(content=json.dumps(Public.site_fragments(), indent=4))
-# 
-# 
-# 
 # 
 # 
 # 

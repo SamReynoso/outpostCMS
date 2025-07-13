@@ -12,5 +12,12 @@
         "canonical": "https://ozprealpha.com/blog/why-i-built-the-same-startup-3-times",
         "hash": "11902c3b6564bc1b9abe0bac824056c1fecb8726",
         "public": true
+    },
+    "blog/web-analytics-from-scratch": {
+        "group": "blog",
+        "project": "web-analytics-from-scratch",
+        "canonical": "https://ozprealpha.com/blog/web-analytics-from-scratch",
+        "hash": "c081e378166ef5f2c997cb1fda8f16e757f1a93d",
+        "public": true
     }
 }
