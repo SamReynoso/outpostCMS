@@ -19,5 +19,19 @@
         "canonical": "https://ozprealpha.com/blog/web-analytics-from-scratch",
         "hash": "c081e378166ef5f2c997cb1fda8f16e757f1a93d",
         "public": true
+    },
+    "blog/jumping-the-gap": {
+        "group": "blog",
+        "project": "jumping-the-gap",
+        "canonical": "https://ozprealpha.com/blog/jumping-the-gap",
+        "hash": "82ad775a656bf098a98b5f111408ef09afba4d68",
+        "public": false
+    },
+    "blog/hedgefund-os": {
+        "group": "blog",
+        "project": "hedgefund-os",
+        "canonical": "https://ozprealpha.com/blog/hedgefund-os",
+        "hash": "82ad775a656bf098a98b5f111408ef09afba4d68",
+        "public": false
     }
 }
